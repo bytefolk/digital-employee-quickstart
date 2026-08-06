@@ -1,0 +1,20 @@
+# 密钥 —— 绝对不能提交
+.env
+.env.*
+!.env.example
+
+# 引擎本体（脚本会自动下载，不需要进版本库）
+runtime/
+
+# 运行时产生的文件
+.runtime.log
+.runtime.pid
+.dingtalk-app.json
+.dingtalk-version.json
+
+# 如果你的知识库含公司内部资料，取消下面这行的注释，避免误传到公开仓库。
+# knowledge/
+
+node_modules/
+*.log
+.DS_Store
