@@ -1,114 +1,130 @@
-# 数字员工一键搭建包
+# Digital Employee Quickstart
 
-把一个会答疑的「数字员工」接进你们公司的钉钉，全程不需要你会写代码。
+[简体中文](README.zh-CN.md)
 
-搭好之后的效果：同事在钉钉里 @ 这个机器人问问题，它会**只根据你批准过的资料**
-回答，并且附上出处；资料里没写的，它会老实说不知道并转人工，不会瞎编。
+Put a question-answering digital employee into your company's DingTalk —
+without writing any code.
+
+Once it is running, colleagues ask the bot a question in DingTalk and it answers
+**only from material you have approved**, with the source attached. When the
+answer is not in your material, it says so and hands off to a human instead of
+making something up.
 
 ---
 
-## 这个包是干什么的
+## What this repo is
 
-真正干活的引擎是开源项目 [Digital Employee](https://github.com/fullstack-ai-infra/digital-employee)。
-但要跑起来，需要在钉钉开放平台建应用、拿密钥、配模型、写配置文件、启动服务……
-对没开发经验的人来说门槛不低。
+The engine doing the actual work is
+[Digital Employee](https://github.com/fullstack-ai-infra/digital-employee),
+an open-source read-only answer runtime. Getting it running means registering a
+DingTalk app, collecting credentials, wiring up a model, writing a config file,
+and keeping a service alive — a real barrier if you are not a developer.
 
-这个包做的事情是：**把那一整套流程整理成 AI 编程助手能直接执行的说明书 + 脚本**。
-你只要装个 AI 编程助手，跟它说一句"帮我搭数字员工"，剩下的它照着做就行。
+This repo turns that whole flow into **a runbook an AI coding agent can execute
+for you, plus the scripts it drives**. Install an AI coding agent, tell it to set
+up your digital employee, and follow along.
 
-## 你需要准备什么
+## What you need
 
-| 需要的东西 | 说明 |
+| Requirement | Notes |
 | --- | --- |
-| 一台电脑或服务器 | Mac / Windows / Linux 都行 |
-| 钉钉**管理员**账号 | 普通成员可能没有创建应用的权限，得找 IT 同事 |
-| 一个大模型的 API Key | OpenAI 官方，或任何"兼容 OpenAI 接口"的服务都可以 |
-| 一个 AI 编程助手 | [Claude Code](https://claude.com/claude-code)、Codex、Cursor 等任选 |
-| Node.js 20 或更高 | 没装也没关系，AI 助手会带你装 |
+| A computer or server | macOS / Windows / Linux all work |
+| A DingTalk **admin** account | Regular members usually cannot create apps — ask your IT admin |
+| An LLM API key | OpenAI, or any OpenAI-compatible endpoint |
+| An AI coding agent | [Claude Code](https://claude.com/claude-code), Codex, Cursor, … |
+| Node.js 20+ | Not installed? The agent will walk you through it |
 
-## 怎么用（推荐：交给 AI 助手）
+## Usage (recommended: hand it to an AI agent)
 
-### 第一步：把这个项目拿到本地
+### 1. Get the project
 
 ```bash
-git clone <这个仓库的地址>
+git clone https://github.com/fullstack-ai-infra/digital-employee-quickstart.git
 cd digital-employee-quickstart
 ```
 
-### 第二步：在项目目录里打开 AI 编程助手
+### 2. Open your AI coding agent in that directory
 
-比如用 Claude Code：
+For example, with Claude Code:
 
 ```bash
 claude
 ```
 
-### 第三步：说一句话
+### 3. Say one thing
 
 ```
-帮我搭建数字员工，按 AGENTS.md 来
+Set up my digital employee, follow AGENTS.md
 ```
 
-然后就是配合它：它会在需要的时候找你要东西（扫码授权钉钉、选审批人、提供模型
-Key），其他时候你等着看它汇报就行。
+From there you just cooperate. The agent asks when it needs something from you
+and reports progress the rest of the time.
 
-**中途它会找你三次**，提前知道心里有底：
+**It will need you three times** — worth knowing up front:
 
-1. **扫码登录钉钉** —— 它会给你一个链接和一串授权码，用管理员账号打开授权。
-2. **选一位审批人** —— 创建的应用要发布得走审批，它会列出候选名单让你挑。
-3. **提供模型信息** —— 你的大模型接口地址、模型名、API Key。
+1. **Authorize DingTalk** — it gives you a link and a code; open it with your
+   admin account.
+2. **Pick an approver** — publishing the app requires approval, so it lists the
+   candidates and asks you to choose.
+3. **Provide model details** — your endpoint URL, model name, and API key.
 
-### 第四步：等审批
+### 4. Wait for approval
 
-应用提交发布后要等审批人在钉钉里点通过。**审批没过之前，机器人在钉钉里是搜不到
-的**，这是正常现象，不是搭错了。这一步得你去催。
+After the app version is submitted, an approver has to accept it inside
+DingTalk. **Until that happens the bot is not searchable in DingTalk** — that is
+expected, not a broken setup. Chasing the approver is on you.
 
-审批通过后，在钉钉搜索框里搜你给机器人起的名字，就能开始对话了。
+Once approved, search DingTalk for the name you gave the bot and start chatting.
 
-## 不想用 AI 助手，想自己一步步做
+## Prefer to do it yourself, step by step
 
-看 `docs/` 目录，按顺序来：
+Walk through `docs/` in order:
 
-1. [01-准备工作.md](docs/01-准备工作.md)
-2. [02-创建钉钉机器人.md](docs/02-创建钉钉机器人.md)
-3. [03-启动数字员工.md](docs/03-启动数字员工.md)
-4. [04-沉淀知识库.md](docs/04-沉淀知识库.md)
-5. [05-常见问题.md](docs/05-常见问题.md)
+1. [01 — Prerequisites](docs/01-准备工作.md)
+2. [02 — Create the DingTalk bot](docs/02-创建钉钉机器人.md)
+3. [03 — Start the digital employee](docs/03-启动数字员工.md)
+4. [04 — Build up the knowledge base](docs/04-沉淀知识库.md)
+5. [05 — Troubleshooting](docs/05-常见问题.md)
 
-## 日常怎么维护
+> These step-by-step guides are currently written in Simplified Chinese.
+> English translations are welcome — see [CONTRIBUTING](#contributing).
 
-数字员工只会回答**你喂给它的资料**里有的内容。所以搭好之后最重要的事是持续
-喂资料：
+## Day-to-day operation
+
+The digital employee only answers from **material you give it**. So the main
+ongoing job is feeding it:
 
 ```
-knowledge/            ← 把公司的规章、手册、FAQ 放这里（markdown 格式）
+knowledge/            ← company policies, handbooks, FAQs (markdown)
 ```
 
-**每次改完 `knowledge/` 里的文件，必须重启一次服务**，否则改动不生效：
+**Every time you edit anything in `knowledge/`, restart the service** or the
+change will not take effect:
 
 ```bash
 bash scripts/start.sh
 ```
 
-日常常用的几条命令：
+Common commands:
 
 ```bash
-bash scripts/doctor.sh             # 一键体检：现在到哪一步了、下一步该干什么
+bash scripts/doctor.sh             # health check: where you are, what is next
 ```
 
 ```bash
-bash scripts/ask.sh "你的问题"     # 不用钉钉，直接在命令行里测一下
+bash scripts/ask.sh "your question"  # test from the terminal, skipping DingTalk
 ```
 
 ```bash
-bash scripts/logs.sh               # 看服务日志
+bash scripts/logs.sh               # service logs
 ```
 
 ```bash
-bash scripts/stop.sh               # 停止服务
+bash scripts/stop.sh               # stop the service
 ```
 
-**搞不清现在是什么状态、卡在哪了，就跑 `doctor.sh`**，它会告诉你下一步该做什么：
+**When you are not sure what state things are in, run `doctor.sh`** — it tells
+you the next step:
 
 ```
 【1/6】基础软件      齐了
@@ -119,34 +135,60 @@ bash scripts/stop.sh               # 停止服务
 【6/6】服务运行      运行中，钉钉已连接
 ```
 
-## 目录结构
+## Layout
 
 ```
 .
-├── README.md              ← 你在看的这份（给人看）
-├── AGENTS.md              ← 给 AI 编程助手看的操作手册
-├── CLAUDE.md              ← 指向 AGENTS.md
-├── .env.example           ← 密钥模板（复制成 .env 后填）
-├── docs/                  ← 手动操作的分步教程
-├── scripts/               ← 各种一键脚本
-├── templates/             ← 配置文件模板
-├── knowledge/             ← 你的知识库（数字员工的"课本"）
-└── runtime/               ← 引擎本体，脚本自动下载，不用管（不进 git）
+├── README.md              ← this file
+├── README.zh-CN.md        ← Simplified Chinese
+├── AGENTS.md              ← the runbook your AI coding agent follows
+├── CLAUDE.md              ← points at AGENTS.md
+├── .env.example           ← secrets template (copy to .env and fill in)
+├── docs/                  ← manual step-by-step guides
+├── scripts/               ← the one-command scripts
+├── templates/             ← config file template
+├── knowledge/             ← your knowledge base (the bot's textbook)
+└── runtime/               ← the engine itself; scripts fetch it, git ignores it
 ```
 
-## 安全说明
+## Writing knowledge that actually gets found
 
-- 密钥只存在本地 `.env` 文件里，`.gitignore` 已经排除，不会被传到 GitHub。
-- 数字员工默认**只读**：它不会帮你审批、不会改数据、不会发起任何操作。
-- 它只读你明确批准的资料，不会自己去翻公司的其他文档。
-- 引擎本身会跳过 `.env`、含 `secret`/`token`/`password` 字样的文件，避免把密钥
-  当成知识喂进去。
+Retrieval is keyword-based, so **phrase your headings the way people actually
+ask**. This is measurable, not folklore — same document, same question:
 
-更多边界说明见引擎项目的
-[SECURITY.md](https://github.com/fullstack-ai-infra/digital-employee/blob/main/SECURITY.md)。
+| Heading | Asking "值班时间是几点到几点" |
+| --- | --- |
+| `## 值班时间` | ❌ falls back to "not enough evidence" |
+| `## 值班时间是几点到几点 / 值班时间 / 什么时候有人` | ✅ answers correctly, with a source |
 
-## 许可
+Cover the common phrasings in the heading, separated by `/`. Details in
+[04 — Build up the knowledge base](docs/04-沉淀知识库.md).
 
-本仓库为搭建脚手架，采用 Apache-2.0 许可。引擎
-[Digital Employee](https://github.com/fullstack-ai-infra/digital-employee)
-同为 Apache-2.0，版权归其作者所有。
+## Security
+
+- Secrets live only in your local `.env`, which `.gitignore` excludes — they
+  never reach GitHub.
+- The digital employee is **read-only** by default: it does not approve things,
+  modify data, or take any action on your behalf.
+- It reads only the material you explicitly approve; it does not go browsing
+  your company's other documents.
+- The engine skips `.env` and files named like `secret` / `token` / `password`,
+  so credentials do not get indexed as knowledge by accident.
+- The generated config contains **no secrets** — only the names of environment
+  variables, which are resolved at runtime.
+
+For the full boundary description, see the engine's
+[SECURITY.md](https://github.com/fullstack-ai-infra/digital-employee/blob/main/SECURITY.md).
+
+## Contributing
+
+Issues and pull requests are welcome — especially English translations of the
+`docs/` guides, and fixes for DingTalk or CLI behavior that has changed since
+this was written.
+
+## License
+
+This scaffold is licensed under Apache-2.0. The engine,
+[Digital Employee](https://github.com/fullstack-ai-infra/digital-employee), is
+also Apache-2.0 and remains the copyright of its authors. See
+[NOTICE](NOTICE) for attribution details.
