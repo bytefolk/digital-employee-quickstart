@@ -16,19 +16,37 @@ bash scripts/hosts.sh
 
 ```
 Agent hosts:
-- Claude Code: not_ready (2.1.72 (Claude Code)) [runnable]
+- Claude Code: ready (2.1.223 (Claude Code)) [runnable]
 - Qoder CLI: not_found [runnable]
 - Codex CLI: probe_failed [probe-only]
 - Qwen Code: not_found [runnable]
 - CodeBuddy Code: not_found [runnable]
 ```
 
+> **WSL 用户注意**：如果你在 Windows 和 WSL 里各装了一份 Agent Host，
+> `which -a claude` 会列出多个。引擎探测的是 `PATH` 里**最先命中**的那个，
+> 所以在 Windows 侧升级了版本，WSL 里可能仍是旧版。要在 WSL 里单独升级。
+
 | 状态 | 含义 |
 | --- | --- |
 | `ready` | 可以用 |
-| `not_ready` | 装了，但版本不在引擎认证区间内 |
+| `not_ready` | 装了，但还差条件——**版本不符 或 密钥没配**，两种都会显示这个 |
 | `not_found` | 没装 |
 | `probe-only` | 引擎只探测、不支持运行 |
+
+`not_ready` 时要看具体的 blocked 代码才知道差什么：
+
+```bash
+bash scripts/employee-check.sh team-qa claude-code
+```
+
+| blocked 代码 | 差什么 |
+| --- | --- |
+| `*_version_not_conformance_verified` | 版本不在认证区间，要装指定版本 |
+| `*_api_key_not_configured` | 密钥没配，写进 `.env` 即可 |
+
+密钥配进项目根目录的 `.env`，`employee-run.sh` 会自动载入。注意 `doctor` **只检查密钥
+有没有配、不验证真假**——真伪只有真实运行时才知道。
 
 ## 版本要求很严格，这是有原因的
 

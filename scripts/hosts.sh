@@ -21,12 +21,17 @@ fi
 echo
 dim "状态含义："
 dim "  ready      → 可以用它跑 employee 包"
-dim "  not_ready  → 装了但版本不在引擎认证区间内，需要升级/降级到指定版本"
+dim "  not_ready  → 装了但还差条件。有两种原因，看 blocked 代码区分："
+dim "                 *_version_not_conformance_verified → 版本不在认证区间"
+dim "                 *_api_key_not_configured           → 密钥没配"
 dim "  not_found  → 没装"
 dim "  probe-only → 引擎只探测不支持运行（Codex 属于此类）"
 echo
-dim "各 host 需要的密钥："
-dim "  claude-code → ANTHROPIC_API_KEY"
-dim "  qoder       → QODER_PERSONAL_ACCESS_TOKEN"
-dim "  qwen-code   → OPENAI_API_KEY + OPENAI_MODEL"
-dim "  codebuddy   → CODEBUDDY_API_KEY + CODEBUDDY_MODEL"
+dim "各 host 需要的版本和密钥："
+dim "  claude-code → Claude Code >=2.1.214 <2.2.0 ·  ANTHROPIC_API_KEY"
+dim "  qoder       → Qoder CLI 1.1.x            ·  QODER_PERSONAL_ACCESS_TOKEN"
+dim "  qwen-code   → Qwen Code 0.17.1           ·  OPENAI_API_KEY + OPENAI_MODEL"
+dim "  codebuddy   → CodeBuddy Code 2.106.4     ·  CODEBUDDY_API_KEY + CODEBUDDY_MODEL"
+echo
+dim "密钥可以写进项目根目录的 .env，employee-run.sh 会自动载入。"
+dim "注意 doctor 只检查密钥【有没有配】，不验证真假 —— 真伪只有真实运行才知道。"
