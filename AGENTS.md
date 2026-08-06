@@ -10,7 +10,37 @@
 
 ## 你的任务
 
-帮使用者搭建一个能在钉钉里对话的「数字员工」问答机器人。完整链路是：
+帮使用者搭建数字员工。**先确认他要哪种**，再选路径——选错会白做很多步。
+
+### 引擎有两条互不相通的路径
+
+|  | **standalone-v1** | **Agent-native** |
+| --- | --- | --- |
+| 配置单元 | `configs/*.json` + `profiles/answer-agent` | `employee.json` + `SKILL.md` + `schemas/` |
+| 谁跑模型 | 引擎内置检索+模型循环 | 外部 Agent Host |
+| 常驻渠道 | ✅ 钉钉 / HTTP / Console | ❌ 没有 |
+| 命令 | `legacy ask/start/serve` | `init/validate/eval/run/doctor` |
+| 密钥 | 一个 OpenAI 兼容 key | Agent Host 自己的 key |
+
+**关键事实：`run` 命令没有 `--channel` 参数。** Agent-native 路径不提供任何常驻服务，
+所以「用 recipe 做钉钉机器人」在当前引擎上**做不到**。钉钉只能走 standalone-v1。
+
+反过来，standalone-v1 不用 `employee.json` 那套包规范。
+
+### 怎么选
+
+| 使用者想要 | 走哪条 | 案例 |
+| --- | --- | --- |
+| 钉钉里能聊天的机器人 | standalone-v1 | `cases/01-dingtalk-qa` |
+| 接进自己系统的 HTTP 接口 | standalone-v1 | `cases/02-http-api` |
+| 可交付、可验收的员工包 | Agent-native | `cases/03-minimal-answer` |
+| 只提案不执行的审批场景 | Agent-native | `cases/04-structured-action` |
+| 换 Agent Host / 验兼容性 | Agent-native | `cases/05-multi-host` |
+
+**默认假设是钉钉机器人**（本项目主场景）。使用者没明说时按这个走，但如果他提到
+「不用钉钉」「接口」「交付给别人」「审批」，先问清楚再动手。
+
+钉钉链路：
 
 ```
 钉钉用户提问 → 钉钉 Stream 长连接 → Digital Employee 运行时
@@ -238,3 +268,47 @@ bash scripts/ask.sh "你的问题"
 
 `dws` 类型没有"自动发现"，必须逐条列出要读什么。要加的时候先问使用者具体是哪个
 文档节点或哪个群，不要自己去搜。
+
+---
+
+## Agent-native 路径怎么做（案例 03/04/05）
+
+只有当使用者要的是**可交付的员工包**而不是活机器人时才走这条。
+
+```bash
+bash scripts/employee-new.sh <名字> [minimal-answer.v1|structured-action.v1]
+```
+
+```bash
+bash scripts/employee-check.sh <名字>
+```
+
+```bash
+bash scripts/hosts.sh
+```
+
+```bash
+bash scripts/employee-run.sh <名字> <agent-host> "问题"
+```
+
+### 这条路径的关键事实
+
+- **`employee-new.sh` 和 `employee-check.sh` 完全离线**：不调模型、不连 Agent Host、
+  不用任何密钥。使用者什么都没配也能跑完，很适合先做演示。
+- **只有 `employee-run.sh` 会真的调模型**，需要本机有 `ready` 的 Agent Host + 对应密钥。
+- **`recipe` 只有两个合法值**：`minimal-answer.v1`、`structured-action.v1`。别的会被拒绝。
+- **`validate` 和 `eval` 的分工**：`validate` 查包结构，`eval` 查行为契约
+  （拿 `evals/cases.json` 的期望输出撞 `output.schema.json`）。`eval` 不调模型，
+  所以它验的是**契约自洽性**，不是模型答得对不对。
+
+### 排查
+
+| 现象 | 原因 | 怎么办 |
+| --- | --- | --- |
+| `host_not_ready` | 没装 Agent Host，或版本不在认证区间 | `bash scripts/hosts.sh` 看详情 |
+| `*_version_not_conformance_verified` | 版本号不匹配 | 装引擎指定的精确版本 |
+| `agent_host_incompatible` | 包声明的能力宿主给不了 | 换 host，或调整 `employee.json` 的 `requiredCapabilities` |
+| `eval` 失败 | `evals/cases.json` 的期望输出不满足 output schema | 改用例或改 schema，两者要自洽 |
+
+**宿主不兼容 ≠ 包写错了。** 向使用者汇报时务必区分这两件事，
+`employee-check.sh` 的输出已经分开报了，照着说即可。

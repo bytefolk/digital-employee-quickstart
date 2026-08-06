@@ -76,6 +76,28 @@ expected, not a broken setup. Chasing the approver is on you.
 
 Once approved, search DingTalk for the name you gave the bot and start chatting.
 
+## Other scenarios
+
+A DingTalk bot is the main case, but the engine supports more. See
+[cases/](cases/README.md) for the full list — each case states which of the
+engine's **two paths** it uses, what it needs up front, and what you get:
+
+| Case | Scenario | Needs a model key? |
+| --- | --- | --- |
+| [01 DingTalk Q&A](cases/01-dingtalk-qa/) | A live bot colleagues chat with | Yes |
+| [02 HTTP API](cases/02-http-api/) | Wire it into your own system | Yes |
+| [03 Minimal answer package](cases/03-minimal-answer/) | A portable, shippable employee package | **No** |
+| [04 Structured action](cases/04-structured-action/) | Proposals for approval, never executed | **No** |
+| [05 Multi-host](cases/05-multi-host/) | One package across different Agent Hosts | Yes |
+
+> **Read [cases/README.md](cases/README.md) before mixing them.** The engine has
+> two separate architectures. Channels (DingTalk, HTTP) exist only on the
+> `standalone-v1` path; the Agent-native `run` command has **no `--channel`
+> option**, so "a DingTalk bot built from a recipe" is not possible today.
+
+Cases 03 and 04 are **fully offline** — no model key, no Agent Host, nothing to
+install beyond Node.js. They are the fastest way to see the package contract.
+
 ## Prefer to do it yourself, step by step
 
 Walk through `docs/` in order:
@@ -144,11 +166,32 @@ you the next step:
 ├── AGENTS.md              ← the runbook your AI coding agent follows
 ├── CLAUDE.md              ← points at AGENTS.md
 ├── .env.example           ← secrets template (copy to .env and fill in)
+├── cases/                 ← scenario library; start here to pick a path
 ├── docs/                  ← manual step-by-step guides
 ├── scripts/               ← the one-command scripts
 ├── templates/             ← config file template
 ├── knowledge/             ← your knowledge base (the bot's textbook)
+├── employees/             ← portable employee packages (Agent-native path)
 └── runtime/               ← the engine itself; scripts fetch it, git ignores it
+```
+
+### Commands by path
+
+`standalone-v1` — a live service, one OpenAI-compatible key:
+
+```bash
+bash scripts/start.sh          # DingTalk bot
+bash scripts/serve.sh 3000     # HTTP API
+bash scripts/ask.sh "..."      # one-shot, terminal only
+```
+
+Agent-native — portable packages, offline unless you run them:
+
+```bash
+bash scripts/employee-new.sh team-qa minimal-answer.v1   # scaffold (offline)
+bash scripts/employee-check.sh team-qa                   # validate + eval (offline)
+bash scripts/hosts.sh                                    # which Agent Hosts are ready
+bash scripts/employee-run.sh team-qa claude-code "..."   # real model call
 ```
 
 ## Writing knowledge that actually gets found

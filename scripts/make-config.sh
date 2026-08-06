@@ -26,18 +26,28 @@ fi
 
 mkdir -p "$(dirname "$CONFIG_FILE")"
 
-# 用 node 做替换，避免路径里的斜杠影响 sed
+# 用 node 做替换，避免路径里的斜杠影响 sed。
+#
+# 知识库路径写成【相对于配置文件所在目录】的形式，不写绝对路径 ——
+# 引擎就是按 configDirectory 解析 source.root 的，写相对路径整个项目才能随便挪位置。
+# 早期版本写死绝对路径，项目目录一改名/移动，服务就报 ENOENT 找不到知识库。
 node -e '
   const fs = require("fs");
+  const path = require("path");
   const [template, output, displayName, baseUrl, modelName, knowledgeRoot, escalation] =
     process.argv.slice(1);
+  const relativeRoot = path
+    .relative(path.dirname(path.resolve(output)), path.resolve(knowledgeRoot))
+    .split(path.sep)
+    .join("/");
   const raw = fs.readFileSync(template, "utf8");
+  const esc = (value) => JSON.stringify(value).slice(1, -1);
   const filled = raw
-    .replace("__DISPLAY_NAME__", JSON.stringify(displayName).slice(1, -1))
-    .replace("__MODEL_BASE_URL__", JSON.stringify(baseUrl).slice(1, -1))
-    .replace("__MODEL_NAME__", JSON.stringify(modelName).slice(1, -1))
-    .replace("__KNOWLEDGE_ROOT__", JSON.stringify(knowledgeRoot).slice(1, -1))
-    .replace("__ESCALATION_MESSAGE__", JSON.stringify(escalation).slice(1, -1));
+    .replace("__DISPLAY_NAME__", esc(displayName))
+    .replace("__MODEL_BASE_URL__", esc(baseUrl))
+    .replace("__MODEL_NAME__", esc(modelName))
+    .replace("__KNOWLEDGE_ROOT__", esc(relativeRoot || "."))
+    .replace("__ESCALATION_MESSAGE__", esc(escalation));
   JSON.parse(filled); // 生成后立刻校验一遍 JSON 合法性
   fs.writeFileSync(output, filled);
 ' \

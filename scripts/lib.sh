@@ -10,6 +10,10 @@ ENV_FILE="$PROJECT_ROOT/.env"
 CONFIG_FILE="$RUNTIME_DIR/configs/local.json"
 LOG_FILE="$PROJECT_ROOT/.runtime.log"
 PID_FILE="$PROJECT_ROOT/.runtime.pid"
+# Agent-native 路径产出的可移植员工包放这里（与 standalone-v1 的 configs/ 分开）
+EMPLOYEES_DIR="$PROJECT_ROOT/employees"
+
+CLI="./dist/apps/cli/bin.js"
 
 RUNTIME_REPO="https://github.com/fullstack-ai-infra/digital-employee.git"
 
@@ -85,6 +89,28 @@ require_runtime() {
 require_config() {
   [ -f "$CONFIG_FILE" ] || die "还没生成配置，请先运行：bash scripts/make-config.sh"
 }
+
+# 在引擎目录里跑 CLI。所有 Agent-native 命令都经由这里，
+# 保证用的是同一个编译产物，也避免各脚本重复写路径。
+run_cli() {
+  ( cd "$RUNTIME_DIR" && node "$CLI" "$@" )
+}
+
+# 把员工包名解析成绝对路径。允许传名字（employees/ 下）或直接传路径。
+resolve_employee_dir() {
+  local input="$1"
+  case "$input" in
+    /*) printf '%s' "$input" ;;
+    */*) printf '%s' "$(cd "$(dirname "$input")" 2>/dev/null && pwd)/$(basename "$input")" ;;
+    *) printf '%s' "$EMPLOYEES_DIR/$input" ;;
+  esac
+}
+
+# 引擎当前认可的 recipe。init 只接受这两个值。
+RECIPES="minimal-answer.v1 structured-action.v1"
+
+# 可实际运行的 Agent Host（codex 是 probe-only，不能跑，故不列入）。
+RUNNABLE_HOSTS="claude-code qoder qwen-code codebuddy"
 
 # 读取某个进程的工作目录（Linux 用 /proc，macOS 用 lsof）
 process_cwd() {

@@ -67,6 +67,27 @@ Key），其他时候你等着看它汇报就行。
 
 审批通过后，在钉钉搜索框里搜你给机器人起的名字，就能开始对话了。
 
+## 其他场景
+
+钉钉机器人是主场景，但引擎能做的不止这些。完整清单见
+[cases/](cases/README.md)，每个案例都写明**走引擎的哪条路径**、需要什么前置条件、
+能得到什么：
+
+| 案例 | 场景 | 要模型密钥吗 |
+| --- | --- | --- |
+| [01 钉钉问答](cases/01-dingtalk-qa/) | 同事能在钉钉里聊天的机器人 | 要 |
+| [02 HTTP 接口](cases/02-http-api/) | 接进你自己的系统 | 要 |
+| [03 最小问答包](cases/03-minimal-answer/) | 可交付、可验收的员工包 | **不要** |
+| [04 结构化提案](cases/04-structured-action/) | 只提案不执行的审批场景 | **不要** |
+| [05 多宿主运行](cases/05-multi-host/) | 同一个包跑在不同 Agent Host 上 | 要 |
+
+> **混用之前务必先看 [cases/README.md](cases/README.md)。** 引擎内部是两套独立架构：
+> 钉钉、HTTP 这些渠道**只存在于 `standalone-v1` 路径**；Agent-native 的 `run` 命令
+> **没有 `--channel` 参数**，所以"用 recipe 做一个钉钉机器人"在当前引擎上做不到。
+
+案例 03 和 04 **完全离线**——不需要模型密钥、不需要装 Agent Host，除了 Node.js
+什么都不用装。想快速看懂引擎的包规范，从它们入手最快。
+
 ## 不想用 AI 助手，想自己一步步做
 
 看 `docs/` 目录，按顺序来：
@@ -130,11 +151,32 @@ bash scripts/stop.sh               # 停止服务
 ├── AGENTS.md              ← 给 AI 编程助手看的操作手册
 ├── CLAUDE.md              ← 指向 AGENTS.md
 ├── .env.example           ← 密钥模板（复制成 .env 后填）
+├── cases/                 ← 案例库，先看这里选对路径
 ├── docs/                  ← 手动操作的分步教程
 ├── scripts/               ← 各种一键脚本
 ├── templates/             ← 配置文件模板
 ├── knowledge/             ← 你的知识库（数字员工的"课本"）
+├── employees/             ← 可移植员工包（Agent-native 路径产出）
 └── runtime/               ← 引擎本体，脚本自动下载，不用管（不进 git）
+```
+
+### 按路径分的命令
+
+`standalone-v1` —— 产出常驻服务，只要一个 OpenAI 兼容密钥：
+
+```bash
+bash scripts/start.sh          # 钉钉机器人
+bash scripts/serve.sh 3000     # HTTP 接口
+bash scripts/ask.sh "..."      # 命令行一次性提问
+```
+
+Agent-native —— 产出可移植员工包，除了真实运行外全程离线：
+
+```bash
+bash scripts/employee-new.sh team-qa minimal-answer.v1   # 生成包（离线）
+bash scripts/employee-check.sh team-qa                   # 校验+验收（离线）
+bash scripts/hosts.sh                                    # 看哪些 Agent Host 可用
+bash scripts/employee-run.sh team-qa claude-code "..."   # 真实调模型
 ```
 
 ## 安全说明

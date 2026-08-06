@@ -113,6 +113,17 @@ else
   [ -f "$CONFIG_FILE" ] && note_next "bash scripts/start.sh"
 fi
 
+# 以上 6 项都是 standalone-v1 路径（钉钉/HTTP）的状态。
+# Agent-native 路径（员工包）是独立的一套，单独列出来，避免两条路径的状态混淆。
+echo
+printf '【附加】员工包        '
+if [ -d "$EMPLOYEES_DIR" ] && [ -n "$(ls -A "$EMPLOYEES_DIR" 2>/dev/null)" ]; then
+  pkg_count="$(find "$EMPLOYEES_DIR" -maxdepth 2 -name employee.json 2>/dev/null | wc -l | tr -d ' ')"
+  printf '%s\n' "${C_GREEN}$pkg_count 个${C_RESET}"
+else
+  printf '%s\n' "${C_DIM}无（可选，见 cases/03-minimal-answer）${C_RESET}"
+fi
+
 echo
 echo "──────────────────────────────────────────"
 if [ -n "$next_step" ]; then
@@ -124,4 +135,6 @@ else
   echo
   dim "  日常：改完 knowledge/ 里的资料后跑 bash scripts/start.sh 重启生效"
 fi
+echo
+dim "其他场景见 cases/README.md：HTTP 接口、可移植员工包、结构化审批提案、多宿主运行"
 echo

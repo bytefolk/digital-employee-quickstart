@@ -15,6 +15,11 @@ runtime/
 # 如果你的知识库含公司内部资料，取消下面这行的注释，避免误传到公开仓库。
 # knowledge/
 
+# 你生成的员工包。默认不提交 —— 里面的 knowledge/ 很可能含公司内部资料。
+# 想把某个包纳入版本库（比如交付给别人或进 CI），单独放行它：
+#   !employees/你的包名/
+employees/
+
 node_modules/
 *.log
 .DS_Store
