@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fullstack-ai-infra/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "hr-onboarding",
+  "version": "1.0.0",
+  "description": "HR onboarding assistant — guides new hires through company processes.",
+  "license": "Apache-2.0",
+  "authors": ["fullstack-ai-infra"],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": []
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json"
+  },
+  "policy": {
+    "mode": "read_only",
+    "network": "deny",
+    "filesystem": { "read": ["./knowledge/**"], "write": [] },
+    "mcpTools": []
+  },
+  "assets": [
+    "./knowledge/入职流程.md",
+    "./knowledge/办公指南.md",
+    "./knowledge/福利制度.md",
+    "./evals/cases.json"
+  ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "first-day-checklist",
+    "input": { "message": "入职第一天要做什么" },
+    "expectedOutput": {
+      "answer": "9:30 到前台签到",
+      "citations": [{ "label": "入职流程" }]
+    }
+  },
+  {
+    "id": "wifi-password",
+    "input": { "message": "WiFi密码是什么" },
+    "expectedOutput": {
+      "answer": "Company-Office",
+      "citations": [{ "label": "办公指南" }]
+    }
+  },
+  {
+    "id": "annual-leave",
+    "input": { "message": "年假有多少天" },
+    "expectedOutput": {
+      "answer": "入职满 1 年：5 天",
+      "citations": [{ "label": "福利制度" }]
+    }
+  },
+  {
+    "id": "salary-escalate",
+    "input": { "message": "我的工资是不是算错了" },
+    "expectedOutput": {
+      "answer": "",
+      "escalation": { "reason": "薪资问题需联系 HR", "target": "hr" }
+    }
+  }
+]

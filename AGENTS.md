@@ -35,7 +35,20 @@ node --version   # 需要 v20+
 - Linux: `curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt-get install -y nodejs`
 - Windows: 下载 https://nodejs.org 安装包
 
-### 一键部署
+### 选一个案例
+
+本仓库是案例库。先问用户需要什么场景，然后 cd 到对应案例目录：
+
+```bash
+cd cases/team-qa         # IT 团队问答
+cd cases/hr-onboarding   # HR 入职引导
+cd cases/ops-approval    # 运维审批提案
+cd cases/product-faq     # 产品 FAQ
+```
+
+每个案例都是完整的员工包，自带 knowledge/、schemas/、evals/。
+
+### 部署
 
 ```bash
 npx @fullstack-ai-infra/digital-employee deploy
@@ -44,8 +57,8 @@ npx @fullstack-ai-infra/digital-employee deploy
 这条命令会交互式引导用户完成：
 
 1. **选语言** — English / 简体中文（自动检测系统 locale）
-2. **选渠道** — 钉钉 / Console / HTTP 接口
-3. **扫码授权**（仅钉钉） — 终端内显示二维码，扫完自动继续
+2. **选渠道** — 钉钉 / 飞书 / 企业微信 / HTTP 接口
+3. **扫码授权**（仅 IM 渠道） — 终端内显示二维码，扫完自动继续
 4. **起名字** — 输入机器人名称
 5. **选 AI 引擎** — 列出已安装的 Agent Host，已登录的标为可用
 6. **自动执行** — 创建应用、配置、启动服务
@@ -68,15 +81,22 @@ npx @fullstack-ai-infra/digital-employee deploy
 - **Console 渠道**：运行 `npx @fullstack-ai-infra/digital-employee legacy start` 开始对话
 - **HTTP 渠道**：POST 到 `http://127.0.0.1:3000/answer` 调用
 
-### 知识库维护
+### 知识库定制
 
-部署完成后，引导用户往 `knowledge/` 目录放入知识库内容（markdown 格式）。
+每个案例自带示例知识库。部署后引导用户替换 `knowledge/` 里的内容为他们公司的真实资料。
 
 ```
-knowledge/            ← 公司的规章、手册、FAQ 放这里
+knowledge/            ← 公司的规章、手册、FAQ 放这里（markdown 格式）
 ```
 
 内容变更后需要重启服务。
+
+### 离线校验（可选，不需要引擎）
+
+```bash
+npx @fullstack-ai-infra/digital-employee validate .   # 包结构校验
+npx @fullstack-ai-infra/digital-employee eval .       # 验收用例
+```
 
 ---
 
@@ -85,7 +105,7 @@ knowledge/            ← 公司的规章、手册、FAQ 放这里
 | 现象 | 处理 |
 |------|------|
 | `npx` 找不到 | Node.js 未安装或版本过低 |
-| 钉钉扫码超时 | 重新运行 deploy 命令 |
+| 扫码超时 | 重新运行 deploy 命令 |
 | "No AI engine found" | 未安装 Agent Host，引导用户选择 OpenAI key 降级路径 |
 | 重复部署提示覆盖 | 正常现象，deploy 命令支持幂等重跑 |
 
@@ -93,6 +113,6 @@ knowledge/            ← 公司的规章、手册、FAQ 放这里
 
 ## 参考资料
 
-- 案例库：[cases/](cases/README.md)
+- 案例规范：[cases/README.md](cases/README.md)
 - 手动教程：[docs/](docs/)
 - 引擎文档：https://github.com/fullstack-ai-infra/digital-employee

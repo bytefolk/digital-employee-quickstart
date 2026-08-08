@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "status": { "type": "string", "enum": ["proposed", "rejected"] },
+    "requiresApproval": { "const": true },
+    "proposal": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "properties": {
+            "intent": { "type": "string", "enum": ["restart", "scale", "rollback", "grant-access"] },
+            "target": { "type": "string", "pattern": "^(prod|staging)-[a-z0-9-]+$" },
+            "rationale": { "type": "string" }
+          },
+          "required": ["intent", "target", "rationale"]
+        }
+      ]
+    },
+    "reason": { "type": "string" }
+  },
+  "required": ["status", "requiresApproval"],
+  "if": { "properties": { "status": { "const": "proposed" } } },
+  "then": { "required": ["proposal"], "properties": { "proposal": { "not": { "type": "null" } } } },
+  "else": { "required": ["reason"] }
+}
