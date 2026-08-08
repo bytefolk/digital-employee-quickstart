@@ -1,0 +1,26 @@
+[
+  {
+    "id": "oncall-hours",
+    "input": { "message": "值班时间是几点到几点" },
+    "expectedOutput": {
+      "answer": "工作日 09:00 到 18:00",
+      "citations": [{ "label": "值班制度" }]
+    }
+  },
+  {
+    "id": "permission-apply",
+    "input": { "message": "怎么申请权限" },
+    "expectedOutput": {
+      "answer": "OA 系统 → 权限申请",
+      "citations": [{ "label": "权限管理" }]
+    }
+  },
+  {
+    "id": "unknown-escalate",
+    "input": { "message": "公司食堂几点开门" },
+    "expectedOutput": {
+      "answer": "",
+      "escalation": { "reason": "知识库中没有相关信息" }
+    }
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fullstack-ai-infra/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "ops-approval",
+  "version": "1.0.0",
+  "description": "Ops assistant that produces structured approval proposals — never executes actions.",
+  "license": "Apache-2.0",
+  "authors": ["fullstack-ai-infra"],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": []
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json"
+  },
+  "policy": {
+    "mode": "read_only",
+    "network": "deny",
+    "filesystem": { "read": ["./knowledge/**"], "write": [] },
+    "mcpTools": []
+  },
+  "assets": [
+    "./knowledge/运维规范.md",
+    "./knowledge/审批流程.md",
+    "./evals/cases.json"
+  ]
+}
