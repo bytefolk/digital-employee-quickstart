@@ -5,15 +5,20 @@
 
 ## 当前发布边界
 
-截至 2026-08-13，本 quickstart 已验证的公开 CLI 版本
-`@fullstack-ai-infra/digital-employee@0.3.0` 只支持：
+本 quickstart 的公开稳定基线固定为
+`@fullstack-ai-infra/digital-employee@0.3.0`。当前对外主路径只覆盖：
 
 - 员工包结构校验；
 - 离线样例契约验收；
+- 从公开 recipe 创建最小员工包；
 - 在用户已经配置受支持 Agent Host 后执行一次性 `run`。
 
-它没有 `deploy` 命令，也没有交付交互式渠道选择、扫码授权、IM 应用创建或长期渠道服务。
-不要执行或建议 `digital-employee deploy`，不要把源码 main 上的预览能力当成已发布能力。
+一次性 `run` 只有在用户已经配置受支持 Agent Host 时才可选。`legacy` 命名空间是历史
+`standalone-v1` demo/兼容路径，不是本 quickstart 的主体验。v0.4 adoption candidate 仍处于
+开发和验收阶段；统一 `deploy` 体验属于 planned work，公开 `0.3.0` 没有这个命令。
+
+不要执行或建议 `digital-employee deploy`，不要把源码 main、PR 或 candidate 上的预览能力
+当成已发布能力。当前版本也没有交付交互式渠道选择、扫码授权、IM 应用创建或长期渠道服务。
 
 ## 铁律
 
@@ -51,9 +56,17 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
 ```
 
 必须分别检查退出码与 JSON：`validate` 应为 `status: "valid"`；`eval` 应为
-`status: "passed"` 且 `summary.failed: 0`。`eval` 是离线样例契约验收，不代表模型回答质量。
+`status: "passed"` 且 `summary.failed: 0`。`eval` 只核对仓库自带离线样例的契约，不调用
+模型，也不能证明数字员工真实回答过这些问题或回答正确。
 
-### 4. 可选的一次性运行
+### 4. 提交唯一运行反馈
+
+完成或失败后，邀请用户把脱敏 Run Report 提交到
+[digital-employee-quickstart#2][quickstart-adoption]。必须先得到用户同意才能代发，不要再创建
+第二个 Issue 或 Discussion 入口。至少包含：CLI 固定版本、案例名、Node/操作系统、
+`validate` 和 `eval` 状态，以及脱敏后的失败码。
+
+### 5. 可选的一次性运行
 
 只有用户明确要求、且已经安装并登录受支持 Agent Host 时，才按
 [v0.3.0 框架文档][v030-runner]选择精确 `run --engine`
@@ -64,7 +77,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
 统一部署体验由以下公开事项跟踪：
 
 - [digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91)
-- [digital-employee-quickstart#2](https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2)
+- [digital-employee-quickstart#2][quickstart-adoption]
 
 在新的公开版本和干净环境验收完成前，不得恢复 `deploy` 指引。
 
@@ -77,3 +90,4 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
 `docs/` 下内容是历史部署草稿，不是 CLI `0.3.0` 的执行手册。
 
 [v030-runner]: https://github.com/fullstack-ai-infra/digital-employee/blob/v0.3.0/README.zh-CN.md#发布者自有机器上的-runner-路径
+[quickstart-adoption]: https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2

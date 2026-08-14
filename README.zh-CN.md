@@ -5,15 +5,19 @@
 [Digital Employee](https://github.com/fullstack-ai-infra/digital-employee) 框架的官方案例库。
 每个案例都是一个可移植的 `employee-package.v1alpha1` 示例，包含知识、Schema 和离线验收样例。
 
-## 当前发布边界
+## 公开发布边界
 
-截至 2026-08-13，本 quickstart 已验证的公开 CLI 版本是
-`@fullstack-ai-infra/digital-employee@0.3.0`。它支持员工包校验、
-离线样例验收，以及通过已配置 Agent Host 执行一次性 `run`。它**没有**交付 `deploy`
-命令、交互式渠道向导、IM 应用创建或长期运行的渠道服务。
+本 quickstart 固定使用公开包 `@fullstack-ai-infra/digital-employee@0.3.0`。
 
-当前版本请勿执行 `digital-employee deploy`。部署流程仍是路线图工作，跟踪于
-[digital-employee#91][adoption-epic] 和
+| 路径 | 状态 | 在本 quickstart 中的含义 |
+|------|------|--------------------------|
+| `init`、`validate`、`eval` | 已验证的公开路径 | 无凭据创建员工包、校验结构和离线契约 |
+| `run` | 依赖用户环境 | 可选的一次性执行；需要已配置的受支持 Agent Host |
+| `legacy ...` | 历史 demo/兼容路径 | `standalone-v1` 兼容能力，不是本 quickstart 的主体验 |
+| v0.4 adoption candidate | candidate，未发布 | 开发和验收中的能力不能写成公开可用 |
+| `deploy` | planned | 公开 `0.3.0` 中不存在；没有渠道向导、IM 应用创建或长期渠道服务 |
+
+规划中的部署路径跟踪于 [digital-employee#91][adoption-epic] 和
 [digital-employee-quickstart#2][quickstart-adoption]。
 
 ## 安全实践一个案例
@@ -30,8 +34,28 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
   digital-employee eval . --json
 ```
 
-`validate` 检查员工包结构；`eval` 只做离线样例契约验收，不会调用模型、Agent Host、
-MCP 或任何在线服务。
+`team-qa` 的预期结果依次是 `status: "valid"`，以及 `status: "passed"`、
+3 个离线样例全部通过。
+
+`validate` 检查员工包结构；`eval` 只核对仓库自带离线样例的契约，不会调用模型、
+Agent Host、MCP 或任何在线服务，也**不能证明数字员工真实回答过这些问题或回答正确**。
+
+## 提交本次运行反馈
+
+无论成功还是失败，只使用一个公开反馈入口：
+[在 digital-employee-quickstart#2 下评论][quickstart-adoption]。请粘贴下面这份脱敏
+Run Report：
+
+```text
+CLI: @fullstack-ai-infra/digital-employee@0.3.0
+案例: team-qa
+Node / 操作系统:
+validate: valid | failed
+eval: passed (3/3) | failed
+失败码/输出（如有，需脱敏）:
+```
+
+不要提交凭据、账号标识、私有仓库名或本机绝对路径。
 
 ## 案例列表
 

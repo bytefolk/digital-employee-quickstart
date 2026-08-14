@@ -4,8 +4,8 @@
 
 ## 当前可执行路径
 
-公开 CLI `0.3.0` 可以校验员工包并执行离线样例验收，但没有 `deploy` 命令或长期渠道服务。
-请固定版本运行：
+公开 CLI `0.3.0` 可以校验员工包并执行离线样例契约验收，但没有 `deploy` 命令或长期
+渠道服务。离线验收不调用模型，也不能证明数字员工真实回答过问题。请固定版本运行：
 
 ```bash
 cd cases/<案例名>
@@ -16,6 +16,9 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
 ```
 
 不要执行 `digital-employee deploy` 或 `deploy --channel dingtalk`；统一部署体验尚未公开交付。
+完成或失败后，只在
+[digital-employee-quickstart#2](https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2)
+提交脱敏 Run Report。
 
 ## 案例列表
 

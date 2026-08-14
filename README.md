@@ -6,20 +6,22 @@ Official case library for [Digital Employee](https://github.com/fullstack-ai-inf
 Each case is a portable `employee-package.v1alpha1` example with knowledge,
 Schemas, and offline acceptance fixtures.
 
-## Current release boundary
+## Public release boundary
 
-As of 2026-08-13, the public CLI version verified by this quickstart is
+This quickstart is pinned to the public package
 `@fullstack-ai-infra/digital-employee@0.3.0`.
-It supports package validation, offline fixture evaluation, and one-shot runs
-through a configured Agent Host. It does **not** ship a `deploy` command, an
-interactive channel wizard, IM application provisioning, or a long-running
-channel service.
 
-Do not use `digital-employee deploy` with the current release. The deployment
-flow remains roadmap work tracked in
+| Path | Status | What it means here |
+|------|--------|--------------------|
+| `init`, `validate`, `eval` | Verified public path | Credential-free package creation and offline contract checks |
+| `run` | Environment-qualified | Optional one-shot execution with an already configured supported Agent Host |
+| `legacy ...` | Historical demo/compatibility | `standalone-v1` compatibility, not this quickstart's primary experience |
+| v0.4 adoption candidate | Candidate, not released | Development and acceptance work must not be presented as public capability |
+| `deploy` | Planned | Not present in public `0.3.0`; no channel wizard, IM provisioning, or long-running channel service |
+
+The planned deployment path is tracked in
 [digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91)
-and
-[digital-employee-quickstart#2](https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2).
+and [digital-employee-quickstart#2][run-report].
 
 ## Try a case safely
 
@@ -36,9 +38,31 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
   digital-employee eval . --json
 ```
 
-`validate` checks the package structure. `eval` performs offline fixture
-conformance; it does not invoke a model, Agent Host, MCP server, or online
-service.
+Expected results for `team-qa` are `status: "valid"` and then
+`status: "passed"` with `3` of `3` fixtures passing.
+
+`validate` checks the package structure. `eval` only checks the contract of the
+repository's offline fixtures. It does not invoke a model, Agent Host, MCP
+server, or online service, and it does **not** prove that a digital employee
+answered these questions correctly.
+
+## Report this run
+
+After a success or failure, use the single public feedback entry:
+[comment on digital-employee-quickstart#2][run-report]. Paste this small,
+redacted Run Report:
+
+```text
+CLI: @fullstack-ai-infra/digital-employee@0.3.0
+Case: team-qa
+Node / OS:
+validate: valid | failed
+eval: passed (3/3) | failed
+Failure code/output (if any, redacted):
+```
+
+Do not include credentials, account identifiers, private repository names, or
+local absolute paths.
 
 ## Cases
 
@@ -107,3 +131,5 @@ for the current engine matrix and `run` syntax.
 ## License
 
 Apache-2.0. See [NOTICE](NOTICE) for attribution.
+
+[run-report]: https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2

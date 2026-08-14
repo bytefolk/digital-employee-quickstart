@@ -1,0 +1,117 @@
+name: Quickstart v0.3 contract
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Reject enterprise commit emails
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          git cat-file -e "${BASE_SHA}^{commit}"
+          git cat-file -e "${HEAD_SHA}^{commit}"
+          commit_emails="$(git log --format='%ae%n%ce' "$BASE_SHA..$HEAD_SHA")"
+          if grep -Eqi '@(alibaba-inc\.com|alibaba\.com)$' <<<"$commit_emails"; then
+            echo 'Enterprise commit email detected in the pull request range. Use a public-safe Git identity.' >&2
+            exit 1
+          fi
+
+      - name: Require Node.js 20 or newer
+        run: |
+          node --version
+          node -e 'if (Number(process.versions.node.split(".")[0]) < 20) process.exit(1)'
+
+      - name: Validate and evaluate all public cases
+        env:
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.3.0"
+          npm_config_loglevel: silent
+        run: |
+          set -euo pipefail
+          total=0
+
+          for case_dir in \
+            cases/team-qa \
+            cases/hr-onboarding \
+            cases/ops-approval \
+            cases/product-faq
+          do
+            validate_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+              digital-employee validate "$case_dir" --json)"
+            node -e '
+              const result = JSON.parse(process.argv[1]);
+              if (result.status !== "valid") process.exit(1);
+            ' "$validate_json"
+
+            eval_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+              digital-employee eval "$case_dir" --json)"
+            passed="$(node -e '
+              const result = JSON.parse(process.argv[1]);
+              if (result.status !== "passed" || result.summary.failed !== 0) process.exit(1);
+              process.stdout.write(String(result.summary.passed));
+            ' "$eval_json")"
+            total=$((total + passed))
+            printf '%s: validate=valid, eval=%s/%s\n' \
+              "$case_dir" "$passed" "$passed"
+          done
+
+          test "$total" -eq 15
+          printf 'Public v0.3.0 matrix: validate=4/4, eval=%s/15\n' "$total"
+
+      - name: Smoke-test public init path
+        env:
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.3.0"
+          npm_config_loglevel: silent
+        run: |
+          set -euo pipefail
+          probe_dir="$(mktemp -d)"
+          npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee init "$probe_dir/my-case" --recipe minimal-answer.v1
+          npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee validate "$probe_dir/my-case" --json
+          npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee eval "$probe_dir/my-case" --json
+
+      - name: Reject stale public claims and package typos
+        run: |
+          set -euo pipefail
+          maintained_docs=(AGENTS.md README.md README.zh-CN.md cases/README.md)
+
+          if grep -nF '@fullstack-ai-infr/digital-employee' "${maintained_docs[@]}"; then
+            echo 'Found the misspelled npm package name.' >&2
+            exit 1
+          fi
+
+          if grep -nF '@fullstack-ai-infra/digital-employee' "${maintained_docs[@]}" \
+            | grep -vF '@fullstack-ai-infra/digital-employee@0.3.0'; then
+            echo 'Found an unpinned public npm package reference.' >&2
+            exit 1
+          fi
+
+          if grep -nE '^[[:space:]]*npx .*digital-employee.*deploy' "${maintained_docs[@]}"; then
+            echo 'Found an executable deploy instruction for public v0.3.0.' >&2
+            exit 1
+          fi
+
+          if grep -nE 'deploy command is fully interactive|deploy 命令全程交互式|一条命令完成全部部署|full deploy|完整部署' \
+            "${maintained_docs[@]}"; then
+            echo 'Found a stale deployment completion claim.' >&2
+            exit 1
+          fi
