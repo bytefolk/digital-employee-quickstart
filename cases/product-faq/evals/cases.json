@@ -1,4 +1,6 @@
-[
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
   {
     "id": "pricing-pro",
     "input": { "message": "专业版多少钱" },
@@ -31,4 +33,5 @@
       "escalation": { "reason": "客户投诉，需转人工处理", "target": "support" }
     }
   }
-]
+  ]
+}

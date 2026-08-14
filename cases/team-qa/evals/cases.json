@@ -1,4 +1,6 @@
-[
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
   {
     "id": "oncall-hours",
     "input": { "message": "值班时间是几点到几点" },
@@ -23,4 +25,5 @@
       "escalation": { "reason": "知识库中没有相关信息" }
     }
   }
-]
+  ]
+}

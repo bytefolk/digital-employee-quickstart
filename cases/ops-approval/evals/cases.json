@@ -1,4 +1,6 @@
-[
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
   {
     "id": "restart-proposal",
     "input": { "message": "api-gateway 挂了，帮我重启一下", "target": "prod-api-gateway" },
@@ -43,4 +45,5 @@
       "reason": "target 不符合命名规范，应为 <环境>-<服务名> 格式。"
     }
   }
-]
+  ]
+}
