@@ -1,43 +1,43 @@
 # 给 AI 编程助手的执行说明
 
-这个文件是给 AI 编程助手（Claude Code / Codex / Cursor 等）看的操作手册。
-使用者大概率**没有开发经验**，请你代替他完成全部命令行操作，并用中文、非技术
-语言汇报进展。
+这个仓库是 Digital Employee 的案例库。使用者可能没有开发经验，请代替他执行命令，
+用中文和非技术语言汇报，并严格遵守下面的发布边界。
 
-如果你是人类，请看 [README.md](README.md)。
+## 当前发布边界
 
----
+本 quickstart 的公开稳定基线固定为
+`@fullstack-ai-infra/digital-employee@0.3.0`。当前对外主路径只覆盖：
 
-## 你的任务
+- 员工包结构校验；
+- 离线样例契约验收；
+- 从公开 recipe 创建最小员工包；
+- 在用户已经配置受支持 Agent Host 后执行一次性 `run`。
 
-帮使用者搭建数字员工。**一条命令完成全部部署**，交互式引导。
+一次性 `run` 只有在用户已经配置受支持 Agent Host 时才可选。`legacy` 命名空间是历史
+`standalone-v1` demo/兼容路径，不是本 quickstart 的主体验。v0.4 adoption candidate 仍处于
+开发和验收阶段；统一 `deploy` 体验属于 planned work，公开 `0.3.0` 没有这个命令。
 
----
+不要执行或建议 `digital-employee deploy`，不要把源码 main、PR 或 candidate 上的预览能力
+当成已发布能力。当前版本也没有交付交互式渠道选择、扫码授权、IM 应用创建或长期渠道服务。
 
 ## 铁律
 
-1. **绝不把密钥打印到输出里。** 哪怕用户让你 echo 也不行。
-2. **操作涉及写入（创建应用、发布版本）之前先跟用户确认。**
-3. **知识库内容变更后提醒用户重启服务。**
+1. 绝不打印、读取或索要密钥来完成本 quickstart。
+2. 不依据 `docs/` 中的历史草稿创建钉钉、飞书或企业微信应用。
+3. 不声称机器人 ONLINE、HTTP 服务已启动或渠道已部署，除非未来公开版本提供该能力且已真实验证。
+4. 任何需要在线服务、Agent Host 或写入外部系统的动作，都先向用户说明边界并取得确认。
 
----
+## 安全实践流程
 
-## 执行步骤
-
-### 前置检查
+### 1. 检查 Node.js
 
 ```bash
-node --version   # 需要 v20+
+node --version
 ```
 
-如果 Node.js 版本不够或未安装，引导用户安装：
-- macOS: `brew install node` 或 `nvm install 20`
-- Linux: `curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt-get install -y nodejs`
-- Windows: 下载 https://nodejs.org 安装包
+需要 Node.js 20 或更高版本。
 
-### 选一个案例
-
-本仓库是案例库。先问用户需要什么场景，然后 cd 到对应案例目录：
+### 2. 选择案例
 
 ```bash
 cd cases/team-qa         # IT 团队问答
@@ -46,73 +46,48 @@ cd cases/ops-approval    # 运维审批提案
 cd cases/product-faq     # 产品 FAQ
 ```
 
-每个案例都是完整的员工包，自带 knowledge/、schemas/、evals/。
-
-### 部署
+### 3. 固定公开版本并做无凭据验证
 
 ```bash
-npx @fullstack-ai-infra/digital-employee deploy
+npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+  digital-employee validate . --json
+npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+  digital-employee eval . --json
 ```
 
-这条命令会交互式引导用户完成：
+必须分别检查退出码与 JSON：`validate` 应为 `status: "valid"`；`eval` 应为
+`status: "passed"` 且 `summary.failed: 0`。`eval` 只核对仓库自带离线样例的契约，不调用
+模型，也不能证明数字员工真实回答过这些问题或回答正确。
 
-1. **选语言** — English / 简体中文（自动检测系统 locale）
-2. **选渠道** — 钉钉 / 飞书 / 企业微信 / HTTP 接口
-3. **扫码授权**（仅 IM 渠道） — 终端内显示二维码，扫完自动继续
-4. **起名字** — 输入机器人名称
-5. **选 AI 引擎** — 列出已安装的 Agent Host，已登录的标为可用
-6. **自动执行** — 创建应用、配置、启动服务
-7. **输出结果** — 告诉用户下一步
+### 4. 提交唯一运行反馈
 
-### 需要用户介入的时刻
+完成或失败后，邀请用户把脱敏 Run Report 提交到
+[digital-employee-quickstart#2][quickstart-adoption]。必须先得到用户同意才能代发，不要再创建
+第二个 Issue 或 Discussion 入口。至少包含：CLI 固定版本、案例名、Node/操作系统、
+`validate` 和 `eval` 状态，以及脱敏后的失败码。
 
-交互过程中以下步骤需要用户操作，**请暂停等待**：
+### 5. 可选的一次性运行
 
-| 时刻 | 需要用户做什么 |
-|------|--------------|
-| 选语言/渠道/引擎 | 输入数字选择 |
-| 钉钉扫码 | 用管理员账号扫码 |
-| 输入名称 | 键入机器人名称 |
-| OpenAI key（降级路径） | 粘贴 API key |
+只有用户明确要求、且已经安装并登录受支持 Agent Host 时，才按
+[v0.3.0 框架文档][v030-runner]选择精确 `run --engine`
+命令。不要自动探测凭据，不要退化为 OpenAI key，也不要把一次性 `run` 描述成部署。
 
-### 部署完成后
+## 已知路线图
 
-- **钉钉渠道**：告诉用户"审批通过后在钉钉搜索机器人名字即可使用"
-- **Console 渠道**：运行 `npx @fullstack-ai-infra/digital-employee legacy start` 开始对话
-- **HTTP 渠道**：POST 到 `http://127.0.0.1:3000/answer` 调用
+统一部署体验由以下公开事项跟踪：
 
-### 知识库定制
+- [digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91)
+- [digital-employee-quickstart#2][quickstart-adoption]
 
-每个案例自带示例知识库。部署后引导用户替换 `knowledge/` 里的内容为他们公司的真实资料。
-
-```
-knowledge/            ← 公司的规章、手册、FAQ 放这里（markdown 格式）
-```
-
-内容变更后需要重启服务。
-
-### 离线校验（可选，不需要引擎）
-
-```bash
-npx @fullstack-ai-infra/digital-employee validate .   # 包结构校验
-npx @fullstack-ai-infra/digital-employee eval .       # 验收用例
-```
-
----
-
-## 故障排查
-
-| 现象 | 处理 |
-|------|------|
-| `npx` 找不到 | Node.js 未安装或版本过低 |
-| 扫码超时 | 重新运行 deploy 命令 |
-| "No AI engine found" | 未安装 Agent Host，引导用户选择 OpenAI key 降级路径 |
-| 重复部署提示覆盖 | 正常现象，deploy 命令支持幂等重跑 |
-
----
+在新的公开版本和干净环境验收完成前，不得恢复 `deploy` 指引。
 
 ## 参考资料
 
-- 案例规范：[cases/README.md](cases/README.md)
-- 手动教程：[docs/](docs/)
-- 引擎文档：https://github.com/fullstack-ai-infra/digital-employee
+- [README.md](README.md)
+- [cases/README.md](cases/README.md)
+- [框架 CLI 文档](https://github.com/fullstack-ai-infra/digital-employee)
+
+`docs/` 下内容是历史部署草稿，不是 CLI `0.3.0` 的执行手册。
+
+[v030-runner]: https://github.com/fullstack-ai-infra/digital-employee/blob/v0.3.0/README.zh-CN.md#发布者自有机器上的-runner-路径
+[quickstart-adoption]: https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2

@@ -1,25 +1,30 @@
 # 案例库
 
-每个子目录是一个**完整可运行**的数字员工案例。
+每个子目录都是一个符合 `employee-package.v1alpha1` 的数字员工案例。
 
-## 使用方式
+## 当前可执行路径
+
+公开 CLI `0.3.0` 可以校验员工包并执行离线样例契约验收，但没有 `deploy` 命令或长期
+渠道服务。离线验收不调用模型，也不能证明数字员工真实回答过问题。请固定版本运行：
 
 ```bash
 cd cases/<案例名>
-npx @fullstack-ai-infra/digital-employee deploy
+npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+  digital-employee validate . --json
+npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+  digital-employee eval . --json
 ```
 
-或指定渠道非交互运行：
-
-```bash
-npx @fullstack-ai-infra/digital-employee deploy --channel dingtalk --yes
-```
+不要执行 `digital-employee deploy` 或 `deploy --channel dingtalk`；统一部署体验尚未公开交付。
+完成或失败后，只在
+[digital-employee-quickstart#2](https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2)
+提交脱敏 Run Report。
 
 ## 案例列表
 
-| 目录 | 场景 | 需要 Agent Host |
-|------|------|----------------|
-| `team-qa/` | IT 答疑机器人（团队手册问答） | 是 |
+| 目录 | 场景 | 一次性运行需要 Agent Host |
+|------|------|--------------------------|
+| `team-qa/` | IT 答疑（团队手册问答） | 是 |
 | `hr-onboarding/` | HR 入职引导（多文档知识源） | 是 |
 | `ops-approval/` | 运维审批提案（结构化输出） | 是 |
 | `product-faq/` | 产品 FAQ（对外客服场景） | 是 |
@@ -28,26 +33,26 @@ npx @fullstack-ai-infra/digital-employee deploy --channel dingtalk --yes
 
 每个案例目录必须包含：
 
-```
+```text
 <案例名>/
-├── employee.json          # 员工包清单（符合 employee-package.v1alpha1）
+├── employee.json          # 员工包清单
 ├── SKILL.md               # 行为说明书
-├── knowledge/             # 知识库（markdown）
-│   └── *.md
+├── knowledge/             # 知识库（Markdown）
 ├── schemas/
 │   ├── input.schema.json  # 输入格式约束
 │   └── output.schema.json # 输出格式约束
 └── evals/
-    └── cases.json         # 离线验收用例
+    └── cases.json         # employee-evals.v1alpha1 离线样例
 ```
 
 ## 创建你自己的案例
 
-三方可以按以上规范做自己的案例仓库。只要目录下有符合 `employee-package.v1alpha1`
-规范的 `employee.json`，框架 CLI 就能识别和运行：
+只要目录符合上述规范，CLI 就能识别。先完成无凭据验证；需要一次性执行时，再按框架文档
+配置受支持的 Agent Host：
 
 ```bash
-npx @fullstack-ai-infra/digital-employee validate .
-npx @fullstack-ai-infra/digital-employee eval .
-npx @fullstack-ai-infra/digital-employee deploy
+npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+  digital-employee validate . --json
+npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+  digital-employee eval . --json
 ```

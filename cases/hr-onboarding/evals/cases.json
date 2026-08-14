@@ -1,4 +1,6 @@
-[
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
   {
     "id": "first-day-checklist",
     "input": { "message": "入职第一天要做什么" },
@@ -31,4 +33,5 @@
       "escalation": { "reason": "薪资问题需联系 HR", "target": "hr" }
     }
   }
-]
+  ]
+}
