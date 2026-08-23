@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
+  {
+    "id": "next-version-priority",
+    "input": { "message": "我们下个版本该做什么？调研一下近一个月的 issue 和社区反馈再给建议。" },
+    "expectedOutput": {
+      "answer": "基于 roadmap，下个版本是 v2.4.0：稳定 JSON 输出、Windows 安装改进、弃用 --no-color。社区反馈也指向 Windows 安装摩擦与 JSON 输出稳定性，我会委派 issue-researcher 和 release-engineer 出更细的调研与风险清单，再汇总给你。",
+      "citations": [{ "label": "release-cadence" }, { "label": "community-health" }]
+    }
+  },
+  {
+    "id": "release-this-week",
+    "input": { "message": "评估一下这周能不能发版，风险在哪里。" },
+    "expectedOutput": {
+      "answer": "当前稳定版是 v2.3.0，下个版本 v2.4.0 仍在开发中，且发布前必须完成发布检查清单、无 release-blocking 回归。按月度小版本节奏，这周不建议直接发版；具体风险项应由 release-engineer 按检查清单逐项核对。",
+      "citations": [{ "label": "release-cadence" }]
+    }
+  },
+  {
+    "id": "delegate-which-report",
+    "input": { "message": "最近 issue 重复很多，我该找谁处理？" },
+    "expectedOutput": {
+      "answer": "这个任务应委派给 issue-researcher：对 open issue 聚类、标出重复和无人认领项。我负责汇总结果并决定是否把聚类结论纳入 v2.4.0 范围。",
+      "citations": [{ "label": "business-overview" }]
+    }
+  },
+  {
+    "id": "unknown-escalate",
+    "input": { "message": "acme-toolkit 的发布后监控告警阈值是多少？" },
+    "expectedOutput": {
+      "answer": "",
+      "escalation": { "reason": "知识库中没有相关信息" }
+    }
+  }
+  ]
+}

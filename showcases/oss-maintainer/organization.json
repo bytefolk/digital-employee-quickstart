@@ -1,0 +1,122 @@
+{
+  "kind": "Organization",
+  "apiVersion": "organization.v1alpha1",
+  "revision": 1,
+  "status": "proposed",
+  "metadata": {
+    "name": "oss-maintainer-org",
+    "displayName": "Open-source maintenance organization",
+    "description": "Proposed organization design draft for the oss-maintainer showcase: repo-owner with three read-only specialist positions. This file is a design artifact: the published CLI does not read or validate it yet (workspace init/org/chat commands are not released)."
+  },
+  "spec": {
+    "limits": {
+      "maxDelegationDepth": 1,
+      "maxFanOut": 3,
+      "maxTasksPerRoot": 4
+    },
+    "contextBundles": {
+      "business-brief": {
+        "scope": "workspace",
+        "files": [
+          "./context/mission.md",
+          "./context/roadmap.md"
+        ]
+      },
+      "issue-backlog": {
+        "scope": "position",
+        "files": [
+          "./employees/issue-researcher/knowledge/issue-snapshot.md",
+          "./employees/issue-researcher/knowledge/user-feedback.md"
+        ]
+      },
+      "release-checklist": {
+        "scope": "position",
+        "files": [
+          "./employees/release-engineer/knowledge/release-process.md",
+          "./employees/release-engineer/knowledge/release-checklist.md",
+          "./employees/release-engineer/knowledge/release-history.md"
+        ]
+      },
+      "community-feed": {
+        "scope": "position",
+        "files": [
+          "./employees/community-operator/knowledge/community-digest.md",
+          "./employees/community-operator/knowledge/activity-record.md",
+          "./employees/community-operator/knowledge/faq-templates.md"
+        ]
+      }
+    },
+    "positions": [
+      {
+        "id": "repo-owner",
+        "title": "Repository Owner",
+        "reportsTo": null,
+        "employeePackage": "./employees/repo-owner",
+        "contextBundleIds": ["business-brief"],
+        "delegation": {
+          "mode": "direct_reports",
+          "depth": 1,
+          "maxFanOut": 3
+        },
+        "executionPolicy": {
+          "mode": "read_only",
+          "network": "deny",
+          "write": [],
+          "mcpTools": [],
+          "maxTurns": "highest"
+        }
+      },
+      {
+        "id": "issue-researcher",
+        "title": "Issue Researcher",
+        "reportsTo": "repo-owner",
+        "employeePackage": "./employees/issue-researcher",
+        "contextBundleIds": ["issue-backlog"],
+        "delegation": {
+          "mode": "none"
+        },
+        "executionPolicy": {
+          "mode": "read_only",
+          "network": "deny",
+          "write": [],
+          "mcpTools": [],
+          "maxTurns": "low"
+        }
+      },
+      {
+        "id": "release-engineer",
+        "title": "Release Engineer",
+        "reportsTo": "repo-owner",
+        "employeePackage": "./employees/release-engineer",
+        "contextBundleIds": ["release-checklist"],
+        "delegation": {
+          "mode": "none"
+        },
+        "executionPolicy": {
+          "mode": "read_only",
+          "network": "deny",
+          "write": [],
+          "mcpTools": [],
+          "maxTurns": "medium"
+        }
+      },
+      {
+        "id": "community-operator",
+        "title": "Community Operator",
+        "reportsTo": "repo-owner",
+        "employeePackage": "./employees/community-operator",
+        "contextBundleIds": ["community-feed"],
+        "delegation": {
+          "mode": "none"
+        },
+        "executionPolicy": {
+          "mode": "read_only",
+          "network": "deny",
+          "write": [],
+          "mcpTools": [],
+          "maxTurns": "medium"
+        }
+      }
+    ]
+  }
+}

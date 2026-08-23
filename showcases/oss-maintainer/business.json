@@ -1,0 +1,23 @@
+{
+  "kind": "BusinessWorkspace",
+  "apiVersion": "business-workspace.v1alpha1",
+  "status": "proposed",
+  "metadata": {
+    "name": "open-source-maintenance",
+    "displayName": "Open-source maintenance business",
+    "description": "Proposed business workspace design draft for the oss-maintainer showcase. This file is a design artifact: the published CLI does not read or validate it yet (workspace init/org/chat commands are not released).",
+    "ownerPosition": "repo-owner"
+  },
+  "spec": {
+    "rootPosition": "repo-owner",
+    "contextFiles": [
+      "./context/mission.md",
+      "./context/roadmap.md"
+    ],
+    "limits": {
+      "maxDelegationDepth": 1,
+      "maxFanOut": 3,
+      "maxTasksPerRoot": 4
+    }
+  }
+}

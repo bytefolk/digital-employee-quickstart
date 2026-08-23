@@ -1,0 +1,85 @@
+name: Showcase oss-maintainer v0.4 contract
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Reject enterprise commit emails
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          git cat-file -e "${BASE_SHA}^{commit}"
+          git cat-file -e "${HEAD_SHA}^{commit}"
+          commit_emails="$(git log --format='%ae%n%ce' "$BASE_SHA..$HEAD_SHA")"
+          if grep -Eqi '@(alibaba-inc\.com|alibaba\.com)$' <<<"$commit_emails"; then
+            echo 'Enterprise commit email detected in the pull request range. Use a public-safe Git identity.' >&2
+            exit 1
+          fi
+
+      - name: Require Node.js 20 or newer
+        run: |
+          node --version
+          node -e 'if (Number(process.versions.node.split(".")[0]) < 20) process.exit(1)'
+
+      - name: Validate and evaluate the four showcase position packages
+        env:
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.4.0"
+          npm_config_loglevel: silent
+        run: |
+          set -euo pipefail
+          total=0
+
+          for package_dir in \
+            showcases/oss-maintainer/employees/repo-owner \
+            showcases/oss-maintainer/employees/issue-researcher \
+            showcases/oss-maintainer/employees/release-engineer \
+            showcases/oss-maintainer/employees/community-operator
+          do
+            validate_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+              digital-employee validate "$package_dir" --json)"
+            node -e '
+              const result = JSON.parse(process.argv[1]);
+              if (result.status !== "valid") process.exit(1);
+            ' "$validate_json"
+
+            eval_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+              digital-employee eval "$package_dir" --json)"
+            passed="$(node -e '
+              const result = JSON.parse(process.argv[1]);
+              if (result.status !== "passed" || result.summary.failed !== 0) process.exit(1);
+              process.stdout.write(String(result.summary.passed));
+            ' "$eval_json")"
+            total=$((total + passed))
+            printf '%s: validate=valid, eval=%s/%s\n' \
+              "$package_dir" "$passed" "$passed"
+          done
+
+          test "$total" -eq 13
+          printf 'Showcase v0.4.0 matrix: validate=4/4, eval=%s/13\n' "$total"
+
+      - name: Reject sensitive content in the showcase
+        run: |
+          set -euo pipefail
+          if grep -rnEi '(/Users/[a-z]|api[_-]?key|BEGIN [A-Z ]*PRIVATE KEY|atatech\.org|alibaba-inc\.com)' \
+            showcases/oss-maintainer; then
+            echo 'Found credential, internal path, or personal identifier patterns in the showcase.' >&2
+            exit 1
+          fi
