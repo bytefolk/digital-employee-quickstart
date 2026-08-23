@@ -83,6 +83,22 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
   digital-employee eval cases/hr-onboarding --json
 ```
 
+## Showcases
+
+| Showcase | Shape | Description |
+|----------|-------|-------------|
+| [`oss-maintainer`](showcases/oss-maintainer/) | 1 owner + 3 expert positions | Open-source maintenance business: `repo-owner` owns the whole business, with `issue-researcher`, `release-engineer`, and `community-operator` as three read-only expert positions |
+
+This category demonstrates the digital-organization workspace target shape:
+one directory is one business, and one position is one addressable digital
+employee. The `business.json` / `organization.json` inside the package are
+`status: "proposed"` design drafts; the published CLI does not read or
+validate them. Workspace, org, and chat commands are unreleased capabilities
+and are marked ⏳ or 🧩 in the package's runbook. The currently executable
+surface is `validate` / `eval` on the four position packages with the pinned
+`@fullstack-ai-infra/digital-employee@0.4.0`; see the clean-machine runbook
+inside the package for stage markers.
+
 ## Case structure
 
 Every case follows the employee package spec:

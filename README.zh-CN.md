@@ -76,6 +76,19 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
   digital-employee eval cases/hr-onboarding --json
 ```
 
+## 多岗位案例（Showcases）
+
+| Showcase | 形态 | 说明 |
+|----------|------|------|
+| [`oss-maintainer`](showcases/oss-maintainer/) | 1 负责人 + 3 专家岗位 | 开源维护业务：`repo-owner` 总负责，配 `issue-researcher`、`release-engineer`、`community-operator` 三个只读专家岗位 |
+
+这一类演示数字组织工作区的目标形态：一个目录就是一项业务，一个岗位就是一个可寻址的
+数字员工。包内的 `business.json` / `organization.json` 是 `status: "proposed"` 的组织契约
+设计稿，已发布 CLI 不读取、不校验；workspace、org、chat 等命令属于未发布能力，在包内
+runbook 中一律标注 ⏳ 或 🧩。当前可执行部分只有四个岗位包在固定版本
+`@fullstack-ai-infra/digital-employee@0.4.0` 下的 `validate` / `eval`，阶段标记见包内的
+干净机 runbook。
+
 ## 案例结构
 
 每个案例遵循员工包规范：
