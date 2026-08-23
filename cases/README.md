@@ -4,19 +4,21 @@
 
 ## 当前可执行路径
 
-公开 CLI `0.3.0` 可以校验员工包并执行离线样例契约验收，但没有 `deploy` 命令或长期
-渠道服务。离线验收不调用模型，也不能证明数字员工真实回答过问题。请固定版本运行：
+公开 CLI `0.4.0` 可以校验员工包并执行离线样例契约验收。`0.4.0` 附带包绑定的
+`deploy` 命令（先校验绑定精确员工包才产生部署效果；`http` 仅认证回读后 ready，
+`console`/`dingtalk` 为 preview 且永不 ready），但案例库不提供任何 deploy 指引。
+离线验收不调用模型，也不能证明数字员工真实回答过问题。请固定版本运行：
 
 ```bash
 cd cases/<案例名>
-npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
   digital-employee validate . --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
   digital-employee eval . --json
 ```
 
-不要执行 `digital-employee deploy` 或 `deploy --channel dingtalk`；统一部署体验尚未公开交付。
-完成或失败后，只在
+不要执行 `digital-employee deploy` 或 `deploy --channel dingtalk`；干净机验收完成前不恢复
+deploy 指引。完成或失败后，只在
 [digital-employee-quickstart#2](https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2)
 提交脱敏 Run Report。
 
@@ -51,8 +53,8 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
 配置受支持的 Agent Host：
 
 ```bash
-npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
   digital-employee validate . --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.3.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
   digital-employee eval . --json
 ```
