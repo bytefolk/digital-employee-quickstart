@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
+  {
+    "id": "cluster-issues",
+    "input": { "message": "把这 30 个 open issue 按主题聚类，标出重复和无人认领的。" },
+    "expectedOutput": {
+      "answer": "30 个 open issue 分为四类：安装/打包 8 个、CLI 行为 9 个、文档 6 个、功能请求 7 个。重复 3 对（安装 2、CLI 行为 1），无人认领 11 个。",
+      "citations": [{ "label": "issue-snapshot" }]
+    }
+  },
+  {
+    "id": "compare-install-paths",
+    "input": { "message": "只比较 acme-toolkit 和 acme-cli 的安装路径差异，不做产品决策。" },
+    "expectedOutput": {
+      "answer": "快照中没有 acme-cli 的安装路径数据；acme-toolkit 已知的安装痛点是 Windows 下的 PATH 与原生依赖下载。超出快照范围的差异无法比较，属于研究建议而非产品决策。",
+      "citations": [{ "label": "issue-snapshot" }]
+    }
+  },
+  {
+    "id": "unknown-escalate",
+    "input": { "message": "下个版本的发布日期是哪天？" },
+    "expectedOutput": {
+      "answer": "",
+      "escalation": { "reason": "知识库中没有相关信息" }
+    }
+  }
+  ]
+}

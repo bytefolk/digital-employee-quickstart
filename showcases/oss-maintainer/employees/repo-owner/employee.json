@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fullstack-ai-infra/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "repo-owner",
+  "version": "1.0.0",
+  "description": "Repository owner — understands the whole open-source business, delegates to direct reports, synthesizes final decisions.",
+  "license": "Apache-2.0",
+  "authors": ["fullstack-ai-infra"],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": []
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json"
+  },
+  "policy": {
+    "mode": "read_only",
+    "network": "deny",
+    "filesystem": { "read": ["./knowledge/**"], "write": [] },
+    "mcpTools": []
+  },
+  "assets": [
+    "./knowledge/business-overview.md",
+    "./knowledge/release-cadence.md",
+    "./knowledge/community-health.md",
+    "./evals/cases.json"
+  ]
+}

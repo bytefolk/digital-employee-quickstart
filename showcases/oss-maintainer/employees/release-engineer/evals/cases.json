@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
+  {
+    "id": "draft-release-checklist",
+    "input": { "message": "按当前 changelog 草拟 v2.4.0 发布检查清单。" },
+    "expectedOutput": {
+      "answer": "v2.4.0 发布检查清单草稿：1) 核对 changelog 覆盖全部合并变更；2) 列出破坏性变更（--no-color 弃用完成）并写迁移说明；3) 跑完整测试且无 release-blocking 回归；4) 版本号按规则确认；5) 草拟 tag 与发布说明（仅文本，不执行）。风险项：JSON 输出 schema 稳定性、Windows 安装路径回归。",
+      "citations": [{ "label": "release-checklist" }]
+    }
+  },
+  {
+    "id": "breaking-changes-migration",
+    "input": { "message": "这次发布有哪些破坏性变更要写进迁移说明？" },
+    "expectedOutput": {
+      "answer": "v2.4.0 需写进迁移说明的破坏性变更：--no-color 弃用流程完成（v2.3.0 已移除该 flag）。参考历史风险：v2.2.x 到 v2.3.x 迁移中 flag 移除造成困惑，迁移说明必须明确列出。",
+      "citations": [{ "label": "release-history" }]
+    }
+  },
+  {
+    "id": "version-suggestion",
+    "input": { "message": "这次是新增向后兼容功能，版本号应该怎么定？" },
+    "expectedOutput": {
+      "answer": "按版本规则，新增向后兼容功能应 bump minor，即 v2.4.0。",
+      "citations": [{ "label": "release-process" }]
+    }
+  }
+  ]
+}
