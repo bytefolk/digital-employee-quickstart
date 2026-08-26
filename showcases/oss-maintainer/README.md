@@ -44,7 +44,7 @@ repo-owner
 
 ## 发布边界（诚实声明）
 
-- 本 showcase 的固定验证版本：`@fullstack-ai-infra/digital-employee@0.4.0`（npm 已发布
+- 本 showcase 的固定验证版本：`@fullstack-ai-infra/digital-employee@0.5.0`（npm 已发布
   latest，含 `init` / `doctor` / `validate` / `eval`）。quickstart 现有 `cases/` 的公共基线
   0.3.0 不受本 showcase 影响。
 - `business.json` / `organization.json` 标注 `status: "proposed"`：它们是组织/工作区
@@ -69,7 +69,7 @@ repo-owner
 1. 安装 Node.js 20+（`node --version` 确认）。
 2. 固定版本安装 CLI：
    ```bash
-   npm install --global @fullstack-ai-infra/digital-employee@0.4.0
+   npm install --global @fullstack-ai-infra/digital-employee@0.5.0
    ```
 3. 确认安装（无模型调用、零成本、无需凭据）：
    ```bash
@@ -87,9 +87,9 @@ repo-owner
    ```
 5. 校验与离线验收（对四个岗位包分别执行，全部应通过）：
    ```bash
-   npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+   npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
      digital-employee validate employees/repo-owner --json
-   npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+   npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
      digital-employee eval employees/repo-owner --json
    # 其余岗位：issue-researcher / release-engineer / community-operator 同法
    ```
@@ -132,7 +132,7 @@ repo-owner
 
 ## 验证记录（本仓库真实执行）
 
-执行环境：Node v24.13.0 / macOS；固定版本 `@fullstack-ai-infra/digital-employee@0.4.0`。
+执行环境：Node v24.13.0 / macOS；固定版本 `@fullstack-ai-infra/digital-employee@0.5.0`。
 全部命令退出码为 0。
 
 | 岗位包 | validate | eval | 退出码 |

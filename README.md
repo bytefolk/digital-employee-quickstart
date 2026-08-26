@@ -9,7 +9,7 @@ Schemas, and offline acceptance fixtures.
 ## Public release boundary
 
 This quickstart is pinned to the public package
-`@fullstack-ai-infra/digital-employee@0.4.0`.
+`@fullstack-ai-infra/digital-employee@0.5.0`.
 
 | Path | Status | What it means here |
 |------|--------|--------------------|
@@ -18,7 +18,7 @@ This quickstart is pinned to the public package
 | `setup` | Released, outside this walkthrough | New in `0.4.0`: package setup inside an existing directory; no clean-machine walkthrough record here yet |
 | `run` | Environment-qualified | Optional one-shot execution with an already configured supported Agent Host |
 | `legacy ...` | Historical demo/compatibility | `standalone-v1` compatibility, not this quickstart's primary experience |
-| `deploy` | Released, guidance withheld | Present in public `0.4.0` as a package-bound command: it validates and binds the exact employee package before any deployment effect. Channels: `http` becomes ready only after authenticated readback; `console` and `dingtalk` are preview and never become ready; `lark` and `wecom` are unavailable. Runtime is `agent-native` only; exit codes are `0` ready, `2` pending external action, `1` unsupported or failed. This quickstart gives no deploy instructions or walkthrough until clean-machine acceptance lands in [digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91). |
+| `deploy` | Released, guidance withheld | Present in public `0.5.0` as a package-bound command: it validates and binds the exact employee package before any deployment effect. Channels: `http` becomes ready only after authenticated readback; `console` and `dingtalk` are preview and never become ready; `lark` and `wecom` are unavailable. Runtime is `agent-native` only; exit codes are `0` ready, `2` pending external action, `1` unsupported or failed. This quickstart gives no deploy instructions or walkthrough until clean-machine acceptance lands in [digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91). |
 
 The planned deployment path is tracked in
 [digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91)
@@ -33,9 +33,9 @@ release:
 git clone https://github.com/fullstack-ai-infra/digital-employee-quickstart.git
 cd digital-employee-quickstart/cases/team-qa
 
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee validate . --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee eval . --json
 ```
 
@@ -54,7 +54,7 @@ After a success or failure, use the single public feedback entry:
 redacted Run Report:
 
 ```text
-CLI: @fullstack-ai-infra/digital-employee@0.4.0
+CLI: @fullstack-ai-infra/digital-employee@0.5.0
 Case: team-qa
 Node / OS:
 validate: valid | failed
@@ -77,9 +77,9 @@ local absolute paths.
 Run the same credential-free checks against any case:
 
 ```bash
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee validate cases/hr-onboarding --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee eval cases/hr-onboarding --json
 ```
 
@@ -96,7 +96,7 @@ employee. The `business.json` / `organization.json` inside the package are
 validate them. Workspace, org, and chat commands are unreleased capabilities
 and are marked ⏳ or 🧩 in the package's runbook. The currently executable
 surface is `validate` / `eval` on the four position packages with the pinned
-`@fullstack-ai-infra/digital-employee@0.4.0`; see the clean-machine runbook
+`@fullstack-ai-infra/digital-employee@0.5.0`; see the clean-machine runbook
 inside the package for stage markers.
 
 ## Case structure
@@ -121,16 +121,16 @@ Third-party case repositories are welcome. Initialize a package, then validate
 and evaluate it before attempting a one-shot run with a supported Agent Host:
 
 ```bash
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee init my-case --recipe minimal-answer.v1
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee validate my-case --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee eval my-case --json
 ```
 
 One-shot execution requires a supported, configured Agent Host. See the
-[v0.4.0 framework documentation](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.4.0/README.md#runner-on-a-publisher-owned-machine)
+[v0.5.0 framework documentation](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.5.0/README.md#runner-on-a-publisher-owned-machine)
 for the current engine matrix and `run` syntax.
 
 ## Requirements
@@ -141,9 +141,9 @@ for the current engine matrix and `run` syntax.
 ## Reference
 
 - [Framework CLI documentation](https://github.com/fullstack-ai-infra/digital-employee)
-- [Employee package specification](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.4.0/docs/employee-package.md)
+- [Employee package specification](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.5.0/docs/employee-package.md)
 - [`docs/`](docs/) contains historical deployment drafts. They are not an
-  executable guide for CLI `0.4.0`.
+  executable guide for CLI `0.5.0`.
 
 ## License
 
