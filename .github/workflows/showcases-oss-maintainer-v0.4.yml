@@ -41,7 +41,7 @@ jobs:
 
       - name: Validate and evaluate the four showcase position packages
         env:
-          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.4.0"
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.5.0"
           npm_config_loglevel: silent
         run: |
           set -euo pipefail
@@ -73,7 +73,7 @@ jobs:
           done
 
           test "$total" -eq 13
-          printf 'Showcase v0.4.0 matrix: validate=4/4, eval=%s/13\n' "$total"
+          printf 'Showcase v0.5.0 matrix: validate=4/4, eval=%s/13\n' "$total"
 
       - name: Reject sensitive content in the showcase
         run: |
