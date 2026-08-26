@@ -7,7 +7,7 @@
 
 ## 公开发布边界
 
-本 quickstart 固定使用公开包 `@fullstack-ai-infra/digital-employee@0.4.0`。
+本 quickstart 固定使用公开包 `@fullstack-ai-infra/digital-employee@0.5.0`。
 
 | 路径 | 状态 | 在本 quickstart 中的含义 |
 |------|------|--------------------------|
@@ -16,7 +16,7 @@
 | `setup` | 已发布，不在本走查内 | `0.4.0` 新增：在既有目录内配置员工包；本仓库尚无对应的干净机走查记录 |
 | `run` | 依赖用户环境 | 可选的一次性执行；需要已配置的受支持 Agent Host |
 | `legacy ...` | 历史 demo/兼容路径 | `standalone-v1` 兼容能力，不是本 quickstart 的主体验 |
-| `deploy` | 已发布，暂不提供指引 | 公开 `0.4.0` 中的包绑定命令：先校验并绑定精确员工包，才产生任何部署效果。渠道：`http` 仅在认证回读后 ready；`console`、`dingtalk` 为 preview，永不 ready；`lark`、`wecom` 不可用。runtime 仅 `agent-native`；退出码 `0` ready、`2` 等待外部动作、`1` 不支持或失败。在 [digital-employee#91][adoption-epic] 的干净机验收完成前，本 quickstart 不提供任何 deploy 操作指引或走查。 |
+| `deploy` | 已发布，暂不提供指引 | 公开 `0.5.0` 中的包绑定命令：先校验并绑定精确员工包，才产生任何部署效果。渠道：`http` 仅在认证回读后 ready；`console`、`dingtalk` 为 preview，永不 ready；`lark`、`wecom` 不可用。runtime 仅 `agent-native`；退出码 `0` ready、`2` 等待外部动作、`1` 不支持或失败。在 [digital-employee#91][adoption-epic] 的干净机验收完成前，本 quickstart 不提供任何 deploy 操作指引或走查。 |
 
 规划中的部署路径跟踪于 [digital-employee#91][adoption-epic] 和
 [digital-employee-quickstart#2][quickstart-adoption]。
@@ -29,9 +29,9 @@
 git clone https://github.com/fullstack-ai-infra/digital-employee-quickstart.git
 cd digital-employee-quickstart/cases/team-qa
 
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee validate . --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee eval . --json
 ```
 
@@ -48,7 +48,7 @@ Agent Host、MCP 或任何在线服务，也**不能证明数字员工真实回�
 Run Report：
 
 ```text
-CLI: @fullstack-ai-infra/digital-employee@0.4.0
+CLI: @fullstack-ai-infra/digital-employee@0.5.0
 案例: team-qa
 Node / 操作系统:
 validate: valid | failed
@@ -70,9 +70,9 @@ eval: passed (3/3) | failed
 对其他案例执行同样的无凭据检查：
 
 ```bash
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee validate cases/hr-onboarding --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee eval cases/hr-onboarding --json
 ```
 
@@ -86,7 +86,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
 数字员工。包内的 `business.json` / `organization.json` 是 `status: "proposed"` 的组织契约
 设计稿，已发布 CLI 不读取、不校验；workspace、org、chat 等命令属于未发布能力，在包内
 runbook 中一律标注 ⏳ 或 🧩。当前可执行部分只有四个岗位包在固定版本
-`@fullstack-ai-infra/digital-employee@0.4.0` 下的 `validate` / `eval`，阶段标记见包内的
+`@fullstack-ai-infra/digital-employee@0.5.0` 下的 `validate` / `eval`，阶段标记见包内的
 干净机 runbook。
 
 ## 案例结构
@@ -111,16 +111,16 @@ runbook 中一律标注 ⏳ 或 🧩。当前可执行部分只有四个岗位�
 Agent Host：
 
 ```bash
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee init my-case --recipe minimal-answer.v1
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee validate my-case --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
   digital-employee eval my-case --json
 ```
 
 一次性执行需要已安装、已配置的受支持 Agent Host。当前引擎矩阵和 `run` 语法见
-[v0.4.0 框架文档](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.4.0/README.zh-CN.md#发布者自有机器上的-runner-路径)。
+[v0.5.0 框架文档](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.5.0/README.zh-CN.md#发布者自有机器上的-runner-路径)。
 
 ## 前置条件
 
@@ -130,8 +130,8 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.4.0 -- \
 ## 参考
 
 - [框架 CLI 文档](https://github.com/fullstack-ai-infra/digital-employee)
-- [员工包规范](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.4.0/docs/employee-package.md)
-- [`docs/`](docs/) 是历史部署草稿，不是 CLI `0.4.0` 的可执行教程。
+- [员工包规范](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.5.0/docs/employee-package.md)
+- [`docs/`](docs/) 是历史部署草稿，不是 CLI `0.5.0` 的可执行教程。
 
 ## 许可
 

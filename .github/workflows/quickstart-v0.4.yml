@@ -41,7 +41,7 @@ jobs:
 
       - name: Validate and evaluate all public cases
         env:
-          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.4.0"
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.5.0"
           npm_config_loglevel: silent
         run: |
           set -euo pipefail
@@ -73,11 +73,11 @@ jobs:
           done
 
           test "$total" -eq 15
-          printf 'Public v0.4.0 matrix: validate=4/4, eval=%s/15\n' "$total"
+          printf 'Public v0.5.0 matrix: validate=4/4, eval=%s/15\n' "$total"
 
       - name: Smoke-test public init path
         env:
-          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.4.0"
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.5.0"
           npm_config_loglevel: silent
         run: |
           set -euo pipefail
@@ -100,13 +100,13 @@ jobs:
           fi
 
           if grep -nF '@fullstack-ai-infra/digital-employee' "${maintained_docs[@]}" \
-            | grep -vF '@fullstack-ai-infra/digital-employee@0.4.0'; then
+            | grep -vF '@fullstack-ai-infra/digital-employee@0.5.0'; then
             echo 'Found an unpinned public npm package reference.' >&2
             exit 1
           fi
 
           if grep -nE '^[[:space:]]*npx .*digital-employee.*deploy' "${maintained_docs[@]}"; then
-            echo 'Found an executable deploy instruction for public v0.4.0.' >&2
+            echo 'Found an executable deploy instruction for public v0.5.0.' >&2
             exit 1
           fi
 
