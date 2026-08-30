@@ -6,7 +6,7 @@
 ## 当前发布边界
 
 本 quickstart 的公开稳定基线固定为
-`@fullstack-ai-infra/digital-employee@0.5.0`。当前对外主路径只覆盖：
+`@fullstack-ai-infra/digital-employee@0.6.0`。当前对外主路径只覆盖：
 
 - 员工包结构校验；
 - 离线样例契约验收；
@@ -16,7 +16,7 @@
 一次性 `run` 只有在用户已经配置受支持 Agent Host 时才可选。`legacy` 命名空间是历史
 `standalone-v1` demo/兼容路径，不是本 quickstart 的主体验。`0.4.0` 新增的 `setup`
 命令（既有目录内配置员工包）已发布，但尚无本仓库的干净机走查记录，不在对外主路径内。
-`0.5.0` 同时提供包绑定的 `deploy` 命令：先校验并绑定精确员工包才产生部署效果；渠道上
+`0.6.0` 继续提供包绑定的 `deploy` 命令：先校验并绑定精确员工包才产生部署效果；渠道上
 `http` 仅在认证回读后 ready，`console`、`dingtalk` 为 preview 且永不 ready，`lark`、
 `wecom` 不可用；没有交互式渠道向导、扫码授权、IM 应用创建或长期渠道服务。
 
@@ -52,9 +52,9 @@ cd cases/product-faq     # 产品 FAQ
 ### 3. 固定公开版本并做无凭据验证
 
 ```bash
-npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
   digital-employee validate . --json
-npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
+npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
   digital-employee eval . --json
 ```
 
@@ -72,7 +72,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
 ### 5. 可选的一次性运行
 
 只有用户明确要求、且已经安装并登录受支持 Agent Host 时，才按
-[v0.5.0 框架文档][v050-runner]选择精确 `run --engine`
+[v0.6.0 框架文档][v060-runner]选择精确 `run --engine`
 命令。不要自动探测凭据，不要退化为 OpenAI key，也不要把一次性 `run` 描述成部署。
 
 ## 已知路线图
@@ -90,7 +90,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
 - [cases/README.md](cases/README.md)
 - [框架 CLI 文档](https://github.com/fullstack-ai-infra/digital-employee)
 
-`docs/` 下内容是历史部署草稿，不是 CLI `0.5.0` 的执行手册。
+`docs/` 下内容是历史部署草稿，不是 CLI `0.6.0` 的执行手册。
 
-[v050-runner]: https://github.com/fullstack-ai-infra/digital-employee/blob/v0.5.0/README.zh-CN.md#发布者自有机器上的-runner-路径
+[v060-runner]: https://github.com/fullstack-ai-infra/digital-employee/blob/v0.6.0/README.zh-CN.md#发布者自有机器上的-runner-路径
 [quickstart-adoption]: https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2

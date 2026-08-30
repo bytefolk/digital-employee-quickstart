@@ -1,4 +1,4 @@
-name: Showcase oss-maintainer v0.4 contract
+name: Showcase oss-maintainer v0.6 contract
 
 on:
   pull_request:
@@ -41,7 +41,7 @@ jobs:
 
       - name: Validate and evaluate the four showcase position packages
         env:
-          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.5.0"
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.6.0"
           npm_config_loglevel: silent
         run: |
           set -euo pipefail
@@ -73,11 +73,17 @@ jobs:
           done
 
           test "$total" -eq 13
-          printf 'Showcase v0.5.0 matrix: validate=4/4, eval=%s/13\n' "$total"
+          printf 'Showcase v0.6.0 matrix: validate=4/4, eval=%s/13\n' "$total"
 
       - name: Reject sensitive content in the showcase
         run: |
           set -euo pipefail
+          if grep -nF '@fullstack-ai-infra/digital-employee' showcases/oss-maintainer/README.md \
+            | grep -vF '@fullstack-ai-infra/digital-employee@0.6.0'; then
+            echo 'Found an unpinned or stale showcase package reference.' >&2
+            exit 1
+          fi
+
           if grep -rnEi '(/Users/[a-z]|api[_-]?key|BEGIN [A-Z ]*PRIVATE KEY|atatech\.org|alibaba-inc\.com)' \
             showcases/oss-maintainer; then
             echo 'Found credential, internal path, or personal identifier patterns in the showcase.' >&2
