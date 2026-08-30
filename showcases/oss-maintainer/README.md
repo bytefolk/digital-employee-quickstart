@@ -5,9 +5,11 @@
 目标形态：一个目录 = 一项业务，一个岗位 = 一个可寻址数字员工，一次对话 = 带岗位
 Context 与权限边界的工作。
 
-> 本 showcase 的**组织契约**（`business.json` / `organization.json`）与
-> `workspace init` / `org tree` / `chat @岗位` 命令面是**设计稿**，不属于已发布 CLI。
-> 当前可执行且已真实验证的部分，只有四个岗位员工包的 `validate` / `eval`。
+> 本 showcase 的**组织契约**（`business.json` / `organization.json`）是旧版设计稿，
+> 不符合公开 `0.6.0` 的标准工作区结构。`0.6.0` 已提供 `workspace init`、`org tree` 和
+> `org apply`，但只消费其标准 `workspace.json` / `organization.v1alpha1.json` / `positions/`
+> 布局；本目录尚未迁移，不能直接作为这些命令的输入。当前在本目录可执行且已真实验证的
+> 部分，只有四个岗位员工包的 `validate` / `eval`；`chat @岗位` 仍未发布。
 
 ## 组织树
 
@@ -44,14 +46,16 @@ repo-owner
 
 ## 发布边界（诚实声明）
 
-- 本 showcase 的固定验证版本：`@fullstack-ai-infra/digital-employee@0.5.0`（npm 已发布
-  latest，含 `init` / `doctor` / `validate` / `eval`）。quickstart 现有 `cases/` 的公共基线
-  0.3.0 不受本 showcase 影响。
+- 本 showcase 的固定验证版本：`@fullstack-ai-infra/digital-employee@0.6.0`（npm 已发布，
+  含 `init` / `doctor` / `validate` / `eval`）。quickstart 现有 `cases/` 的公共基线
+  同步固定为 0.6.0。
 - `business.json` / `organization.json` 标注 `status: "proposed"`：它们是组织/工作区
   契约的设计稿，**已发布 CLI 不读取、不校验**；不要把它们当成可用命令的输入。
-- `workspace init` / `org tree` / `chat @岗位` / `task show` / `context inspect` 是
-  规划中命令面，任何已发布版本都不支持。runbook 中这些步骤一律标 ⏳ 或 🧩，不得执行、
-  不得声称已跑通。
+- `workspace init` / `org tree` / `org apply` 已在 `0.6.0` 发布，并已针对 CLI 新建的临时
+  标准工作区完成无凭据验证；本 showcase 目录仍会被 `org tree` 以
+  `workspace_org_workspace_not_initialized` 拒绝，不能声称已经迁移。
+- `chat @岗位` / `task show` / `context inspect` 仍不是已发布命令面；`0.6.0` 提供的是底层
+  `task delegate`，不等同于 `task show` 或交互式聊天。runbook 中这些步骤继续标 ⏳ 或 🧩。
 - `validate` 只校验员工包结构；`eval` 只核对仓库自带离线样例的契约，不调用模型、
   Agent Host、MCP 或在线服务，**不能证明数字员工真实回答过这些问题或回答正确**。
 - 本 showcase 不含任何凭证、内部路径或个人标识。
@@ -61,15 +65,15 @@ repo-owner
 目标：新用户从零安装到第一次 `chat @岗位`。每条标注依赖状态：
 
 - ✅ 现在就能验证（基于已发布能力，本仓库已真实执行）
-- ⏳ 依赖 workspace 命令实现（发布前不可执行）
-- 🧩 部分可验证（依赖 mem，但岗位绑定未实现）
+- ⏳ 依赖本 showcase 迁移到 `0.6.0` 标准工作区契约，或依赖尚未发布的上层命令
+- 🧩 底层能力已发布或可验证，但本 showcase 的迁移/岗位绑定尚未完成
 
 ### 阶段 A：环境与工具（✅ 现在就能验证）
 
 1. 安装 Node.js 20+（`node --version` 确认）。
 2. 固定版本安装 CLI：
    ```bash
-   npm install --global @fullstack-ai-infra/digital-employee@0.5.0
+   npm install --global @fullstack-ai-infra/digital-employee@0.6.0
    ```
 3. 确认安装（无模型调用、零成本、无需凭据）：
    ```bash
@@ -80,16 +84,16 @@ repo-owner
 
 ### 阶段 B：确认「底座可信」（✅ 现在就能验证）
 
-4. 获取案例（workspace init 的目标形态见 ⏳ 说明）：
+4. 获取案例（本目录仍是旧版草稿布局，不要对它执行 `org tree` / `org apply`）：
    ```bash
    git clone https://github.com/fullstack-ai-infra/digital-employee-quickstart.git
    cd digital-employee-quickstart/showcases/oss-maintainer
    ```
 5. 校验与离线验收（对四个岗位包分别执行，全部应通过）：
    ```bash
-   npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
+   npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
      digital-employee validate employees/repo-owner --json
-   npx --yes --package @fullstack-ai-infra/digital-employee@0.5.0 -- \
+   npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
      digital-employee eval employees/repo-owner --json
    # 其余岗位：issue-researcher / release-engineer / community-operator 同法
    ```
@@ -98,8 +102,10 @@ repo-owner
 
 ### 阶段 C：第一次对话（⏳ 依赖实现；🧩 部分项）
 
-6. 查看组织（⏳ 目标 `digital-employee org tree`，未实现）：当前可静态查看
-   `organization.json` 与本 README 的组织树图。
+6. 查看组织（🧩 命令已发布，showcase 迁移未完成）：`digital-employee org tree` 已在
+   `0.6.0` 提供，但只支持 `workspace init` 创建的标准工作区；当前目录会被判定为
+   `workspace_org_workspace_not_initialized`，现阶段只静态查看 `organization.json` 与
+   本 README 的组织树图。
 7. 省心模式（⏳ 目标 `digital-employee chat @repo-owner`，未实现）：目标体验是向负责人
    提问后看到委派链与汇总 Artifact；当前可验证的证据只有 `eval` 离线契约
    （`employees/repo-owner/evals/cases.json` 的委派/汇总样例）。
@@ -123,16 +129,17 @@ repo-owner
 |------|------|------|--------|
 | A1–A3 | 已发布 0.4.0（doctor） | ✅ 可验证 | 无 |
 | B4（克隆替代） | quickstart 仓库 | ✅ 可验证 | 无 |
-| B4（init 目标） | `workspace init` 命令 | ⏳ | 组织/工作区 Schema + CLI |
+| B4（init 目标） | `0.6.0 workspace init` + showcase 迁移 | 🧩 | CLI 已发布；本目录仍是旧布局 |
 | B5 | 已发布 0.4.0（validate/eval） | ✅ 可验证 | 无 |
-| C6–C8 | org / chat / 委派状态机 | ⏳ | 组织 Runtime + Host 输出契约 |
+| C6 | `0.6.0 org tree` + showcase 迁移 | 🧩 | 命令已发布；本目录尚未初始化为标准工作区 |
+| C7–C8 | `chat @岗位` / 对话编排 | ⏳ | 上层 chat Runtime + Host 输出契约 |
 | C9 | mem durable-context 岗位绑定 | 🧩 | `context inspect` + appointment 绑定 |
-| C10 | task / org apply | ⏳ | 未实现 |
+| C10 | `task show` | ⏳ | `0.6.0` 仅提供底层 `task delegate`；`task show` 未实现 |
 | D11 | quickstart#2 反馈模板 | ✅ 可验证 | 无 |
 
 ## 验证记录（本仓库真实执行）
 
-执行环境：Node v24.13.0 / macOS；固定版本 `@fullstack-ai-infra/digital-employee@0.5.0`。
+执行环境：Node v22.14.0 / Linux（WSL）；固定版本 `@fullstack-ai-infra/digital-employee@0.6.0`。
 全部命令退出码为 0。
 
 | 岗位包 | validate | eval | 退出码 |
@@ -144,6 +151,12 @@ repo-owner
 
 `doctor --json`：`status: "installed"`，`runnable: false`（无已配置 Agent Host），退出码 0，
 无需任何凭据。
+
+工作区接口兼容性复核（同一环境、同一 `0.6.0` 公共包）：在临时空目录执行
+`workspace init --template oss-maintainer`、`org tree`、`org apply` 均退出 0；对本仓库
+`showcases/oss-maintainer` 执行只读 `org tree --json` 则退出 1，稳定错误码为
+`workspace_org_workspace_not_initialized`。因此这里只记录已发布接口，不把旧 showcase 声称为
+已迁移工作区。
 
 ## 目录结构
 
