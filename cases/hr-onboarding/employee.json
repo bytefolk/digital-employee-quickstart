@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "HR onboarding assistant — guides new hires through company processes.",
   "license": "Apache-2.0",
-  "authors": ["fullstack-ai-infra"],
+  "authors": ["ByteFolk"],
   "host": {
     "protocol": "agent-host.v1",
     "requiredCapabilities": []

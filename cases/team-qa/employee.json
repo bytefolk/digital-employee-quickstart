@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "IT team Q&A bot — answers from team handbook, escalates when unsure.",
   "license": "Apache-2.0",
-  "authors": ["fullstack-ai-infra"],
+  "authors": ["ByteFolk"],
   "host": {
     "protocol": "agent-host.v1",
     "requiredCapabilities": []

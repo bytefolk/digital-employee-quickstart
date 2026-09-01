@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Repository owner — understands the whole open-source business, delegates to direct reports, synthesizes final decisions.",
   "license": "Apache-2.0",
-  "authors": ["fullstack-ai-infra"],
+  "authors": ["ByteFolk"],
   "host": {
     "protocol": "agent-host.v1",
     "requiredCapabilities": []
