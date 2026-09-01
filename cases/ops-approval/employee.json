@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Ops assistant that produces structured approval proposals — never executes actions.",
   "license": "Apache-2.0",
-  "authors": ["fullstack-ai-infra"],
+  "authors": ["ByteFolk"],
   "host": {
     "protocol": "agent-host.v1",
     "requiredCapabilities": []

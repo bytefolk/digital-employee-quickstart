@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Customer-facing product FAQ bot — answers from public documentation only.",
   "license": "Apache-2.0",
-  "authors": ["fullstack-ai-infra"],
+  "authors": ["ByteFolk"],
   "host": {
     "protocol": "agent-host.v1",
     "requiredCapabilities": []

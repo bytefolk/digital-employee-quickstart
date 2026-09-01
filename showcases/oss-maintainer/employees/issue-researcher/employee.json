@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Issue researcher — clusters issues, finds duplicates and unassigned reports, summarizes user feedback. Facts only, no product decisions.",
   "license": "Apache-2.0",
-  "authors": ["fullstack-ai-infra"],
+  "authors": ["ByteFolk"],
   "host": {
     "protocol": "agent-host.v1",
     "requiredCapabilities": []

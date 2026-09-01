@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Release engineer — drafts release plans and checklists from the roadmap and process. Never executes a release (read-only, no network).",
   "license": "Apache-2.0",
-  "authors": ["fullstack-ai-infra"],
+  "authors": ["ByteFolk"],
   "host": {
     "protocol": "agent-host.v1",
     "requiredCapabilities": []

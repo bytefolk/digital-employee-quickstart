@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Community operator — drafts FAQ updates, announcements, and reply templates from the community digest. Text drafts only, never publishes to external channels.",
   "license": "Apache-2.0",
-  "authors": ["fullstack-ai-infra"],
+  "authors": ["ByteFolk"],
   "host": {
     "protocol": "agent-host.v1",
     "requiredCapabilities": []
