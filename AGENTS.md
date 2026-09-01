@@ -79,7 +79,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 
 统一部署体验由以下公开事项跟踪：
 
-- [digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91)
+- [digital-employee#91](https://github.com/bytefolk/digital-employee/issues/91)
 - [digital-employee-quickstart#2][quickstart-adoption]
 
 在新的公开版本和干净环境验收完成前，不得恢复 `deploy` 指引。
@@ -88,9 +88,9 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 
 - [README.md](README.md)
 - [cases/README.md](cases/README.md)
-- [框架 CLI 文档](https://github.com/fullstack-ai-infra/digital-employee)
+- [框架 CLI 文档](https://github.com/bytefolk/digital-employee)
 
 `docs/` 下内容是历史部署草稿，不是 CLI `0.6.0` 的执行手册。
 
-[v060-runner]: https://github.com/fullstack-ai-infra/digital-employee/blob/v0.6.0/README.zh-CN.md#发布者自有机器上的-runner-路径
-[quickstart-adoption]: https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2
+[v060-runner]: https://github.com/bytefolk/digital-employee/blob/v0.6.0/README.zh-CN.md#发布者自有机器上的-runner-路径
+[quickstart-adoption]: https://github.com/bytefolk/digital-employee-quickstart/issues/2

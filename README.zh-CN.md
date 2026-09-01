@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-[Digital Employee](https://github.com/fullstack-ai-infra/digital-employee) 框架的官方案例库。
+[Digital Employee](https://github.com/bytefolk/digital-employee) 框架的官方案例库。
 每个案例都是一个可移植的 `employee-package.v1alpha1` 示例，包含知识、Schema 和离线验收样例。
 
 ## 公开发布边界
@@ -26,7 +26,7 @@
 下面这条路径不需要任何凭据，并且已经针对精确公开版本完成验证：
 
 ```bash
-git clone https://github.com/fullstack-ai-infra/digital-employee-quickstart.git
+git clone https://github.com/bytefolk/digital-employee-quickstart.git
 cd digital-employee-quickstart/cases/team-qa
 
 npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
@@ -121,7 +121,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 ```
 
 一次性执行需要已安装、已配置的受支持 Agent Host。当前引擎矩阵和 `run` 语法见
-[v0.6.0 框架文档](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.6.0/README.zh-CN.md#发布者自有机器上的-runner-路径)。
+[v0.6.0 框架文档](https://github.com/bytefolk/digital-employee/blob/v0.6.0/README.zh-CN.md#发布者自有机器上的-runner-路径)。
 
 ## 前置条件
 
@@ -130,13 +130,13 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 
 ## 参考
 
-- [框架 CLI 文档](https://github.com/fullstack-ai-infra/digital-employee)
-- [员工包规范](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.6.0/docs/employee-package.md)
+- [框架 CLI 文档](https://github.com/bytefolk/digital-employee)
+- [员工包规范](https://github.com/bytefolk/digital-employee/blob/v0.6.0/docs/employee-package.md)
 - [`docs/`](docs/) 是历史部署草稿，不是 CLI `0.6.0` 的可执行教程。
 
 ## 许可
 
 Apache-2.0。详见 [NOTICE](NOTICE)。
 
-[adoption-epic]: https://github.com/fullstack-ai-infra/digital-employee/issues/91
-[quickstart-adoption]: https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2
+[adoption-epic]: https://github.com/bytefolk/digital-employee/issues/91
+[quickstart-adoption]: https://github.com/bytefolk/digital-employee-quickstart/issues/2

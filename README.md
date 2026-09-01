@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md)
 
-Official case library for [Digital Employee](https://github.com/fullstack-ai-infra/digital-employee).
+Official case library for [Digital Employee](https://github.com/bytefolk/digital-employee).
 Each case is a portable `employee-package.v1alpha1` example with knowledge,
 Schemas, and offline acceptance fixtures.
 
@@ -18,10 +18,10 @@ This quickstart is pinned to the public package
 | `setup` | Released, outside this walkthrough | New in `0.4.0`: package setup inside an existing directory; no clean-machine walkthrough record here yet |
 | `run` | Environment-qualified | Optional one-shot execution with an already configured supported Agent Host |
 | `legacy ...` | Historical demo/compatibility | `standalone-v1` compatibility, not this quickstart's primary experience |
-| `deploy` | Released, guidance withheld | Retained in public `0.6.0` as a package-bound command: it validates and binds the exact employee package before any deployment effect. Channels: `http` becomes ready only after authenticated readback; `console` and `dingtalk` are preview and never become ready; `lark` and `wecom` are unavailable. Runtime is `agent-native` only; exit codes are `0` ready, `2` pending external action, `1` unsupported or failed. This quickstart gives no deploy instructions or walkthrough until clean-machine acceptance lands in [digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91). |
+| `deploy` | Released, guidance withheld | Retained in public `0.6.0` as a package-bound command: it validates and binds the exact employee package before any deployment effect. Channels: `http` becomes ready only after authenticated readback; `console` and `dingtalk` are preview and never become ready; `lark` and `wecom` are unavailable. Runtime is `agent-native` only; exit codes are `0` ready, `2` pending external action, `1` unsupported or failed. This quickstart gives no deploy instructions or walkthrough until clean-machine acceptance lands in [digital-employee#91](https://github.com/bytefolk/digital-employee/issues/91). |
 
 The planned deployment path is tracked in
-[digital-employee#91](https://github.com/fullstack-ai-infra/digital-employee/issues/91)
+[digital-employee#91](https://github.com/bytefolk/digital-employee/issues/91)
 and [digital-employee-quickstart#2][run-report].
 
 ## Try a case safely
@@ -30,7 +30,7 @@ The following path is credential-free and was verified against the exact public
 release:
 
 ```bash
-git clone https://github.com/fullstack-ai-infra/digital-employee-quickstart.git
+git clone https://github.com/bytefolk/digital-employee-quickstart.git
 cd digital-employee-quickstart/cases/team-qa
 
 npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
@@ -133,7 +133,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 ```
 
 One-shot execution requires a supported, configured Agent Host. See the
-[v0.6.0 framework documentation](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.6.0/README.md#runner-on-a-publisher-owned-machine)
+[v0.6.0 framework documentation](https://github.com/bytefolk/digital-employee/blob/v0.6.0/README.md#runner-on-a-publisher-owned-machine)
 for the current engine matrix and `run` syntax.
 
 ## Requirements
@@ -143,8 +143,8 @@ for the current engine matrix and `run` syntax.
 
 ## Reference
 
-- [Framework CLI documentation](https://github.com/fullstack-ai-infra/digital-employee)
-- [Employee package specification](https://github.com/fullstack-ai-infra/digital-employee/blob/v0.6.0/docs/employee-package.md)
+- [Framework CLI documentation](https://github.com/bytefolk/digital-employee)
+- [Employee package specification](https://github.com/bytefolk/digital-employee/blob/v0.6.0/docs/employee-package.md)
 - [`docs/`](docs/) contains historical deployment drafts. They are not an
   executable guide for CLI `0.6.0`.
 
@@ -152,4 +152,4 @@ for the current engine matrix and `run` syntax.
 
 Apache-2.0. See [NOTICE](NOTICE) for attribution.
 
-[run-report]: https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2
+[run-report]: https://github.com/bytefolk/digital-employee-quickstart/issues/2
