@@ -19,7 +19,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 
 不要执行 `digital-employee deploy` 或 `deploy --channel dingtalk`；干净机验收完成前不恢复
 deploy 指引。完成或失败后，只在
-[digital-employee-quickstart#2](https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2)
+[digital-employee-quickstart#2](https://github.com/bytefolk/digital-employee-quickstart/issues/2)
 提交脱敏 Run Report。
 
 ## 案例列表

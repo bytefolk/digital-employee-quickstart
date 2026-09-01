@@ -86,7 +86,7 @@ repo-owner
 
 4. 获取案例（本目录仍是旧版草稿布局，不要对它执行 `org tree` / `org apply`）：
    ```bash
-   git clone https://github.com/fullstack-ai-infra/digital-employee-quickstart.git
+   git clone https://github.com/bytefolk/digital-employee-quickstart.git
    cd digital-employee-quickstart/showcases/oss-maintainer
    ```
 5. 校验与离线验收（对四个岗位包分别执行，全部应通过）：
@@ -119,7 +119,7 @@ repo-owner
 ### 阶段 D：反馈回路（✅ 现在就能验证）
 
 11. 走查记录按 quickstart 模板提交到
-    [digital-employee-quickstart#2](https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2)
+    [digital-employee-quickstart#2](https://github.com/bytefolk/digital-employee-quickstart/issues/2)
     （唯一反馈入口），至少包含：CLI 固定版本、案例名、Node/操作系统、`validate` 和
     `eval` 状态、脱敏后的失败码。无密钥、无个人标识、无私有 URL。
 
@@ -180,5 +180,5 @@ showcases/oss-maintainer/
 
 ## 反馈
 
-唯一公开反馈入口：[digital-employee-quickstart#2](https://github.com/fullstack-ai-infra/digital-employee-quickstart/issues/2)。
+唯一公开反馈入口：[digital-employee-quickstart#2](https://github.com/bytefolk/digital-employee-quickstart/issues/2)。
 不要为此 showcase 另开 Issue 或 Discussion。

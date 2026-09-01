@@ -1,7 +1,7 @@
 Digital Employee Quickstart
 
 This project is a setup scaffold. The digital employee runtime it installs is
-Digital Employee (https://github.com/fullstack-ai-infra/digital-employee),
+Digital Employee (https://github.com/bytefolk/digital-employee),
 Copyright 2026 fullstack-ai-infra contributors, distributed under the
 Apache License 2.0. This scaffold does not vendor or modify that runtime; the
 setup scripts download it at install time into the runtime/ directory.
