@@ -49,10 +49,10 @@ jobs:
           total=0
 
           for package_dir in \
-            showcases/oss-maintainer/employees/repo-owner \
-            showcases/oss-maintainer/employees/issue-researcher \
-            showcases/oss-maintainer/employees/release-engineer \
-            showcases/oss-maintainer/employees/community-operator
+            showcases/oss-maintainer/positions/repo-owner \
+            showcases/oss-maintainer/positions/repo-owner/issue-researcher \
+            showcases/oss-maintainer/positions/repo-owner/release-engineer \
+            showcases/oss-maintainer/positions/repo-owner/community-operator
           do
             validate_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
               digital-employee validate "$package_dir" --json)"
@@ -75,6 +75,27 @@ jobs:
 
           test "$total" -eq 13
           printf 'Showcase v0.6.0 matrix: validate=4/4, eval=%s/13\n' "$total"
+
+      - name: Validate the canonical oss-maintainer workspace
+        env:
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.6.0"
+          npm_config_loglevel: silent
+        run: |
+          set -euo pipefail
+          tree_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee org tree showcases/oss-maintainer --json)"
+          node -e '
+            const result = JSON.parse(process.argv[1]);
+            if (result.schemaVersion !== "org-tree.v1" || result.positionCount !== 4 || result.depth !== 2) process.exit(1);
+          ' "$tree_json"
+
+          apply_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee org apply showcases/oss-maintainer --json)"
+          node -e '
+            const result = JSON.parse(process.argv[1]);
+            if (result.status !== "applied" || result.positions !== 4) process.exit(1);
+          ' "$apply_json"
+          echo 'Canonical oss-maintainer workspace: tree=valid, apply=valid'
 
       - name: Reject sensitive content in the showcase
         run: |

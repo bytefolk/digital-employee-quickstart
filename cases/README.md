@@ -1,6 +1,7 @@
 # 案例库
 
 每个子目录都是一个符合 `employee-package.v1alpha1` 的数字员工案例。
+案例的统一场景、边界和桌面端支持信息记录在 [catalog.json](catalog.json)。
 
 ## 当前可执行路径
 

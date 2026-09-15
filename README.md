@@ -91,16 +91,12 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 
 This category demonstrates the digital-organization workspace target shape:
 one directory is one business, and one position is one addressable digital
-employee. The `business.json` / `organization.json` inside the package are
-`status: "proposed"` drafts in an older layout; the published CLI does not read
-or validate those files. Public `0.6.0` does ship `workspace init`, `org tree`,
-and `org apply` for the canonical workspace layout it creates, but this
-showcase has not been migrated to that layout and is rejected as an
-uninitialized workspace. `chat @position` and persistent Workbench integration
-remain unreleased. The currently executable surface in this repository is
-`validate` / `eval` on the four position packages with the pinned
-`@fullstack-ai-infra/digital-employee@0.6.0`; see the clean-machine runbook for
-the exact stage markers.
+employee. The showcase uses the canonical `workspace.json`,
+`organization.v1alpha1.json`, `positions/`, and `context/` layout. It can
+be inspected with `org tree`, reconciled with `org apply`, opened directly in
+RoleWeave, and validated with the pinned
+`@fullstack-ai-infra/digital-employee@0.6.0`. Interactive `chat @position`
+orchestration remains outside this repository's current scope.
 
 ## Case structure
 

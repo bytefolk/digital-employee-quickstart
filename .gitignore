@@ -15,6 +15,10 @@ employees/
 !showcases/*/employees/
 !showcases/*/employees/**
 
+# RoleWeave workspace runtime state is generated when the showcase is applied.
+showcases/oss-maintainer/.digital-employee/
+showcases/oss-maintainer/**/.workbench/
+
 node_modules/
 *.log
 .DS_Store
