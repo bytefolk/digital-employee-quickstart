@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "case-catalog.v1",
+  "cliBaseline": "@fullstack-ai-infra/digital-employee@0.6.0",
+  "cases": [
+    {
+      "id": "team-qa",
+      "path": "cases/team-qa",
+      "category": "internal-knowledge",
+      "audience": "team members",
+      "outcome": "Answer questions from the team handbook, on-call rules, and permission documentation.",
+      "boundaries": ["read-only", "must refuse unsupported facts", "must cite source documents"],
+      "supportsDesktopWorkspace": false
+    },
+    {
+      "id": "hr-onboarding",
+      "path": "cases/hr-onboarding",
+      "category": "employee-support",
+      "audience": "new hires",
+      "outcome": "Guide a new hire through first-day tasks, benefits, and office logistics.",
+      "boundaries": ["read-only", "must distinguish policy from personal advice", "must cite source documents"],
+      "supportsDesktopWorkspace": false
+    },
+    {
+      "id": "ops-approval",
+      "path": "cases/ops-approval",
+      "category": "structured-proposal",
+      "audience": "operations teams",
+      "outcome": "Turn an operational request into a structured proposal without executing it.",
+      "boundaries": ["never executes actions", "requires approval for consequential work", "must preserve the requested target"],
+      "supportsDesktopWorkspace": false
+    },
+    {
+      "id": "product-faq",
+      "path": "cases/product-faq",
+      "category": "customer-support",
+      "audience": "customers and support agents",
+      "outcome": "Answer product and pricing questions from public product documentation.",
+      "boundaries": ["read-only", "must not invent unavailable product details", "must cite source documents"],
+      "supportsDesktopWorkspace": false
+    }
+  ]
+}

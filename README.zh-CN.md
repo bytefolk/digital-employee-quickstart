@@ -83,12 +83,12 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 | [`oss-maintainer`](showcases/oss-maintainer/) | 1 负责人 + 3 专家岗位 | 开源维护业务：`repo-owner` 总负责，配 `issue-researcher`、`release-engineer`、`community-operator` 三个只读专家岗位 |
 
 这一类演示数字组织工作区的目标形态：一个目录就是一项业务，一个岗位就是一个可寻址的
-数字员工。包内的 `business.json` / `organization.json` 是 `status: "proposed"` 的组织契约
-旧版设计稿，已发布 CLI 不读取、不校验这些文件。公开 `0.6.0` 已提供面向其标准工作区结构的
-`workspace init`、`org tree` 和 `org apply`，但本 showcase 尚未迁移，CLI 会把它判定为未初始化
-工作区；`chat @岗位` 与持久化 Workbench 集成仍未发布。当前仓库内可执行部分只有四个岗位包在
-固定版本 `@fullstack-ai-infra/digital-employee@0.6.0` 下的 `validate` / `eval`，精确阶段标记见
-包内干净机 runbook。
+数字员工。本 showcase 现在使用标准的 `workspace.json`、
+`organization.v1alpha1.json`、`positions/` 和 `context/` 布局。
+它可以通过 `org tree` 查看、通过 `org apply` 校准，并可直接在 RoleWeave
+桌面端打开。四个岗位包仍使用固定版本
+`@fullstack-ai-infra/digital-employee@0.6.0` 进行 `validate` / `eval`。
+`chat @岗位` 编排仍不在本仓库当前范围内。
 
 ## 案例结构
 

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/workspace-org.schema.json",
+  "schemaVersion": "workspace-org.v1",
+  "business": "oss-maintainer",
+  "description": "Open-source maintainer organization: a repo-owner lead with issue research, release engineering, and community operations positions.",
+  "owner": "repo-owner",
+  "roles": [
+    {
+      "id": "repo-owner",
+      "name": "Repo Owner",
+      "description": "Owns the repository roadmap, review decisions, and final releases.",
+      "reportTo": null,
+      "package": {
+        "name": "repo-owner",
+        "version": "1.0.0",
+        "digest": "sha256:17da95d9c30ea2ad068b23e6203188356935dacfcf91d70e9de7b426ee828350",
+        "localReference": "/workspace/positions/repo-owner"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {},
+      "budget": {
+        "perTask": {
+          "tokens": 40000,
+          "iterations": 12
+        },
+        "perDay": {
+          "tokens": 400000,
+          "iterations": 96
+        }
+      }
+    },
+    {
+      "id": "issue-researcher",
+      "name": "Issue Researcher",
+      "description": "Triages issues and produces researched, evidence-backed summaries for the owner.",
+      "reportTo": "repo-owner",
+      "package": {
+        "name": "issue-researcher",
+        "version": "1.0.0",
+        "digest": "sha256:d27fc6acc554d4b1b69449e66946dea87cd50341760046189fe0f37a89b46421",
+        "localReference": "/workspace/positions/repo-owner/issue-researcher"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {},
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "release-engineer",
+      "name": "Release Engineer",
+      "description": "Prepares release notes, version bumps, and publish checklists for the owner.",
+      "reportTo": "repo-owner",
+      "package": {
+        "name": "release-engineer",
+        "version": "1.0.0",
+        "digest": "sha256:cdd7964c3b170cd54152eab5d515461c5292df1cea6e88b28fb4a90c4840c763",
+        "localReference": "/workspace/positions/repo-owner/release-engineer"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {},
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "community-operator",
+      "name": "Community Operator",
+      "description": "Summarizes community feedback and keeps contributor documentation current.",
+      "reportTo": "repo-owner",
+      "package": {
+        "name": "community-operator",
+        "version": "1.0.0",
+        "digest": "sha256:a87a21e8df8ac397e51eaff5bc3e9ca95c946ce4c0ade78b02ea4209e451a3d4",
+        "localReference": "/workspace/positions/repo-owner/community-operator"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {},
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-09-15T15:03:46.691Z"
+}
