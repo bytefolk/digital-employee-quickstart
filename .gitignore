@@ -11,9 +11,6 @@
 
 # 你生成的员工包。默认不提交 —— 里面的 knowledge/ 很可能含公司内部资料。
 employees/
-# 例外：showcases/ 下的员工包是经审查、随案例一起分发的公开样例，必须入库。
-!showcases/*/employees/
-!showcases/*/employees/**
 
 # RoleWeave workspace runtime state is generated when the showcase is applied.
 showcases/oss-maintainer/.digital-employee/
