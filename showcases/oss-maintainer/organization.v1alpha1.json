@@ -24,7 +24,10 @@
         "Glob"
       ],
       "toolDeny": [],
-      "metadata": {},
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "仓库负责人",
+        "roleweave.i18n.zh-CN.description": "负责仓库路线图、评审决策和最终发布。"
+      },
       "budget": {
         "perTask": {
           "tokens": 40000,
@@ -55,7 +58,10 @@
         "Glob"
       ],
       "toolDeny": [],
-      "metadata": {},
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "问题研究员",
+        "roleweave.i18n.zh-CN.description": "分诊问题，并为负责人产出经研究、可追溯依据的摘要。"
+      },
       "budget": {
         "perTask": {
           "tokens": 20000,
@@ -86,7 +92,10 @@
         "Glob"
       ],
       "toolDeny": [],
-      "metadata": {},
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "发布工程师",
+        "roleweave.i18n.zh-CN.description": "为负责人准备发布说明、版本更新和发布检查清单。"
+      },
       "budget": {
         "perTask": {
           "tokens": 20000,
@@ -117,7 +126,10 @@
         "Glob"
       ],
       "toolDeny": [],
-      "metadata": {},
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "社区运营",
+        "roleweave.i18n.zh-CN.description": "汇总社区反馈，并维护贡献者文档的时效性。"
+      },
       "budget": {
         "perTask": {
           "tokens": 20000,
