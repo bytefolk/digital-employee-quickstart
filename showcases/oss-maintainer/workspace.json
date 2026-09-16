@@ -4,6 +4,7 @@
   "name": "oss-maintainer",
   "description": "Open-source maintainer organization: a repo-owner lead with issue research, release engineering, and community operations positions.",
   "template": "oss-maintainer",
+  "createdAt": "2026-09-15T00:00:00Z",
   "organization": "./organization.v1alpha1.json",
   "positions": "./positions",
   "context": "./context"
