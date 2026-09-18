@@ -17,5 +17,9 @@ showcases/oss-maintainer/.digital-employee/
 showcases/oss-maintainer/**/.workbench/
 
 node_modules/
+runtime/
+.dingtalk-app.json
+.dingtalk-version.json
 *.log
 .DS_Store
+

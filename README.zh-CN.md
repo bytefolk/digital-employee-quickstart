@@ -86,7 +86,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 数字员工。本 showcase 现在使用标准的 `workspace.json`、
 `organization.v1alpha1.json`、`positions/` 和 `context/` 布局。
 它可以通过 `org tree` 查看、通过 `org apply` 校准，并可直接在 RoleWeave
-桌面端打开。四个岗位包仍使用固定版本
+桌面端打开（详见 [showcase 实战指南](showcases/oss-maintainer/README.zh-CN.md)）。四个岗位包仍使用固定版本
 `@fullstack-ai-infra/digital-employee@0.6.0` 进行 `validate` / `eval`。
 `chat @岗位` 编排仍不在本仓库当前范围内。
 

@@ -1,5 +1,7 @@
 # oss-maintainer showcase
 
+[简体中文](README.zh-CN.md)
+
 oss-maintainer is a runnable digital-organization workspace for maintaining an
 open-source project. It contains one owner and three read-only specialist
 positions:
@@ -67,20 +69,77 @@ Validate and evaluate each position package:
         digital-employee eval "$package_dir" --json
     done
 
-validate checks package structure. eval checks the repository's offline
+`validate` checks package structure. `eval` checks the repository's offline
 fixtures; neither proves that a model produced a correct answer. A real
 one-shot run requires a separately configured, supported Agent Host and should
 not be added as a mandatory CI dependency.
 
-## Open in RoleWeave
+## Open in RoleWeave Desktop
 
-In the desktop client, choose Open existing workspace and select the
-showcases/oss-maintainer directory. Select the workspace directory itself,
-not an individual employee.json file.
+### 1. Workspace isolation (Recommended)
 
-The desktop client owns local session history and Agent Host bindings. Those
-runtime files are intentionally not part of this showcase and must not be
-committed.
+RoleWeave Desktop treats opened workspaces as live, mutable state. In the UI,
+recruiting positions adds directories, moving positions changes reporting lines,
+and dismissing positions deletes directories. Furthermore, running sessions
+creates `.digital-employee/` runtime audit and history records.
+
+To prevent accidental modification or dismissal of files in your Git tracking,
+copy the showcase out of the repository before opening it:
+
+```bash
+mkdir -p "$HOME/roleweave-workspaces"
+cp -R showcases/oss-maintainer "$HOME/roleweave-workspaces/oss-maintainer"
+```
+
+### 2. Launching RoleWeave
+
+Point RoleWeave to your copied workspace directory:
+
+- **Desktop App**: Choose **Open existing workspace** and select the
+  `$HOME/roleweave-workspaces/oss-maintainer` directory (select the workspace root,
+  not an individual `employee.json`).
+- **Development Shell**:
+  ```bash
+  ROLEWEAVE_DEFAULT_WORKSPACE=$HOME/roleweave-workspaces/oss-maintainer npm run dev:desktop
+  ```
+
+### 3. What you will see
+
+- **Organization tree on the left**: `oss-maintainer` root with `repo-owner`,
+  and under it `community-operator`, `issue-researcher`, `release-engineer`.
+- **Position budget inspector**:
+  - `repo-owner`: 40,000 tokens / 12 iterations per task; 400,000 tokens / 96 iterations per day.
+  - Direct reports: 20,000 tokens / 8 iterations per task; 200,000 tokens / 64 iterations per day.
+- **Permissions**: Read / Grep / Glob allowed; filesystem write denied.
+- **Context sources**: Position knowledge base connected in read-only mode.
+
+### 4. Running interactive chat (`@position`)
+
+- Interactive chats with positions require a supported local Agent Host (such
+  as Qoder CLI 1.1.x or Claude Code).
+- The Qoder host requires `QODER_PERSONAL_ACCESS_TOKEN` set in your environment.
+- Machine-specific engine and model choices are saved in local
+  `.workbench/agent-binding.v1.json` files; these are gitignored and should
+  not be committed across machines.
+- Unified storage: Set `MEM_URL` or `ORG_WORKBENCH_MEM_URL` pointing to `memd`
+  if connecting shared drive storage.
+
+### 5. Control plane rules
+
+1. **File tree is organization structure**: Adding a directory equals recruiting
+   (requires `budget.json`). Moving a directory updates reporting lines (`reportTo`).
+   Deleting a directory dismisses the position (backups recorded in `.digital-employee/backup/`).
+2. **Digest reconciliation**: `organization.v1alpha1.json` stores the package
+   digest for each position. If package files are modified, reconcile via:
+   ```bash
+   npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
+     digital-employee org apply <workspace-dir> --json
+   ```
+3. **Restoring pristine showcase state**: If testing accidentally mutates
+   the showcase inside this repository, restore it using:
+   ```bash
+   bash scripts/restore-showcase.sh
+   ```
 
 ## Update a position
 

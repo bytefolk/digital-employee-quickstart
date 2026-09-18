@@ -59,3 +59,18 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
   digital-employee eval . --json
 ```
+
+## 从单体员工包演进为组织工作区
+
+本目录下的案例皆为单体员工包（`employee-package.v1alpha1`），重点定义单一职责的输入输出契约与知识库。
+
+如果你希望将单体案例挂载到多 Agent 协同的数字组织工作区（如 [`showcases/oss-maintainer`](../showcases/oss-maintainer/)）中，步骤如下：
+
+1. **添加预算声明**：在岗位目录下增加 `budget.json`（设定 `perTask` 与 `perDay` 的 tokens 与 iterations 上限）。
+2. **在组织架构中登记**：在工作区的 `organization.v1alpha1.json` 中的 `roles` 数组中添加该岗位，声明 `id`、`reportTo`（确立汇报关系）、`toolAllow`、`mode` 以及 `localReference` 本地引用路径。
+3. **校准与绑定 Digest**：运行以下命令重新计算 digest 并应用组织状态：
+   ```bash
+   npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
+     digital-employee org apply <工作区路径> --json
+   ```
+
