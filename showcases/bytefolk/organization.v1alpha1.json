@@ -1,0 +1,1069 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/workspace-org.schema.json",
+  "schemaVersion": "workspace-org.v1",
+  "business": "bytefolk",
+  "description": "ByteFolk open-source organization showcase: one owner, seven project leads, and twenty specialist positions across seven public projects.",
+  "owner": "bytefolk-owner",
+  "roles": [
+    {
+      "id": "bytefolk-owner",
+      "name": "CEO",
+      "description": "作为 CEO，负责「bytefolk」的整体目标、任务分配和最终确认；统筹各项目负责人（项目组 lead）。",
+      "reportTo": null,
+      "package": {
+        "name": "bytefolk-owner",
+        "version": "0.1.0",
+        "digest": "sha256:aa6c3cf1ea3b4f59a762aecf06f4604f2e7d40adfffcc5c2a3c87b7a75d8a4fc",
+        "localReference": "/workspace/positions/bytefolk-owner"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "budget": {
+        "perTask": {
+          "tokens": 40000
+        },
+        "perDay": {
+          "tokens": 400000
+        }
+      },
+      "metadata": {
+        "system": "true",
+        "color": "#7C5CFF",
+        "roleweave.i18n.en.name": "CEO",
+        "roleweave.i18n.zh-CN.name": "CEO"
+      }
+    },
+    {
+      "id": "roleweave-lead",
+      "name": "RoleWeave 项目负责人",
+      "description": "统筹「roleweave」项目组的目标拆解、任务分配与产出把关；把明确的工作拆给组内职能岗，只读协调、复核结论，不亲自落盘、不改代码。主要面向 roleweave 仓库。",
+      "reportTo": "bytefolk-owner",
+      "package": {
+        "name": "roleweave-lead",
+        "version": "0.1.0",
+        "digest": "sha256:bac435963be2b2ac8b47275551cfd5790298231f5d55c74ded0021bbe42d7146",
+        "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead"
+      },
+      "mode": "read_only",
+      "memoryScope": "./work/roleweave-lead/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "roleweave",
+        "layer": "lead",
+        "color": "#4F7CFF",
+        "roleweave.i18n.en.name": "RoleWeave Lead",
+        "roleweave.i18n.zh-CN.name": "RoleWeave 项目负责人"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 40000
+        },
+        "perDay": {
+          "tokens": 400000
+        }
+      }
+    },
+    {
+      "id": "digital-employee-lead",
+      "name": "Digital Employee 项目负责人",
+      "description": "统筹「digital-employee」项目组的目标拆解、任务分配与产出把关；把明确的工作拆给组内职能岗，只读协调、复核结论，不亲自落盘、不改代码。主要面向 digital-employee 仓库。",
+      "reportTo": "bytefolk-owner",
+      "package": {
+        "name": "digital-employee-lead",
+        "version": "0.1.0",
+        "digest": "sha256:1f3109e5d37820605e9b44ce05b34f831e009fb2ce7d9b802d907ff0960d1416",
+        "localReference": "/workspace/positions/bytefolk-owner/digital-employee-lead"
+      },
+      "mode": "read_only",
+      "memoryScope": "./work/digital-employee-lead/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee",
+        "layer": "lead",
+        "color": "#2FBF71",
+        "roleweave.i18n.en.name": "Digital Employee Lead",
+        "roleweave.i18n.zh-CN.name": "Digital Employee 项目负责人"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 40000
+        },
+        "perDay": {
+          "tokens": 400000
+        }
+      }
+    },
+    {
+      "id": "de-platform-lead",
+      "name": "Digital Employee Platform 项目负责人",
+      "description": "统筹「digital-employee-platform」项目组的目标拆解、任务分配与产出把关；把明确的工作拆给组内职能岗，只读协调、复核结论，不亲自落盘、不改代码。主要面向 digital-employee-platform 仓库。",
+      "reportTo": "bytefolk-owner",
+      "package": {
+        "name": "de-platform-lead",
+        "version": "0.1.0",
+        "digest": "sha256:1087354de757c82ed6b1fd3d54de49f320781d7f1d11583777911f0195329c16",
+        "localReference": "/workspace/positions/bytefolk-owner/de-platform-lead"
+      },
+      "mode": "read_only",
+      "memoryScope": "./work/de-platform-lead/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee-platform",
+        "layer": "lead",
+        "color": "#F5A623",
+        "roleweave.i18n.en.name": "Platform Lead",
+        "roleweave.i18n.zh-CN.name": "Digital Employee Platform 项目负责人"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 40000
+        },
+        "perDay": {
+          "tokens": 400000
+        }
+      }
+    },
+    {
+      "id": "de-quickstart-lead",
+      "name": "Digital Employee Quickstart 项目负责人",
+      "description": "统筹「digital-employee-quickstart」项目组的目标拆解、任务分配与产出把关；把明确的工作拆给组内职能岗，只读协调、复核结论，不亲自落盘、不改代码。主要面向 digital-employee-quickstart 仓库。",
+      "reportTo": "bytefolk-owner",
+      "package": {
+        "name": "de-quickstart-lead",
+        "version": "0.1.0",
+        "digest": "sha256:28b7d01244ba0322ffc98ef049f597741b354c4c535de197dab99f40bcb4abb2",
+        "localReference": "/workspace/positions/bytefolk-owner/de-quickstart-lead"
+      },
+      "mode": "read_only",
+      "memoryScope": "./work/de-quickstart-lead/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee-quickstart",
+        "layer": "lead",
+        "color": "#00B8D9",
+        "roleweave.i18n.en.name": "Quickstart Lead",
+        "roleweave.i18n.zh-CN.name": "Digital Employee Quickstart 项目负责人"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 40000
+        },
+        "perDay": {
+          "tokens": 400000
+        }
+      }
+    },
+    {
+      "id": "mem-lead",
+      "name": "Mem 项目负责人",
+      "description": "统筹「mem」项目组的目标拆解、任务分配与产出把关；把明确的工作拆给组内职能岗，只读协调、复核结论，不亲自落盘、不改代码。主要面向 mem 仓库。",
+      "reportTo": "bytefolk-owner",
+      "package": {
+        "name": "mem-lead",
+        "version": "0.1.0",
+        "digest": "sha256:8f16ccc94fd47d9ff9e0ba1d8e15b067973f78e6ff30f2b7ac0af2e81d0004c9",
+        "localReference": "/workspace/positions/bytefolk-owner/mem-lead"
+      },
+      "mode": "read_only",
+      "memoryScope": "./work/mem-lead/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "mem",
+        "layer": "lead",
+        "color": "#E84393",
+        "roleweave.i18n.en.name": "Mem Lead",
+        "roleweave.i18n.zh-CN.name": "Mem 项目负责人"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 40000
+        },
+        "perDay": {
+          "tokens": 400000
+        }
+      }
+    },
+    {
+      "id": "doc-lead",
+      "name": "Doc 项目负责人",
+      "description": "统筹「doc」项目组的目标拆解、任务分配与产出把关；把明确的工作拆给组内职能岗，只读协调、复核结论，不亲自落盘、不改代码。主要面向 doc 仓库。",
+      "reportTo": "bytefolk-owner",
+      "package": {
+        "name": "doc-lead",
+        "version": "0.1.0",
+        "digest": "sha256:4bcaad15154dfed6bb5c44c6d7acdadaac26287b22cb57a50ac6561695edaf89",
+        "localReference": "/workspace/positions/bytefolk-owner/doc-lead"
+      },
+      "mode": "read_only",
+      "memoryScope": "./work/doc-lead/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "doc",
+        "layer": "lead",
+        "color": "#A3B516",
+        "roleweave.i18n.en.name": "Doc Lead",
+        "roleweave.i18n.zh-CN.name": "Doc 项目负责人"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 40000
+        },
+        "perDay": {
+          "tokens": 400000
+        }
+      }
+    },
+    {
+      "id": "design-system-lead",
+      "name": "Design System 项目负责人",
+      "description": "统筹「design-system」项目组的目标拆解、任务分配与产出把关；把明确的工作拆给组内职能岗，只读协调、复核结论，不亲自落盘、不改代码。主要面向 design-system 仓库。",
+      "reportTo": "bytefolk-owner",
+      "package": {
+        "name": "design-system-lead",
+        "version": "0.1.0",
+        "digest": "sha256:469e626e5f94b460e3175556767255f9b35958f3840ade72e8d6345a1d099d93",
+        "localReference": "/workspace/positions/bytefolk-owner/design-system-lead"
+      },
+      "mode": "read_only",
+      "memoryScope": "./work/design-system-lead/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "design-system",
+        "layer": "lead",
+        "color": "#B5179E",
+        "roleweave.i18n.en.name": "Design System Lead",
+        "roleweave.i18n.zh-CN.name": "Design System 项目负责人"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 40000
+        },
+        "perDay": {
+          "tokens": 400000
+        }
+      }
+    },
+    {
+      "id": "roleweave-desktop",
+      "name": "客户端工程师（Electron）",
+      "description": "负责 apps/desktop 的主进程、preload、打包与签名脚本链（package/verify/smoke）、以及更新清单与跨平台启动。",
+      "reportTo": "roleweave-lead",
+      "package": {
+        "name": "roleweave-desktop",
+        "version": "0.1.0",
+        "digest": "sha256:f77ae6cae00cb61e5d8f44bcc5d2f6f63e1c7a0a7201d9ab6f6a191a9b57ce33",
+        "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-desktop"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/roleweave-desktop/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "roleweave",
+        "layer": "function",
+        "color": "#6B93FF",
+        "roleweave.i18n.en.name": "Desktop Engineer",
+        "roleweave.i18n.zh-CN.name": "客户端工程师（Electron）"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "roleweave-renderer",
+      "name": "渲染前端工程师（React）",
+      "description": "负责 apps/desktop/renderer 的 React 界面、状态与组件，消费 packages/ui 与 design-system 的 tokens 与模式。",
+      "reportTo": "roleweave-lead",
+      "package": {
+        "name": "roleweave-renderer",
+        "version": "0.1.0",
+        "digest": "sha256:2ebc408f5dbd6229d884a6ffc4004ab74056b586f746ee442507308dcc0e9581",
+        "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-renderer"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/roleweave-renderer/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "roleweave",
+        "layer": "function",
+        "color": "#87A9FF",
+        "roleweave.i18n.en.name": "Renderer Engineer",
+        "roleweave.i18n.zh-CN.name": "渲染前端工程师（React）"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "roleweave-server",
+      "name": "本地服务工程师（Node）",
+      "description": "负责 apps/server 本地 HTTP 服务：路由、每启动 Bearer 鉴权、SSE /events、健康检查与引擎适配。",
+      "reportTo": "roleweave-lead",
+      "package": {
+        "name": "roleweave-server",
+        "version": "0.1.0",
+        "digest": "sha256:951e751bcc718fa5383c35b685e6b4a4b656c4ae7134e4b565b8a437bbab4b5c",
+        "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-server"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/roleweave-server/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "roleweave",
+        "layer": "function",
+        "color": "#5C86FF",
+        "roleweave.i18n.en.name": "Server Engineer",
+        "roleweave.i18n.zh-CN.name": "本地服务工程师（Node）"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "roleweave-design",
+      "name": "UI 设计师",
+      "description": "负责客户端的交互与视觉设计，产出设计规格、走查与可用性建议，并对齐 design-system。",
+      "reportTo": "roleweave-lead",
+      "package": {
+        "name": "roleweave-design",
+        "version": "0.1.0",
+        "digest": "sha256:08eb0788562aad924b8306db3019f808913f26930915dd1d026a5e0989d1cc8a",
+        "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-design"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/roleweave-design/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "roleweave",
+        "layer": "function",
+        "color": "#A3BFFF",
+        "roleweave.i18n.en.name": "UI Designer",
+        "roleweave.i18n.zh-CN.name": "UI 设计师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "roleweave-release",
+      "name": "发版运营",
+      "description": "负责版本规划、release notes、多渠道发布（macOS DMG/ZIP、Windows EXE）与发布公告的起草。",
+      "reportTo": "roleweave-lead",
+      "package": {
+        "name": "roleweave-release",
+        "version": "0.1.0",
+        "digest": "sha256:adfa33658148dc6956d070d9306e6f089e760372812593ea50c42ee0c945b609",
+        "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-release"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/roleweave-release/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "roleweave",
+        "layer": "function",
+        "color": "#3D6BE8",
+        "roleweave.i18n.en.name": "Release Ops",
+        "roleweave.i18n.zh-CN.name": "发版运营"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "roleweave-qa",
+      "name": "质量工程师（QA）",
+      "description": "负责测试策略、用例设计与回归把关，覆盖 test:ui / test:renderer / test:desktop-main 与 npm run check。",
+      "reportTo": "roleweave-lead",
+      "package": {
+        "name": "roleweave-qa",
+        "version": "0.1.0",
+        "digest": "sha256:0daa8f75cf70a84fa2e1853bd2d5cacb1a3c15549cd3e8d8247a66b1591d9e09",
+        "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-qa"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/roleweave-qa/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "roleweave",
+        "layer": "function",
+        "color": "#7FA3FF",
+        "roleweave.i18n.en.name": "QA Engineer",
+        "roleweave.i18n.zh-CN.name": "质量工程师（QA）"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "de-engine",
+      "name": "引擎框架工程师",
+      "description": "负责数字员工运行时引擎：turn 生命周期、上下文与记忆路由、岗位派生 scope 与工具闸门。",
+      "reportTo": "digital-employee-lead",
+      "package": {
+        "name": "de-engine",
+        "version": "0.1.0",
+        "digest": "sha256:cce3552d29c2eb19d5c7ffeb8f02e9ad31185c6ea771da60cdac7d765a970850",
+        "localReference": "/workspace/positions/bytefolk-owner/digital-employee-lead/de-engine"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/de-engine/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee",
+        "layer": "function",
+        "color": "#4FD18B",
+        "roleweave.i18n.en.name": "Engine Engineer",
+        "roleweave.i18n.zh-CN.name": "引擎框架工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "de-cli",
+      "name": "CLI 工程师",
+      "description": "负责 CLI 命令、参数解析、locale 词条与退出码语义（含非法输入显式失败）。",
+      "reportTo": "digital-employee-lead",
+      "package": {
+        "name": "de-cli",
+        "version": "0.1.0",
+        "digest": "sha256:27c73d9a0f02741adfe68e0d0763052f580e9d971c039b6af9ff3936a2464bf8",
+        "localReference": "/workspace/positions/bytefolk-owner/digital-employee-lead/de-cli"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/de-cli/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee",
+        "layer": "function",
+        "color": "#3DA85E",
+        "roleweave.i18n.en.name": "CLI Engineer",
+        "roleweave.i18n.zh-CN.name": "CLI 工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "de-qa",
+      "name": "测试质量工程师",
+      "description": "负责引擎与 CLI 的测试覆盖、fixtures 维护与回归防线。",
+      "reportTo": "digital-employee-lead",
+      "package": {
+        "name": "de-qa",
+        "version": "0.1.0",
+        "digest": "sha256:92df0683dfeb9ef7702a5a556866e9b6882b83096ad8253020ce43f0d33f676e",
+        "localReference": "/workspace/positions/bytefolk-owner/digital-employee-lead/de-qa"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/de-qa/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee",
+        "layer": "function",
+        "color": "#6FE0A5",
+        "roleweave.i18n.en.name": "QA Engineer",
+        "roleweave.i18n.zh-CN.name": "测试质量工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "dep-framework",
+      "name": "平台框架工程师",
+      "description": "负责平台层框架、服务编排与跨仓库共享契约的落地。",
+      "reportTo": "de-platform-lead",
+      "package": {
+        "name": "dep-framework",
+        "version": "0.1.0",
+        "digest": "sha256:32adc98692d69f758daa63688fcb2c50a2d6aa4c8ef87c9131a73bb8d8a3cbd3",
+        "localReference": "/workspace/positions/bytefolk-owner/de-platform-lead/dep-framework"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/dep-framework/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee-platform",
+        "layer": "function",
+        "color": "#F7B84F",
+        "roleweave.i18n.en.name": "Framework Engineer",
+        "roleweave.i18n.zh-CN.name": "平台框架工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "dep-integration",
+      "name": "集成工程师",
+      "description": "负责与 mem / doc / context 等独立服务的集成、适配与兼容性核验。",
+      "reportTo": "de-platform-lead",
+      "package": {
+        "name": "dep-integration",
+        "version": "0.1.0",
+        "digest": "sha256:7cfd5456a69fca950eb423637e141b4ae23717b2a76cca0832a65c1ac24d127b",
+        "localReference": "/workspace/positions/bytefolk-owner/de-platform-lead/dep-integration"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/dep-integration/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee-platform",
+        "layer": "function",
+        "color": "#E8941A",
+        "roleweave.i18n.en.name": "Integration Engineer",
+        "roleweave.i18n.zh-CN.name": "集成工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "deq-template",
+      "name": "模板工程师",
+      "description": "负责 quickstart 脚手架、模板工程与一键起步体验的正确性与可复现。",
+      "reportTo": "de-quickstart-lead",
+      "package": {
+        "name": "deq-template",
+        "version": "0.1.0",
+        "digest": "sha256:a778e7c94dd00fa2f66eeada36113c13e01c6e99e44391310212ba173b85d223",
+        "localReference": "/workspace/positions/bytefolk-owner/de-quickstart-lead/deq-template"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/deq-template/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee-quickstart",
+        "layer": "function",
+        "color": "#36C7E2",
+        "roleweave.i18n.en.name": "Template Engineer",
+        "roleweave.i18n.zh-CN.name": "模板工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "deq-docs",
+      "name": "文档运营",
+      "description": "负责入门文档、教程与示例的编写与维护，让新用户能照着跑通。",
+      "reportTo": "de-quickstart-lead",
+      "package": {
+        "name": "deq-docs",
+        "version": "0.1.0",
+        "digest": "sha256:671292317c3d33bff6c09cc7d8ebd05385365ad2d7c8e082e57931ced2825c89",
+        "localReference": "/workspace/positions/bytefolk-owner/de-quickstart-lead/deq-docs"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/deq-docs/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "digital-employee-quickstart",
+        "layer": "function",
+        "color": "#00A3C0",
+        "roleweave.i18n.en.name": "Docs Ops",
+        "roleweave.i18n.zh-CN.name": "文档运营"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "mem-backend",
+      "name": "后端服务工程师",
+      "description": "负责 mem 记忆/文件索引服务的后端实现与对外 API。",
+      "reportTo": "mem-lead",
+      "package": {
+        "name": "mem-backend",
+        "version": "0.1.0",
+        "digest": "sha256:8dff012783ef9ecda48077fe2ae3b8dd008425b1da48e5419f1be7424261b361",
+        "localReference": "/workspace/positions/bytefolk-owner/mem-lead/mem-backend"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/mem-backend/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "mem",
+        "layer": "function",
+        "color": "#F06FAE",
+        "roleweave.i18n.en.name": "Backend Engineer",
+        "roleweave.i18n.zh-CN.name": "后端服务工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "mem-retrieval",
+      "name": "检索索引工程师",
+      "description": "负责索引构建、检索排序与召回质量，关注准确率与性能。",
+      "reportTo": "mem-lead",
+      "package": {
+        "name": "mem-retrieval",
+        "version": "0.1.0",
+        "digest": "sha256:38c822bfb2886c6997436ba945467c9d1d299b0abcd40330b0c8f59755a6539a",
+        "localReference": "/workspace/positions/bytefolk-owner/mem-lead/mem-retrieval"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/mem-retrieval/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "mem",
+        "layer": "function",
+        "color": "#D63384",
+        "roleweave.i18n.en.name": "Retrieval Engineer",
+        "roleweave.i18n.zh-CN.name": "检索索引工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "doc-backend",
+      "name": "后端服务工程师",
+      "description": "负责 doc 文档服务的后端、v1 API 与存储层。",
+      "reportTo": "doc-lead",
+      "package": {
+        "name": "doc-backend",
+        "version": "0.1.0",
+        "digest": "sha256:f1d1d0bbf8a47e64cdd8ec0984ba322a8a3fffbd87834e167eb4c9bac0ba4672",
+        "localReference": "/workspace/positions/bytefolk-owner/doc-lead/doc-backend"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/doc-backend/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "doc",
+        "layer": "function",
+        "color": "#B8C93A",
+        "roleweave.i18n.en.name": "Backend Engineer",
+        "roleweave.i18n.zh-CN.name": "后端服务工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "doc-editor",
+      "name": "编辑器集成工程师",
+      "description": "负责协同编辑器的集成、文档渲染与上游编辑器打通。",
+      "reportTo": "doc-lead",
+      "package": {
+        "name": "doc-editor",
+        "version": "0.1.0",
+        "digest": "sha256:e2361642468193517ae531ba42e33520e22711c0421b32cbb6f7104ba356d1f3",
+        "localReference": "/workspace/positions/bytefolk-owner/doc-lead/doc-editor"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/doc-editor/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "doc",
+        "layer": "function",
+        "color": "#8FA00F",
+        "roleweave.i18n.en.name": "Editor Engineer",
+        "roleweave.i18n.zh-CN.name": "编辑器集成工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "ds-components",
+      "name": "组件前端工程师",
+      "description": "负责 @fullstack-ai-infra/ui 组件族（OrgTree / OrgTreeNode / PositionCard / BudgetBar 等）的实现与打包。",
+      "reportTo": "design-system-lead",
+      "package": {
+        "name": "ds-components",
+        "version": "0.1.0",
+        "digest": "sha256:84f457ad7c197291d8e5fc43bd7defbec13f431b56413be36c85ae55cdfc64b6",
+        "localReference": "/workspace/positions/bytefolk-owner/design-system-lead/ds-components"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/ds-components/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "design-system",
+        "layer": "function",
+        "color": "#C94FB5",
+        "roleweave.i18n.en.name": "Component Engineer",
+        "roleweave.i18n.zh-CN.name": "组件前端工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "ds-visual",
+      "name": "视觉设计师",
+      "description": "负责设计 tokens、视觉规范与组件外观，保证跨仓库一致的视觉语言。",
+      "reportTo": "design-system-lead",
+      "package": {
+        "name": "ds-visual",
+        "version": "0.1.0",
+        "digest": "sha256:01fb7898af786e8d1654d44aef2d19427a222e72ff760fb6e0868d4b93191e45",
+        "localReference": "/workspace/positions/bytefolk-owner/design-system-lead/ds-visual"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/ds-visual/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "design-system",
+        "layer": "function",
+        "color": "#9D0E8B",
+        "roleweave.i18n.en.name": "Visual Designer",
+        "roleweave.i18n.zh-CN.name": "视觉设计师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "ds-docs",
+      "name": "文档工程师",
+      "description": "负责组件文档、用法示例与设计规范说明的编写与维护。",
+      "reportTo": "design-system-lead",
+      "package": {
+        "name": "ds-docs",
+        "version": "0.1.0",
+        "digest": "sha256:6e690c9349c061192eaf15bf5071d5ec8e6002028e0844a884f04f126d31c779",
+        "localReference": "/workspace/positions/bytefolk-owner/design-system-lead/ds-docs"
+      },
+      "mode": "approval_required",
+      "memoryScope": "./work/ds-docs/",
+      "toolAllow": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [],
+      "metadata": {
+        "project": "design-system",
+        "layer": "function",
+        "color": "#D77CCB",
+        "roleweave.i18n.en.name": "Docs Engineer",
+        "roleweave.i18n.zh-CN.name": "文档工程师"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-09-20T00:00:00.000Z"
+}

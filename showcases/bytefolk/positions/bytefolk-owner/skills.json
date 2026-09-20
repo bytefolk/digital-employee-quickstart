@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "workbench-skills.v1",
+  "defaultEffect": "deny",
+  "skills": [
+    {
+      "id": "issue-research",
+      "name": "Issue 调研",
+      "description": "梳理 Issue / PR，输出带证据的研究结论。"
+    },
+    {
+      "id": "docs-review",
+      "name": "文档审校",
+      "description": "检查文档的准确性、结构和可执行性。"
+    },
+    {
+      "id": "release-notes",
+      "name": "发布说明",
+      "description": "从变更记录整理面向用户的发布说明。"
+    }
+  ]
+}

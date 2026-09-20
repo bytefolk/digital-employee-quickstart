@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "dep-framework",
+  "version": "0.1.0",
+  "description": "负责平台层框架、服务编排与跨仓库共享契约的落地。",
+  "license": "Apache-2.0",
+  "authors": [
+    "ByteFolk"
+  ],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": []
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json"
+  },
+  "policy": {
+    "mode": "approval_required",
+    "network": "deny",
+    "filesystem": {
+      "read": [
+        "./knowledge/**",
+        "./context/**"
+      ],
+      "write": [
+        "./work/dep-framework/**"
+      ]
+    },
+    "mcpTools": []
+  },
+  "assets": [
+    "./knowledge/README.md",
+    "./permissions.json",
+    "./skills.json",
+    "./mcp.json",
+    "./evals/cases.json"
+  ]
+}

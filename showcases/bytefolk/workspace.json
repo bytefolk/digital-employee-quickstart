@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/workspace.schema.json",
+  "schemaVersion": "workspace.v1alpha1",
+  "name": "bytefolk",
+  "description": "A portable public showcase of the ByteFolk open-source organization: 1 owner, 7 project leads, and 20 specialist positions.",
+  "template": "blank-project",
+  "createdAt": "2026-09-20T00:00:00.000Z",
+  "organization": "./organization.v1alpha1.json",
+  "positions": "./positions",
+  "context": "./context"
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "workbench-permissions.v1",
+  "model": "chmod-inspired",
+  "defaultEffect": "deny",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob"
+  ],
+  "rules": [],
+  "skills": [],
+  "mcpServers": []
+}

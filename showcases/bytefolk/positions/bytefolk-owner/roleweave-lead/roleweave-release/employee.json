@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "roleweave-release",
+  "version": "0.1.0",
+  "description": "负责版本规划、release notes、多渠道发布（macOS DMG/ZIP、Windows EXE）与发布公告的起草。",
+  "license": "Apache-2.0",
+  "authors": [
+    "ByteFolk"
+  ],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": []
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json"
+  },
+  "policy": {
+    "mode": "approval_required",
+    "network": "deny",
+    "filesystem": {
+      "read": [
+        "./knowledge/**",
+        "./context/**"
+      ],
+      "write": [
+        "./work/roleweave-release/**"
+      ]
+    },
+    "mcpTools": []
+  },
+  "assets": [
+    "./knowledge/README.md",
+    "./permissions.json",
+    "./skills.json",
+    "./mcp.json",
+    "./evals/cases.json"
+  ]
+}

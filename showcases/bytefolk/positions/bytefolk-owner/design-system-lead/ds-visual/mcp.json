@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "workbench-mcp.v1",
+  "defaultEffect": "deny",
+  "servers": [
+    {
+      "id": "workspace-drive",
+      "name": "工作区网盘",
+      "description": "读取已接入的组织共享资料。",
+      "tools": [
+        "list",
+        "read"
+      ]
+    }
+  ]
+}

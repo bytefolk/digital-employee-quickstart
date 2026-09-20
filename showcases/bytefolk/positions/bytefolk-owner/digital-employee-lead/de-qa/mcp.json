@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "workbench-mcp.v1",
+  "defaultEffect": "deny",
+  "servers": [
+    {
+      "id": "issue-tracker",
+      "name": "Issue 跟踪",
+      "description": "搜索和读取已接入的 Issue / PR 数据。",
+      "tools": [
+        "search",
+        "read"
+      ]
+    }
+  ]
+}
