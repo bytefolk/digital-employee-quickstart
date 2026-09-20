@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "workbench-mcp.v1",
+  "defaultEffect": "deny",
+  "servers": [
+    {
+      "id": "issue-tracker",
+      "name": "Issue 跟踪",
+      "description": "搜索和读取已接入的 Issue / PR 数据。",
+      "tools": [
+        "search",
+        "read"
+      ]
+    },
+    {
+      "id": "repository",
+      "name": "代码仓库",
+      "description": "搜索和读取已接入的代码仓库内容。",
+      "tools": [
+        "search",
+        "read"
+      ]
+    },
+    {
+      "id": "workspace-drive",
+      "name": "工作区网盘",
+      "description": "读取已接入的组织共享资料。",
+      "tools": [
+        "list",
+        "read"
+      ]
+    }
+  ]
+}

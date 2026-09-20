@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "workbench-skills.v1",
+  "defaultEffect": "deny",
+  "skills": [
+    {
+      "id": "issue-research",
+      "name": "Issue 调研",
+      "description": "梳理 Issue / PR，输出带证据的研究结论。"
+    }
+  ]
+}

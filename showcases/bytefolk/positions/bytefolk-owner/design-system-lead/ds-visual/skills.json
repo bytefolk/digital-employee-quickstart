@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "workbench-skills.v1",
+  "defaultEffect": "deny",
+  "skills": [
+    {
+      "id": "docs-review",
+      "name": "文档审校",
+      "description": "检查文档的准确性、结构和可执行性。"
+    }
+  ]
+}

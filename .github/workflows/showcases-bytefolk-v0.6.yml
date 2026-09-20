@@ -1,0 +1,94 @@
+name: Showcase ByteFolk v0.6 contract
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Showcase ByteFolk v0.6 contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require Node.js 20 or newer
+        run: |
+          node --version
+          node -e 'if (Number(process.versions.node.split(".")[0]) < 20) process.exit(1)'
+
+      - name: Verify ByteFolk workspace and position contracts
+        env:
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.6.0"
+          npm_config_loglevel: silent
+        run: |
+          set -euo pipefail
+          tree_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee org tree showcases/bytefolk --json)"
+          node -e '
+            const result = JSON.parse(process.argv[1]);
+            if (result.schemaVersion !== "org-tree.v1" || result.positionCount !== 28 || result.depth !== 3) process.exit(1);
+          ' "$tree_json"
+
+          packages=0
+          cases=0
+          while IFS= read -r -d '' manifest; do
+            package_dir="$(dirname "$manifest")"
+            validate_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+              digital-employee validate "$package_dir" --json)"
+            node -e 'const r = JSON.parse(process.argv[1]); if (r.status !== "valid") process.exit(1);' "$validate_json"
+
+            eval_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+              digital-employee eval "$package_dir" --json)"
+            passed="$(node -e '
+              const r = JSON.parse(process.argv[1]);
+              if (r.status !== "passed" || r.summary.failed !== 0) process.exit(1);
+              process.stdout.write(String(r.summary.passed));
+            ' "$eval_json")"
+            packages=$((packages + 1))
+            cases=$((cases + passed))
+          done < <(find showcases/bytefolk/positions -name employee.json -print0)
+          test "$packages" -eq 28
+          test "$cases" -eq 28
+
+          workspace_copy="$(mktemp -d)/bytefolk"
+          cp -R showcases/bytefolk "$workspace_copy"
+          before_digest="$(shasum -a 256 "$workspace_copy/organization.v1alpha1.json" | cut -d ' ' -f 1)"
+          apply_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee org apply "$workspace_copy" --json)"
+          node -e '
+            const r = JSON.parse(process.argv[1]);
+            if (r.status !== "applied" || r.positions !== 28 || r.changes.moved.length !== 0) process.exit(1);
+          ' "$apply_json"
+          after_digest="$(shasum -a 256 "$workspace_copy/organization.v1alpha1.json" | cut -d ' ' -f 1)"
+          test "$before_digest" = "$after_digest"
+
+          set +e
+          write_scope="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee org scope roleweave-desktop "$workspace_copy" --tool Write --json)"
+          write_exit=$?
+          set -e
+          test "$write_exit" -ne 0
+          node -e '
+            const r = JSON.parse(process.argv[1]);
+            if (r.status !== "denied" || r.code !== "workspace_org_authority_denied") process.exit(1);
+          ' "$write_scope"
+
+          printf 'ByteFolk v0.6.0: tree=28/depth-3, validate=%s/28, eval=%s/28, apply=stable, Write=denied\n' \
+            "$packages" "$cases"
+
+      - name: Reject private or runtime content
+        run: |
+          set -euo pipefail
+          test -z "$(find showcases/bytefolk -type d \( -name .digital-employee -o -name .workbench -o -name work \) -print -quit)"
+          if grep -rnEi '(/Users/[a-z]|api[_-]?key|BEGIN [A-Z ]*PRIVATE KEY|atatech\.org|alibaba-inc\.com)' \
+            showcases/bytefolk; then
+            echo 'Found credential, internal path, or personal identifier patterns in the showcase.' >&2
+            exit 1
+          fi

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "de-cli",
+  "version": "0.1.0",
+  "description": "负责 CLI 命令、参数解析、locale 词条与退出码语义（含非法输入显式失败）。",
+  "license": "Apache-2.0",
+  "authors": [
+    "ByteFolk"
+  ],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": []
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json"
+  },
+  "policy": {
+    "mode": "read_only",
+    "network": "deny",
+    "filesystem": {
+      "read": [
+        "./knowledge/**",
+        "./context/**"
+      ],
+      "write": []
+    },
+    "mcpTools": []
+  },
+  "assets": [
+    "./knowledge/README.md",
+    "./permissions.json",
+    "./skills.json",
+    "./mcp.json",
+    "./evals/cases.json"
+  ]
+}

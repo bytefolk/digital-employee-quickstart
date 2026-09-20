@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "digital-employee-lead",
+  "version": "0.1.0",
+  "description": "统筹「digital-employee」项目组的目标拆解、任务分配与产出把关；把明确的工作拆给组内职能岗，只读协调、复核结论，不亲自落盘、不改代码。主要面向 digital-employee 仓库。",
+  "license": "Apache-2.0",
+  "authors": [
+    "ByteFolk"
+  ],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": []
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json"
+  },
+  "policy": {
+    "mode": "read_only",
+    "network": "deny",
+    "filesystem": {
+      "read": [
+        "./knowledge/**",
+        "./context/**"
+      ],
+      "write": []
+    },
+    "mcpTools": []
+  },
+  "assets": [
+    "./knowledge/README.md",
+    "./permissions.json",
+    "./skills.json",
+    "./mcp.json",
+    "./evals/cases.json"
+  ]
+}
