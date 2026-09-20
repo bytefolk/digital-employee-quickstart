@@ -4,8 +4,6 @@
   "defaultEffect": "deny",
   "tools": [
     "Read",
-    "Write",
-    "Edit",
     "Grep",
     "Glob"
   ],
@@ -22,14 +20,6 @@
       "resource": "./context/**",
       "actions": [
         "read"
-      ]
-    },
-    {
-      "scope": "workspace",
-      "resource": "./work/dep-framework/**",
-      "actions": [
-        "read",
-        "write"
       ]
     }
   ],

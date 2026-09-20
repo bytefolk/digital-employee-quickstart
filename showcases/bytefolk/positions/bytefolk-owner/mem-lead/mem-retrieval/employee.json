@@ -18,16 +18,14 @@
     "outputSchema": "./schemas/output.schema.json"
   },
   "policy": {
-    "mode": "approval_required",
+    "mode": "read_only",
     "network": "deny",
     "filesystem": {
       "read": [
         "./knowledge/**",
         "./context/**"
       ],
-      "write": [
-        "./work/mem-retrieval/**"
-      ]
+      "write": []
     },
     "mcpTools": []
   },

@@ -295,12 +295,10 @@
         "digest": "sha256:f77ae6cae00cb61e5d8f44bcc5d2f6f63e1c7a0a7201d9ab6f6a191a9b57ce33",
         "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-desktop"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/roleweave-desktop/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -334,12 +332,10 @@
         "digest": "sha256:2ebc408f5dbd6229d884a6ffc4004ab74056b586f746ee442507308dcc0e9581",
         "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-renderer"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/roleweave-renderer/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -373,12 +369,10 @@
         "digest": "sha256:951e751bcc718fa5383c35b685e6b4a4b656c4ae7134e4b565b8a437bbab4b5c",
         "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-server"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/roleweave-server/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -412,12 +406,10 @@
         "digest": "sha256:08eb0788562aad924b8306db3019f808913f26930915dd1d026a5e0989d1cc8a",
         "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-design"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/roleweave-design/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -451,12 +443,10 @@
         "digest": "sha256:adfa33658148dc6956d070d9306e6f089e760372812593ea50c42ee0c945b609",
         "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-release"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/roleweave-release/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -490,12 +480,10 @@
         "digest": "sha256:0daa8f75cf70a84fa2e1853bd2d5cacb1a3c15549cd3e8d8247a66b1591d9e09",
         "localReference": "/workspace/positions/bytefolk-owner/roleweave-lead/roleweave-qa"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/roleweave-qa/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -529,12 +517,10 @@
         "digest": "sha256:cce3552d29c2eb19d5c7ffeb8f02e9ad31185c6ea771da60cdac7d765a970850",
         "localReference": "/workspace/positions/bytefolk-owner/digital-employee-lead/de-engine"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/de-engine/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -568,12 +554,10 @@
         "digest": "sha256:27c73d9a0f02741adfe68e0d0763052f580e9d971c039b6af9ff3936a2464bf8",
         "localReference": "/workspace/positions/bytefolk-owner/digital-employee-lead/de-cli"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/de-cli/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -607,12 +591,10 @@
         "digest": "sha256:92df0683dfeb9ef7702a5a556866e9b6882b83096ad8253020ce43f0d33f676e",
         "localReference": "/workspace/positions/bytefolk-owner/digital-employee-lead/de-qa"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/de-qa/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -646,12 +628,10 @@
         "digest": "sha256:32adc98692d69f758daa63688fcb2c50a2d6aa4c8ef87c9131a73bb8d8a3cbd3",
         "localReference": "/workspace/positions/bytefolk-owner/de-platform-lead/dep-framework"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/dep-framework/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -685,12 +665,10 @@
         "digest": "sha256:7cfd5456a69fca950eb423637e141b4ae23717b2a76cca0832a65c1ac24d127b",
         "localReference": "/workspace/positions/bytefolk-owner/de-platform-lead/dep-integration"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/dep-integration/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -724,12 +702,10 @@
         "digest": "sha256:a778e7c94dd00fa2f66eeada36113c13e01c6e99e44391310212ba173b85d223",
         "localReference": "/workspace/positions/bytefolk-owner/de-quickstart-lead/deq-template"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/deq-template/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -763,12 +739,10 @@
         "digest": "sha256:671292317c3d33bff6c09cc7d8ebd05385365ad2d7c8e082e57931ced2825c89",
         "localReference": "/workspace/positions/bytefolk-owner/de-quickstart-lead/deq-docs"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/deq-docs/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -802,12 +776,10 @@
         "digest": "sha256:8dff012783ef9ecda48077fe2ae3b8dd008425b1da48e5419f1be7424261b361",
         "localReference": "/workspace/positions/bytefolk-owner/mem-lead/mem-backend"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/mem-backend/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -841,12 +813,10 @@
         "digest": "sha256:38c822bfb2886c6997436ba945467c9d1d299b0abcd40330b0c8f59755a6539a",
         "localReference": "/workspace/positions/bytefolk-owner/mem-lead/mem-retrieval"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/mem-retrieval/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -880,12 +850,10 @@
         "digest": "sha256:f1d1d0bbf8a47e64cdd8ec0984ba322a8a3fffbd87834e167eb4c9bac0ba4672",
         "localReference": "/workspace/positions/bytefolk-owner/doc-lead/doc-backend"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/doc-backend/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -919,12 +887,10 @@
         "digest": "sha256:e2361642468193517ae531ba42e33520e22711c0421b32cbb6f7104ba356d1f3",
         "localReference": "/workspace/positions/bytefolk-owner/doc-lead/doc-editor"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/doc-editor/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -958,12 +924,10 @@
         "digest": "sha256:84f457ad7c197291d8e5fc43bd7defbec13f431b56413be36c85ae55cdfc64b6",
         "localReference": "/workspace/positions/bytefolk-owner/design-system-lead/ds-components"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/ds-components/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -997,12 +961,10 @@
         "digest": "sha256:01fb7898af786e8d1654d44aef2d19427a222e72ff760fb6e0868d4b93191e45",
         "localReference": "/workspace/positions/bytefolk-owner/design-system-lead/ds-visual"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/ds-visual/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],
@@ -1036,12 +998,10 @@
         "digest": "sha256:6e690c9349c061192eaf15bf5071d5ec8e6002028e0844a884f04f126d31c779",
         "localReference": "/workspace/positions/bytefolk-owner/design-system-lead/ds-docs"
       },
-      "mode": "approval_required",
+      "mode": "read_only",
       "memoryScope": "./work/ds-docs/",
       "toolAllow": [
         "Read",
-        "Write",
-        "Edit",
         "Grep",
         "Glob"
       ],

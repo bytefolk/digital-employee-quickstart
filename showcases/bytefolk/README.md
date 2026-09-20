@@ -17,7 +17,7 @@ ByteFolk Owner (CEO)
 └── Design System team (1 + 3)
 ```
 
-There are 28 positions: one organization owner, seven project leads, and twenty specialist positions. Lead positions are `read_only`; specialist positions use `approval_required`, so writes and external actions still require approval.
+There are 28 positions: one organization owner, seven project leads, and twenty specialist positions. Lead positions are `read_only`; specialist positions also run as `read_only`. The pinned CLI v0.6.0 denies `Write` / `Edit`, so this showcase does not claim approval-gated writes.
 
 ## Public boundary
 

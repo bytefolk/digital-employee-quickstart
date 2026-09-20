@@ -23,7 +23,7 @@
 
 1. 建 `work/<岗位id>/` 领地目录；
 2. 将上方领地声明写入其 SKILL.md；
-3. 权限最小化：`toolAllow` 默认 `Read/Grep/Glob`；需要落盘产出再加 `Edit/Write`；**默认不给 `Bash`**——无 shell 才能保证领地约定不可被 shell 命令绕过；
+3. 权限最小化：当前固定 CLI v0.6.0 下，公开案例统一使用 `Read/Grep/Glob`，不给 `Edit/Write/Bash`；需要落盘的工作交由人工或未来明确支持审批写入的运行时处理；
 4. `memoryScope` 记账为 `./work/<岗位id>/`（当前引擎版本的路径闸门为固定派生，不读此字段；保留作身份与规划标识）；
 5. 预算按任务体量设定 `perTask` / `perDay`，默认从紧。
 

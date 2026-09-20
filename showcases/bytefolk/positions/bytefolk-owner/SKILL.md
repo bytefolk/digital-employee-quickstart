@@ -19,7 +19,7 @@ description: "负责「bytefolk」的整体目标、任务分配和最终确认�
 
 1. 建 `work/<岗位id>/` 领地目录；
 2. 把 `context/workspace-conventions.md` 中的领地声明写入新岗位 SKILL.md；
-3. `toolAllow` 默认 `Read/Grep/Glob`，需落盘再加 `Edit/Write`，默认禁 `Bash`；
+3. 当前固定 CLI v0.6.0 下，`toolAllow` 统一为 `Read/Grep/Glob`，不添加 `Edit/Write/Bash`；
 4. `memoryScope` 记账为 `./work/<岗位id>/`；预算从紧。
 
 ## 已启用 Skill
