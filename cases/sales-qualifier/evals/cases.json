@@ -358,6 +358,96 @@
       }
     },
     {
+      "id": "needs-info-no-customer-profile",
+      "input": {
+        "inquiry": {
+          "rawMessage": "A vendor recommended you. We want to replace our manual ticketing queue and we are comparing two or three options right now. I can sign off on the purchase once I have seen a demo.",
+          "channel": "chat",
+          "language": "en",
+          "receivedAt": "2026-09-12T10:00:00Z"
+        },
+        "enterpriseContext": {
+          "schemaVersion": "sales-context.v1alpha1",
+          "productCatalog": {
+            "asOf": "2026-09-11T00:00:00Z",
+            "items": [
+              { "sku": "TIX-STD", "name": "Ticketing Standard", "category": "operations", "priceBand": "mid", "inStock": true }
+            ]
+          }
+        }
+      },
+      "expectedOutput": {
+        "status": "needs_info",
+        "requiresApproval": true,
+        "proposal": {
+          "qualification": { "budget": "unknown", "authority": "unknown", "need": "explicit", "timeline": "unknown" },
+          "nextAction": {
+            "intent": "send_discovery_questions",
+            "rationale": "The need is explicit and a self-described approver is present, but no customerProfile block was supplied, so authority must stay unknown and no tier or VIP assumption may be made; discovery questions come first.",
+            "draftTalkingPoints": [
+              "Ask which ticketing volumes and handoffs are causing the most pain today.",
+              "Ask which other teams would need to sign off before a decision."
+            ]
+          },
+          "confidence": "medium",
+          "evidence": [
+            { "source": "inquiry", "excerpt": "I can sign off on the purchase once I have seen a demo." },
+            { "source": "knowledge", "excerpt": "customerProfile absent forces authority to unknown and forbids VIP or tier assumptions." }
+          ],
+          "missingFields": ["budget", "authority", "timeline", "company_profile"],
+          "risks": [{ "kind": "missing_data", "note": "customerProfile absent; authority defaults to unknown and no tier assumption is permitted." }]
+        }
+      }
+    },
+    {
+      "id": "qualified-stale-one-eighty-days",
+      "input": {
+        "inquiry": {
+          "rawMessage": "We are a regional distributor and our warehouse staff still key orders in by hand. I am the operations director with budget authority and we want to run a pilot this quarter. Please get in touch.",
+          "channel": "email",
+          "language": "en",
+          "receivedAt": "2026-09-13T09:00:00Z"
+        },
+        "enterpriseContext": {
+          "schemaVersion": "sales-context.v1alpha1",
+          "customerProfile": {
+            "asOf": "2026-03-01T00:00:00Z",
+            "industry": "distribution",
+            "companySize": "mid",
+            "tier": "prospect"
+          },
+          "productCatalog": {
+            "asOf": "2026-02-20T00:00:00Z",
+            "items": [
+              { "sku": "ORD-STD", "name": "Order Entry Automation", "category": "operations", "priceBand": "mid", "inStock": true }
+            ]
+          }
+        }
+      },
+      "expectedOutput": {
+        "status": "qualified",
+        "requiresApproval": true,
+        "proposal": {
+          "qualification": { "budget": "known", "authority": "confirmed", "need": "explicit", "timeline": "quarter" },
+          "nextAction": {
+            "intent": "schedule_call",
+            "rationale": "Budget, authority, need, and timeline are all present in the inquiry, but the enterprise snapshots are more than six months old, so confidence is forced to low and a human must refresh the data before acting.",
+            "draftTalkingPoints": [
+              "Confirm the current order volume the warehouse team handles by hand.",
+              "Ask the director to reconfirm that budget authority still sits with them."
+            ]
+          },
+          "confidence": "low",
+          "evidence": [
+            { "source": "inquiry", "excerpt": "I am the operations director with budget authority and we want to run a pilot this quarter." },
+            { "source": "enterpriseContext", "excerpt": "customerProfile snapshot.", "asOf": "2026-03-01T00:00:00Z" }
+          ],
+          "missingFields": [],
+          "risks": [{ "kind": "stale_data", "note": "customerProfile and productCatalog asOf are more than one hundred eighty days before receivedAt; confidence is forced to low." }]
+        }
+      }
+    },
+    {
       "id": "qualified-referral-urgent",
       "input": {
         "inquiry": {
