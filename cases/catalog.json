@@ -37,6 +37,15 @@
       "outcome": "Answer product and pricing questions from public product documentation.",
       "boundaries": ["read-only", "must not invent unavailable product details", "must cite source documents"],
       "supportsDesktopWorkspace": false
+    },
+    {
+      "id": "sales-qualifier",
+      "path": "cases/sales-qualifier",
+      "category": "structured-proposal",
+      "audience": "revenue teams",
+      "outcome": "Turn a raw sales inquiry, plus optional caller-supplied enterprise context, into a structured qualification proposal with a next best action for human review.",
+      "boundaries": ["read-only", "never sends messages", "never quotes prices or commits delivery dates", "requires human approval", "degrades conservatively when enterprise data is missing or stale"],
+      "supportsDesktopWorkspace": false
     }
   ]
 }

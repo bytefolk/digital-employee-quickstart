@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "sales-qualifier",
+  "version": "1.0.0",
+  "description": "Read-only sales qualification employee: turns a raw inquiry plus optional caller-supplied enterprise context into a structured qualification proposal. Never sends, never quotes, never commits; always requires human approval.",
+  "license": "Apache-2.0",
+  "authors": ["ByteFolk"],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": ["structured_output"]
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json"
+  },
+  "policy": {
+    "mode": "read_only",
+    "network": "deny",
+    "filesystem": { "read": ["./knowledge/**"], "write": [] },
+    "mcpTools": []
+  },
+  "assets": [
+    "./knowledge/qualification-framework.md",
+    "./knowledge/objection-patterns.md",
+    "./knowledge/next-best-action-catalog.md",
+    "./evals/cases.json"
+  ]
+}

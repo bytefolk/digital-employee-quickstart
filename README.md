@@ -73,6 +73,7 @@ local absolute paths.
 | [`hr-onboarding`](cases/hr-onboarding/) | HR onboarding | Guides new hires through processes, benefits, office logistics |
 | [`ops-approval`](cases/ops-approval/) | Ops approval proposals | Turns requests into structured proposals — never executes |
 | [`product-faq`](cases/product-faq/) | Product FAQ | Customer-facing product questions from public docs |
+| [`sales-qualifier`](cases/sales-qualifier/) | Sales qualification | Turns a raw inquiry into a structured qualification proposal — never sends, never quotes, requires approval. Optional [`enterpriseContext`](docs/adapters/sales-qualifier-enterprise-context.md) lets a company wire in its own CRM data caller-side |
 
 Run the same credential-free checks against any case:
 
