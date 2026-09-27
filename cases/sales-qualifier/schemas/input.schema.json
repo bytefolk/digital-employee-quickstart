@@ -7,7 +7,7 @@
     "inquiry": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["rawMessage"],
+      "required": ["rawMessage", "receivedAt"],
       "properties": {
         "rawMessage": { "type": "string", "minLength": 1, "maxLength": 20000 },
         "channel": {
@@ -21,6 +21,7 @@
       "description": "Optional. Populated by a caller-side adapter (see docs/adapters/sales-qualifier-enterprise-context.md). The package itself stays offline and never fetches this data. Every block carries its own asOf so the Skill can degrade explicitly when data is missing or stale.",
       "type": "object",
       "additionalProperties": false,
+      "required": ["schemaVersion"],
       "properties": {
         "schemaVersion": { "const": "sales-context.v1alpha1" },
         "customerProfile": {

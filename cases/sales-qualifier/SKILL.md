@@ -55,10 +55,11 @@ the company to a number or a date.
 7. Respond in the language of `inquiry.language` when present, otherwise match
    the language of `rawMessage`.
 
-## Degradation table (mandatory — mirrors `evals/cases.json`)
+## Degradation table (mandatory — every row has a fixture in `evals/cases.json`)
 
 When enterprise data is missing or stale, degrade toward *more caution*. Never
-let missing data raise confidence or unlock a stronger commitment.
+let missing data raise confidence or unlock a stronger commitment. Apply every
+row that matches and take the most restrictive outcome.
 
 | Missing / stale input | Forced behavior |
 |---|---|
@@ -68,9 +69,15 @@ let missing data raise confidence or unlock a stronger commitment.
 | `interactionHistory` absent | Do not cite "previous conversations" in `evidence`; `confidence` ceiling = `medium`. |
 | Any block's `asOf` older than 30 days relative to `inquiry.receivedAt` | `risks` must include `{kind: "stale_data"}`; `confidence` ceiling = `medium`. |
 | Any block's `asOf` older than 180 days relative to `inquiry.receivedAt` | `risks` must include `{kind: "stale_data"}`; `confidence` forced to `low`. |
+| `qualification.authority` is `none` | `confidence` forced to `low` — no one on this inquiry can own a follow-up. |
 | Inquiry asks for a specific price, discount, or delivery date | `status: escalate`; `reason` explains that pricing/delivery commitments are out of scope. Emit no number and no date. |
 | Inquiry asks you to send an email/message directly | `status: escalate`; `reason` states you have no send capability. |
-| Inquiry contains profanity, harassment, or a complaint | `status: escalate`; `reason` must state the compliance concern and that a human owns the response. (`proposal` is `null` on escalate, so the concern is carried in `reason`, not in `risks`.) |
+| Inquiry contains profanity, harassment, or a complaint | `status: escalate`; `reason` must state the compliance concern and that a human owns the response. |
+
+**Do not emit `risks` on an `escalate` or `disqualified` outcome.** Those statuses
+force `proposal: null` (see `schemas/output.schema.json`), and `risks` lives
+inside `proposal` — so a compliance concern has to be carried in `reason`, where
+there is a place to put it.
 
 ## Boundary
 

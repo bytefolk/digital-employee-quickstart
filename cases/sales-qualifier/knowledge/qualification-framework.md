@@ -72,9 +72,14 @@ Is a hard prohibition triggered (price / date / direct-send / compliance)?
 |---|---|
 | `high` | All four BANT dimensions have affirmative evidence and no degradation ceiling applies. |
 | `medium` | At least one dimension is `unknown`/`unclear`, **or** a 30-day staleness ceiling applies, **or** `interactionHistory` is absent. |
-| `low` | `enterpriseContext` is entirely absent, **or** a 180-day staleness rule applies, **or** the inquiry alone is thin. |
+| `low` | `enterpriseContext` is entirely absent, **or** a 180-day staleness rule applies, **or** `authority` is `none`, **or** the inquiry alone is thin. |
 
-Confidence is a ceiling-aware value: degradation rules can only lower it.
+`authority: none` forces `low` on its own: a sender who has stated they cannot
+decide leaves no owner for a follow-up, so even a well-specified need cannot be
+carried forward on this inquiry alone.
+
+Confidence is a ceiling-aware value: degradation rules can only lower it. Apply
+every rule that matches and take the **lowest** result.
 
 ## Evidence discipline
 
