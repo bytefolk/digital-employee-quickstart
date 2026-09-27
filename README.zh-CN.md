@@ -66,6 +66,7 @@ eval: passed (3/3) | failed
 | [`hr-onboarding`](cases/hr-onboarding/) | HR 入职引导 | 引导新人了解流程、福利、办公指南 |
 | [`ops-approval`](cases/ops-approval/) | 运维审批提案 | 把请求转成结构化提案——只提案不执行 |
 | [`product-faq`](cases/product-faq/) | 产品 FAQ | 面向客户的产品问答，从公开文档回答 |
+| [`sales-qualifier`](cases/sales-qualifier/) | 销售资格评估 | 把原始询盘转成结构化资格提案——不发消息、不报价、不承诺交期，须人工审批。可选 [`enterpriseContext`](docs/adapters/sales-qualifier-enterprise-context.md) 让企业在调用侧接入自己的 CRM 数据 |
 
 对其他案例执行同样的无凭据检查：
 

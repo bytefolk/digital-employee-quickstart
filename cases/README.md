@@ -31,6 +31,7 @@ deploy 指引。完成或失败后，只在
 | `hr-onboarding/` | HR 入职引导（多文档知识源） | 是 |
 | `ops-approval/` | 运维审批提案（结构化输出） | 是 |
 | `product-faq/` | 产品 FAQ（对外客服场景） | 是 |
+| `sales-qualifier/` | 销售资格评估（结构化提案，企业数据走调用侧 `enterpriseContext`） | 是 |
 
 ## 案例规范
 
