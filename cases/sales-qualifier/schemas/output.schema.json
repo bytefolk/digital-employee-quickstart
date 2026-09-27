@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "requiresApproval", "proposal"],
+  "properties": {
+    "status": {
+      "enum": ["qualified", "needs_info", "disqualified", "escalate"]
+    },
+    "requiresApproval": { "const": true },
+    "proposal": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["qualification", "nextAction", "confidence", "evidence"],
+      "properties": {
+        "qualification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["budget", "authority", "need", "timeline"],
+          "properties": {
+            "budget": { "enum": ["known", "unknown", "insufficient", "not_applicable"] },
+            "authority": { "enum": ["confirmed", "likely", "unknown", "none"] },
+            "need": { "enum": ["explicit", "implicit", "unclear", "none"] },
+            "timeline": { "enum": ["immediate", "quarter", "half_year", "unknown", "none"] }
+          }
+        },
+        "nextAction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["intent"],
+          "properties": {
+            "intent": {
+              "enum": [
+                "send_discovery_questions",
+                "schedule_call",
+                "send_product_info",
+                "prepare_quote_request",
+                "escalate_to_human",
+                "nurture_sequence",
+                "disqualify_with_reason"
+              ]
+            },
+            "rationale": { "type": "string", "minLength": 1, "maxLength": 2000 },
+            "draftTalkingPoints": {
+              "type": "array",
+              "maxItems": 8,
+              "items": { "type": "string", "maxLength": 500 }
+            }
+          }
+        },
+        "confidence": { "enum": ["high", "medium", "low"] },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source"],
+            "properties": {
+              "source": { "enum": ["inquiry", "knowledge", "enterpriseContext"] },
+              "excerpt": { "type": "string", "maxLength": 500 },
+              "asOf": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "missingFields": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "type": "string", "maxLength": 120 }
+        },
+        "risks": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind"],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "stale_data",
+                  "missing_data",
+                  "price_pressure",
+                  "timeline_mismatch",
+                  "authority_unclear",
+                  "compliance",
+                  "other"
+                ]
+              },
+              "note": { "type": "string", "maxLength": 500 }
+            }
+          }
+        }
+      }
+    },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 2000 }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "enum": ["qualified", "needs_info"] } }
+      },
+      "then": {
+        "properties": { "proposal": { "type": "object" } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "status": { "enum": ["disqualified", "escalate"] } }
+      },
+      "then": {
+        "required": ["reason"],
+        "properties": { "proposal": { "type": "null" } }
+      }
+    }
+  ]
+}

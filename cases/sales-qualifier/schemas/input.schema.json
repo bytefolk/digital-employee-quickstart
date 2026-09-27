@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["inquiry"],
+  "properties": {
+    "inquiry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rawMessage"],
+      "properties": {
+        "rawMessage": { "type": "string", "minLength": 1, "maxLength": 20000 },
+        "channel": {
+          "enum": ["email", "phone", "chat", "web_form", "event", "referral", "other"]
+        },
+        "language": { "type": "string", "minLength": 2, "maxLength": 8 },
+        "receivedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "enterpriseContext": {
+      "description": "Optional. Populated by a caller-side adapter (see docs/adapters/sales-qualifier-enterprise-context.md). The package itself stays offline and never fetches this data. Every block carries its own asOf so the Skill can degrade explicitly when data is missing or stale.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": { "const": "sales-context.v1alpha1" },
+        "customerProfile": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["asOf"],
+          "properties": {
+            "asOf": { "type": "string", "format": "date-time" },
+            "industry": { "type": "string", "maxLength": 120 },
+            "companySize": { "enum": ["unknown", "smb", "mid", "enterprise"] },
+            "region": { "type": "string", "maxLength": 120 },
+            "tier": { "enum": ["unknown", "prospect", "existing", "vip"] },
+            "interactionCount": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "productCatalog": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["asOf", "items"],
+          "properties": {
+            "asOf": { "type": "string", "format": "date-time" },
+            "items": {
+              "type": "array",
+              "maxItems": 200,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["sku", "name"],
+                "properties": {
+                  "sku": { "type": "string", "maxLength": 64 },
+                  "name": { "type": "string", "maxLength": 200 },
+                  "category": { "type": "string", "maxLength": 120 },
+                  "priceBand": { "enum": ["low", "mid", "high", "premium", "unknown"] },
+                  "inStock": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        },
+        "interactionHistory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["asOf", "entries"],
+          "properties": {
+            "asOf": { "type": "string", "format": "date-time" },
+            "entries": {
+              "type": "array",
+              "maxItems": 50,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["at", "kind"],
+                "properties": {
+                  "at": { "type": "string", "format": "date-time" },
+                  "kind": {
+                    "enum": ["call", "email", "meeting", "demo", "quote_sent", "objection", "other"]
+                  },
+                  "summary": { "type": "string", "maxLength": 500 }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
