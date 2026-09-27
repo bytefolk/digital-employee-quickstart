@@ -9,9 +9,9 @@ closed: do not synthesize a new intent, and do not combine two.
 | `schedule_call` | Propose a discovery or qualification call with a human rep. | Always allowed. |
 | `send_product_info` | Propose sending public product material that matches an expressed need. | **Requires `productCatalog`** in `enterpriseContext`. Blocked by degradation when absent. |
 | `prepare_quote_request` | Propose that a human prepare a formal quote (internal hand-off). **This never produces a price.** | **Requires `productCatalog`** and `qualification.need` ∈ {`explicit`, `implicit`}. |
-| `escalate_to_human` | Route to a person because a policy boundary was hit. | Used with `status: escalate`; `proposal` is `null` in that case, so this intent appears only when a proposal still exists but a human must own the next step. |
+| `escalate_to_human` | Route to a person because a policy boundary was hit while a proposal still exists (e.g. timeline is immediate but feasibility is unconfirmed). | `proposal` is non-null and a policy concern prevents auto-proceeding. Not used with `status: escalate` (that path sets `proposal: null` and carries the concern in `reason`). |
 | `nurture_sequence` | Propose adding the contact to a long-term follow-up cadence. | Use when `timeline` ∈ {`half_year`, `unknown`} but need is real. |
-| `disqualify_with_reason` | Record a disqualification for the human to confirm. | Used with `status: disqualified`; `proposal` is `null` in that case. |
+| `disqualify_with_reason` | Record a disqualification for the human to confirm. | `status: disqualified`. `proposal` is `null` in that case; the reason is carried in `reason`. |
 
 ## Rules
 

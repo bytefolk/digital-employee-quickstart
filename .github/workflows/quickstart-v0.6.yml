@@ -74,8 +74,8 @@ jobs:
               "$case_dir" "$passed" "$passed"
           done
 
-          test "$total" -eq 27
-          printf 'Public v0.6.0 matrix: validate=5/5, eval=%s/27\n' "$total"
+          test "$total" -eq 29
+          printf 'Public v0.6.0 matrix: validate=5/5, eval=%s/29\n' "$total"
 
       - name: Smoke-test public init path
         env:

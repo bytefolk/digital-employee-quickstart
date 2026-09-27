@@ -9,13 +9,13 @@ send.
 
 | Pattern | Signal in the inquiry | Suggested talking-point shape (draft, human-owned) |
 |---|---|---|
-| `price_first` | "How much?", "Send me pricing" | Acknowledge the question, explain that fit comes before figure, propose a short scoping call. **Do not include a number.** |
+| `price_first` | "How much?", "Send me pricing" | **Do not draft talking points.** Per the degradation table, a pricing demand forces `status: escalate` with `proposal: null`; route to a human instead. |
 | `just_researching` | "Gathering options", "No timeline yet" | Thank them, offer a concise capability overview, propose a low-pressure follow-up window. |
 | `competitor_compare` | "How are you better than X?" | Avoid naming or disparaging competitors; map the expressed need to a capability; propose a technical deep-dive. |
 | `need_clarification` | Vague or one-line request | Ask at most three targeted discovery questions drawn from `missingFields`. |
 | `urgency` | "ASAP", "Live blocker", a hard deadline this cycle | Acknowledge urgency, propose the fastest human-owned path (call), flag `timeline: immediate`. **Do not promise a delivery date.** |
 | `authority_gap` | Sender cannot decide | Offer material the sender can forward; propose involving the decision maker. |
-| `complaint` | Frustration, a service failure, profanity | Do not argue. Set `status: escalate` with `risks: [{kind: "compliance"}]`; a human owns the response. |
+| `complaint` | Frustration, a service failure, profanity | Do not argue. Set `status: escalate` with `proposal: null`; put the compliance concern in `reason`, not in `risks`. A human owns the response. |
 | `out_of_scope` | Request unrelated to the catalog | Set `status: disqualified` with a clear `reason`; do not stretch the catalog. |
 
 ## Drafting rules

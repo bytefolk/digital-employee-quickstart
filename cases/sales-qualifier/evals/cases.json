@@ -330,13 +330,99 @@
               "Ask who owns tooling decisions on the marketing team."
             ]
           },
-          "confidence": "low",
+          "confidence": "medium",
           "evidence": [
             { "source": "inquiry", "excerpt": "I am not sure who decides." },
             { "source": "knowledge", "excerpt": "Authority none means a decision maker must be identified before qualification." }
           ],
           "missingFields": ["authority", "budget", "timeline", "decision_maker"],
           "risks": [{ "kind": "authority_unclear", "note": "Sender is an intern and cannot decide." }]
+        }
+      }
+    },
+    {
+      "id": "needs-info-no-profile",
+      "input": {
+        "inquiry": {
+          "rawMessage": "We are looking at automation tools for our supply chain. Can you tell me more about your enterprise offering?",
+          "channel": "email",
+          "language": "en",
+          "receivedAt": "2026-09-12T10:00:00Z"
+        },
+        "enterpriseContext": {
+          "schemaVersion": "sales-context.v1alpha1",
+          "productCatalog": {
+            "asOf": "2026-09-10T00:00:00Z",
+            "items": [
+              { "sku": "AUTO-ENT", "name": "Task Automation Enterprise", "category": "automation", "priceBand": "premium", "inStock": true }
+            ]
+          }
+        }
+      },
+      "expectedOutput": {
+        "status": "needs_info",
+        "requiresApproval": true,
+        "proposal": {
+          "qualification": { "budget": "unknown", "authority": "unknown", "need": "implicit", "timeline": "unknown" },
+          "nextAction": {
+            "intent": "send_discovery_questions",
+            "rationale": "The inquiry expresses interest but customerProfile is absent, so authority must be unknown and no tier assumption is made; discovery questions come first.",
+            "draftTalkingPoints": [
+              "Ask which supply-chain workflows the team wants to automate.",
+              "Ask who on the sender's side evaluates and signs off on tooling."
+            ]
+          },
+          "confidence": "medium",
+          "evidence": [
+            { "source": "inquiry", "excerpt": "We are looking at automation tools for our supply chain." },
+            { "source": "knowledge", "excerpt": "Without customerProfile, authority must be unknown and no VIP or tier assumption is made." }
+          ],
+          "missingFields": ["budget", "authority", "timeline", "company_size"],
+          "risks": [{ "kind": "missing_data", "note": "customerProfile absent; authority defaults to unknown." }]
+        }
+      }
+    },
+    {
+      "id": "qualified-stale-180-days",
+      "input": {
+        "inquiry": {
+          "rawMessage": "We are a 100-person manufacturer evaluating inspection automation. I run the quality team and have budget. We need to start within the quarter.",
+          "channel": "web_form",
+          "language": "en",
+          "receivedAt": "2026-09-13T09:00:00Z"
+        },
+        "enterpriseContext": {
+          "schemaVersion": "sales-context.v1alpha1",
+          "customerProfile": {
+            "asOf": "2026-01-15T00:00:00Z",
+            "industry": "manufacturing",
+            "companySize": "mid",
+            "tier": "prospect"
+          },
+          "productCatalog": {
+            "asOf": "2026-01-10T00:00:00Z",
+            "items": [
+              { "sku": "INSP-STD", "name": "Inspection Automation Standard", "category": "quality", "priceBand": "high", "inStock": true }
+            ]
+          }
+        }
+      },
+      "expectedOutput": {
+        "status": "qualified",
+        "requiresApproval": true,
+        "proposal": {
+          "qualification": { "budget": "known", "authority": "confirmed", "need": "explicit", "timeline": "quarter" },
+          "nextAction": {
+            "intent": "schedule_call",
+            "rationale": "Strong BANT signal from the inquiry, but all enterpriseContext blocks are older than 180 days; confidence is forced to low and a human must refresh the data before proceeding."
+          },
+          "confidence": "low",
+          "evidence": [
+            { "source": "inquiry", "excerpt": "I run the quality team and have budget." },
+            { "source": "enterpriseContext", "excerpt": "customerProfile snapshot.", "asOf": "2026-01-15T00:00:00Z" }
+          ],
+          "missingFields": [],
+          "risks": [{ "kind": "stale_data", "note": "customerProfile and productCatalog asOf are more than 180 days before receivedAt; confidence forced to low." }]
         }
       }
     },

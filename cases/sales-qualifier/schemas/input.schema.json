@@ -14,13 +14,14 @@
           "enum": ["email", "phone", "chat", "web_form", "event", "referral", "other"]
         },
         "language": { "type": "string", "minLength": 2, "maxLength": 8 },
-        "receivedAt": { "type": "string", "format": "date-time" }
+        "receivedAt": { "type": "string", "format": "date-time", "description": "When absent, staleness rules (30-day / 180-day) are skipped and no stale_data risk is emitted." }
       }
     },
     "enterpriseContext": {
       "description": "Optional. Populated by a caller-side adapter (see docs/adapters/sales-qualifier-enterprise-context.md). The package itself stays offline and never fetches this data. Every block carries its own asOf so the Skill can degrade explicitly when data is missing or stale.",
       "type": "object",
       "additionalProperties": false,
+      "required": ["schemaVersion"],
       "properties": {
         "schemaVersion": { "const": "sales-context.v1alpha1" },
         "customerProfile": {
