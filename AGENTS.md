@@ -43,10 +43,11 @@ node --version
 ### 2. 选择案例
 
 ```bash
-cd cases/team-qa         # IT 团队问答
-cd cases/hr-onboarding   # HR 入职引导
-cd cases/ops-approval    # 运维审批提案
-cd cases/product-faq     # 产品 FAQ
+cd cases/team-qa          # IT 团队问答
+cd cases/hr-onboarding    # HR 入职引导
+cd cases/ops-approval     # 运维审批提案
+cd cases/product-faq      # 产品 FAQ
+cd cases/sales-qualifier  # 销售资格评估（结构化提案）
 ```
 
 ### 3. 固定公开版本并做无凭据验证
@@ -90,7 +91,10 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 - [cases/README.md](cases/README.md)
 - [框架 CLI 文档](https://github.com/bytefolk/digital-employee)
 
-`docs/` 下内容是历史部署草稿，不是 CLI `0.6.0` 的执行手册。
+`docs/` 根目录下的内容是历史部署草稿，不是 CLI `0.6.0` 的执行手册。
+
+例外：`docs/adapters/` 下的文档是**当前有效的集成契约说明**（描述调用侧如何把企业
+数据映射成某个案例的输入字段），不属于上述「历史草稿」，可以正常引用与维护。
 
 [v060-runner]: https://github.com/bytefolk/digital-employee/blob/v0.6.0/README.zh-CN.md#发布者自有机器上的-runner-路径
 [quickstart-adoption]: https://github.com/bytefolk/digital-employee-quickstart/issues/2

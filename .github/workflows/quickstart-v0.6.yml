@@ -74,8 +74,8 @@ jobs:
               "$case_dir" "$passed" "$passed"
           done
 
-          test "$total" -eq 27
-          printf 'Public v0.6.0 matrix: validate=5/5, eval=%s/27\n' "$total"
+          test "$total" -eq 29
+          printf 'Public v0.6.0 matrix: validate=5/5, eval=%s/29\n' "$total"
 
       - name: Smoke-test public init path
         env:
@@ -94,7 +94,7 @@ jobs:
       - name: Reject stale public claims and package typos
         run: |
           set -euo pipefail
-          maintained_docs=(AGENTS.md README.md README.zh-CN.md cases/README.md)
+          maintained_docs=(AGENTS.md README.md README.zh-CN.md cases/README.md docs/adapters/sales-qualifier-enterprise-context.md)
 
           if grep -nF '@fullstack-ai-infr/digital-employee' "${maintained_docs[@]}"; then
             echo 'Found the misspelled npm package name.' >&2

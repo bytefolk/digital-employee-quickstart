@@ -165,6 +165,17 @@ The package applies these automatically (see `SKILL.md`):
   `confidence` ceiling `medium` + a `stale_data` risk;
 - any block `asOf` more than **180 days** before → `confidence` forced `low`.
 
+Because these rules are measured against `inquiry.receivedAt`, that field is
+**required** in `input.schema.json`. If your adapter does not know when the
+inquiry actually arrived, pass the real arrival time from your channel rather
+than the sync time — a wrong `receivedAt` silently weakens or strengthens every
+staleness ceiling downstream.
+
+Two more ceilings come from the data rather than the clock: omitting
+`customerProfile` forces `authority: unknown` (no tier assumptions), and an
+inquiry whose sender cannot decide at all (`authority: none`) forces
+`confidence: low` regardless of how fresh your snapshots are.
+
 If your CRM sync is stale, the package gets *more* cautious, never more
 confident. Stamp `asOf` truthfully; do not refresh it just to look current.
 
