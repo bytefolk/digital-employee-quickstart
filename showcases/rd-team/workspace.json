@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/workspace.schema.json",
+  "schemaVersion": "workspace.v1alpha1",
+  "name": "rd-team",
+  "description": "Public seven-position R&D team showcase with offline contracts and synthetic teaching cases",
+  "template": "rd-team",
+  "createdAt": "2026-09-28T00:00:00Z",
+  "organization": "./organization.v1alpha1.json",
+  "positions": "./positions",
+  "context": "./context"
+}

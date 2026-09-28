@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "rd-case-catalog.v1alpha1",
+  "cases": [
+    {
+      "id": "member-list-filter-001",
+      "path": "./member-list-filter-001/case.json",
+      "approved": true
+    },
+    {
+      "id": "member-list-states-002",
+      "path": "./member-list-states-002/case.json",
+      "approved": true
+    },
+    {
+      "id": "member-api-review-003",
+      "path": "./member-api-review-003/case.json",
+      "approved": true
+    }
+  ]
+}

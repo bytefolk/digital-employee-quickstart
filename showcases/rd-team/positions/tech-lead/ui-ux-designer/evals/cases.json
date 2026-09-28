@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
+    {
+      "id": "contract-shape",
+      "input": {
+        "taskId": "demo-member-list-001",
+        "message": "整理成员列表切片的结构化交付。"
+      },
+      "expectedOutput": {
+        "sourceRefs": [],
+        "caseRefs": [],
+        "assumptions": [],
+        "risks": [],
+        "artifacts": [],
+        "checks": [],
+        "handoffQuestions": [],
+        "taskId": "demo-member-list-001",
+        "schemaVersion": "design-spec.v1",
+        "summary": "UI/UX 设计师公开契约样例；没有调用模型或执行仓库测试。",
+        "states": [
+          "normal",
+          "loading",
+          "empty",
+          "error"
+        ]
+      }
+    }
+  ]
+}

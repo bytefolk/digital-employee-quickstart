@@ -90,6 +90,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 |----------|-------|-------------|
 | [`oss-maintainer`](showcases/oss-maintainer/) | 1 owner + 3 expert positions | Open-source maintenance business: `repo-owner` owns the whole business, with `issue-researcher`, `release-engineer`, and `community-operator` as three read-only expert positions |
 | [`bytefolk`](showcases/bytefolk/) | 1 organization owner + 7 project leads + 20 specialists | Public-safe adaptation of ByteFolk's real open-source organization, covering seven project teams and 28 offline-verifiable positions |
+| [`rd-team`](showcases/rd-team/README.md) | 1 tech lead + 6 specialists | Public R&D team showcase with read-only packages, handoff contracts, synthetic teaching cases, and deterministic retrieval; no real code-execution loop yet |
 
 This category demonstrates the digital-organization workspace target shape:
 one directory is one business, and one position is one addressable digital

@@ -1,0 +1,103 @@
+name: Showcase R&D team v0.6 contract
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Showcase R&D team v0.6 contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require Node.js 20 or newer
+        run: |
+          node --version
+          node -e 'if (Number(process.versions.node.split(".")[0]) < 20) process.exit(1)'
+
+      - name: Verify case library and seven position packages
+        env:
+          DIGITAL_EMPLOYEE_PACKAGE: "@fullstack-ai-infra/digital-employee@0.6.0"
+          npm_config_loglevel: silent
+        run: |
+          set -euo pipefail
+          node showcases/rd-team/tools/check.mjs
+
+          tree_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee org tree showcases/rd-team --json)"
+          node -e '
+            const r = JSON.parse(process.argv[1]);
+            if (r.schemaVersion !== "org-tree.v1" || r.positionCount !== 7 || r.depth !== 2) process.exit(1);
+          ' "$tree_json"
+
+          packages=0
+          cases=0
+          while IFS= read -r -d '' manifest; do
+            package_dir="$(dirname "$manifest")"
+            validate_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+              digital-employee validate "$package_dir" --json)"
+            node -e 'const r = JSON.parse(process.argv[1]); if (r.status !== "valid") process.exit(1);' "$validate_json"
+
+            eval_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+              digital-employee eval "$package_dir" --json)"
+            passed="$(node -e '
+              const r = JSON.parse(process.argv[1]);
+              if (r.status !== "passed" || r.summary.failed !== 0) process.exit(1);
+              process.stdout.write(String(r.summary.passed));
+            ' "$eval_json")"
+            packages=$((packages + 1))
+            cases=$((cases + passed))
+          done < <(find showcases/rd-team/positions -name employee.json -print0)
+          test "$packages" -eq 7
+          test "$cases" -eq 7
+
+          workspace_copy="$(mktemp -d)/rd-team"
+          cp -R showcases/rd-team "$workspace_copy"
+          before_digest="$(shasum -a 256 "$workspace_copy/organization.v1alpha1.json" | cut -d ' ' -f 1)"
+          apply_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee org apply "$workspace_copy" --json)"
+          node -e '
+            const r = JSON.parse(process.argv[1]);
+            if (r.status !== "applied" || r.positions !== 7 || r.changes.moved.length !== 0) process.exit(1);
+          ' "$apply_json"
+          after_digest="$(shasum -a 256 "$workspace_copy/organization.v1alpha1.json" | cut -d ' ' -f 1)"
+          test "$before_digest" = "$after_digest"
+          node -e '
+            const fs = require("node:fs");
+            const source = JSON.parse(fs.readFileSync("showcases/rd-team/organization.v1alpha1.json", "utf8"));
+            const applied = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            const digests = new Map(applied.roles.map((role) => [role.id, role.package.digest]));
+            if (source.roles.some((role) => role.package.digest !== digests.get(role.id))) process.exit(1);
+          ' "$workspace_copy/.digital-employee/org.json"
+
+          set +e
+          write_scope="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
+            digital-employee org scope frontend-engineer "$workspace_copy" --tool Write --json)"
+          write_exit=$?
+          set -e
+          test "$write_exit" -ne 0
+          node -e '
+            const r = JSON.parse(process.argv[1]);
+            if (r.status !== "denied" || r.code !== "workspace_org_authority_denied") process.exit(1);
+          ' "$write_scope"
+
+          printf 'R&D team v0.6.0: tree=7/depth-2, validate=%s/7, eval=%s/7, apply=stable, Write=denied\n' \
+            "$packages" "$cases"
+
+      - name: Reject private or runtime content
+        run: |
+          set -euo pipefail
+          test -z "$(find showcases/rd-team -type d \( -name .digital-employee -o -name .workbench -o -name work \) -print -quit)"
+          if grep -rnEi '(/Users/[a-z]|api[_-]?key|BEGIN [A-Z ]*PRIVATE KEY|atatech\.org|alibaba-inc\.com)' \
+            showcases/rd-team; then
+            echo 'Found credential, internal path, or personal identifier patterns in the showcase.' >&2
+            exit 1
+          fi

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "rd-case.v1alpha1",
+  "id": "member-list-states-002",
+  "title": "Member-list state coverage",
+  "taskType": "frontend-feature",
+  "roles": [
+    "ui-ux-designer",
+    "frontend-engineer",
+    "qa-engineer"
+  ],
+  "stack": [
+    "react",
+    "typescript"
+  ],
+  "difficulty": "easy",
+  "source": {
+    "type": "synthetic",
+    "approved": true,
+    "anonymized": true,
+    "license": "Apache-2.0",
+    "maintainer": "rd-team demo maintainers"
+  },
+  "baseline": {
+    "repository": "example/member-console",
+    "commit": "demo-baseline-v1"
+  },
+  "tags": [
+    "loading",
+    "empty",
+    "error",
+    "accessibility",
+    "成员",
+    "列表",
+    "加载",
+    "空状态",
+    "错误"
+  ],
+  "module": "members",
+  "version": "0.1.0",
+  "expiresAt": "2027-09-28",
+  "summary": "Distinguish initial loading, a true empty list, API errors, and insufficient permission; give an actionable retry path."
+}

@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "taskType",
+    "roles",
+    "stack",
+    "difficulty",
+    "source",
+    "baseline",
+    "tags",
+    "module",
+    "version",
+    "expiresAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "rd-case.v1alpha1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "taskType": {
+      "type": "string"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stack": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "difficulty": {
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "type",
+        "approved",
+        "anonymized",
+        "license",
+        "maintainer"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "internal",
+            "public",
+            "synthetic"
+          ]
+        },
+        "approved": {
+          "type": "boolean"
+        },
+        "anonymized": {
+          "type": "boolean"
+        },
+        "license": {
+          "type": "string"
+        },
+        "maintainer": {
+          "type": "string"
+        }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "required": [
+        "repository",
+        "commit"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "module": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "summary": {
+      "type": "string"
+    }
+  }
+}

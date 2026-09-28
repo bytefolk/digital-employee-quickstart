@@ -1,0 +1,10 @@
+{
+  "status": "illustrative_only",
+  "verified": false,
+  "checksRun": [],
+  "knownLimits": [
+    "synthetic case",
+    "no real patch",
+    "no real test run"
+  ]
+}

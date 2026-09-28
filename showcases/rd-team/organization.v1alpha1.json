@@ -1,0 +1,276 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/workspace-org.schema.json",
+  "schemaVersion": "workspace-org.v1",
+  "business": "rd-team",
+  "description": "Seven read-only research and development roles with independent review and QA responsibilities.",
+  "owner": "tech-lead",
+  "roles": [
+    {
+      "id": "tech-lead",
+      "name": "Tech Lead",
+      "description": "clarify scope, break down tasks, identify risks, and review evidence",
+      "reportTo": null,
+      "package": {
+        "name": "tech-lead",
+        "version": "0.1.0",
+        "digest": "sha256:2f6a653108e8b20b61dd576616fb13cd5aea409024b4926865fc8bae2b737a3b",
+        "localReference": "/workspace/positions/tech-lead"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [
+        "Write",
+        "Edit",
+        "Bash"
+      ],
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "研发负责人",
+        "roleweave.i18n.zh-CN.description": "澄清范围、分解任务、识别风险并复核证据"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 30000,
+          "iterations": 10
+        },
+        "perDay": {
+          "tokens": 300000,
+          "iterations": 80
+        }
+      }
+    },
+    {
+      "id": "product-manager",
+      "name": "Product Manager",
+      "description": "turn requests into user stories and testable acceptance criteria",
+      "reportTo": "tech-lead",
+      "package": {
+        "name": "product-manager",
+        "version": "0.1.0",
+        "digest": "sha256:fb40d48d46d762b3019e804c512ceff8d8d3446d5bbd3ef2e33db847cb8a848f",
+        "localReference": "/workspace/positions/tech-lead/product-manager"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [
+        "Write",
+        "Edit",
+        "Bash"
+      ],
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "产品经理",
+        "roleweave.i18n.zh-CN.description": "整理需求、用户故事和可验证的验收标准"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "ui-ux-designer",
+      "name": "Ui Ux Designer",
+      "description": "describe pages, interactions, and states using approved design rules",
+      "reportTo": "tech-lead",
+      "package": {
+        "name": "ui-ux-designer",
+        "version": "0.1.0",
+        "digest": "sha256:51129e47946f3a04324667fe1d2e3f85a96e2afbaf561cf809e5b5db7bca4356",
+        "localReference": "/workspace/positions/tech-lead/ui-ux-designer"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [
+        "Write",
+        "Edit",
+        "Bash"
+      ],
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "UI/UX 设计师",
+        "roleweave.i18n.zh-CN.description": "基于已批准设计规范描述页面、交互和全部状态"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "frontend-engineer",
+      "name": "Frontend Engineer",
+      "description": "propose frontend changes, tests, and a patch against current APIs and design",
+      "reportTo": "tech-lead",
+      "package": {
+        "name": "frontend-engineer",
+        "version": "0.1.0",
+        "digest": "sha256:21450c96d733265a6fdc777b11b399411c5e33a68b5d07b24e1a694efd2a0abf",
+        "localReference": "/workspace/positions/tech-lead/frontend-engineer"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [
+        "Write",
+        "Edit",
+        "Bash"
+      ],
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "前端工程师",
+        "roleweave.i18n.zh-CN.description": "根据设计和 API 提出前端实现、测试与 Patch"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "backend-engineer",
+      "name": "Backend Engineer",
+      "description": "propose endpoint, validation, authorization, and test changes",
+      "reportTo": "tech-lead",
+      "package": {
+        "name": "backend-engineer",
+        "version": "0.1.0",
+        "digest": "sha256:525c006ca22a440d2c1dced288ebea641bd02607f6bbb3aee5269188932eac43",
+        "localReference": "/workspace/positions/tech-lead/backend-engineer"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [
+        "Write",
+        "Edit",
+        "Bash"
+      ],
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "后端工程师",
+        "roleweave.i18n.zh-CN.description": "根据需求提出接口、验证、权限及测试实现"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "code-reviewer",
+      "name": "Code Reviewer",
+      "description": "independently review diffs for correctness, safety, architecture, and maintainability",
+      "reportTo": "tech-lead",
+      "package": {
+        "name": "code-reviewer",
+        "version": "0.1.0",
+        "digest": "sha256:3ecb7d15ff272fb7e3e4de708c569710174a43b4972f483f890b9bfac6db8c1a",
+        "localReference": "/workspace/positions/tech-lead/code-reviewer"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [
+        "Write",
+        "Edit",
+        "Bash"
+      ],
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "代码评审员",
+        "roleweave.i18n.zh-CN.description": "独立审查 Diff、架构、安全和可维护性"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    },
+    {
+      "id": "qa-engineer",
+      "name": "Qa Engineer",
+      "description": "independently trace acceptance criteria and run tests",
+      "reportTo": "tech-lead",
+      "package": {
+        "name": "qa-engineer",
+        "version": "0.1.0",
+        "digest": "sha256:5f4697a744e529f257da6a0dd38bbeb75a4baa54ea532c385255bf86be44fb6b",
+        "localReference": "/workspace/positions/tech-lead/qa-engineer"
+      },
+      "mode": "read_only",
+      "memoryScope": "/",
+      "toolAllow": [
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "toolDeny": [
+        "Write",
+        "Edit",
+        "Bash"
+      ],
+      "metadata": {
+        "roleweave.i18n.zh-CN.name": "QA 测试工程师",
+        "roleweave.i18n.zh-CN.description": "独立追踪验收条件，执行测试并报告缺陷"
+      },
+      "budget": {
+        "perTask": {
+          "tokens": 20000,
+          "iterations": 8
+        },
+        "perDay": {
+          "tokens": 200000,
+          "iterations": 64
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-09-28T00:00:00Z"
+}
