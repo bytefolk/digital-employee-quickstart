@@ -1,0 +1,10 @@
+{
+  "perTask": {
+    "tokens": 30000,
+    "iterations": 10
+  },
+  "perDay": {
+    "tokens": 300000,
+    "iterations": 80
+  }
+}

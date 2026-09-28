@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "taskId",
+    "schemaVersion",
+    "summary",
+    "sourceRefs",
+    "caseRefs",
+    "assumptions",
+    "risks",
+    "artifacts",
+    "checks",
+    "handoffQuestions",
+    "endpoints"
+  ],
+  "properties": {
+    "taskId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaVersion": {
+      "const": "api-contract.v1"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "caseRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "kind"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "command",
+          "status",
+          "evidence"
+        ],
+        "properties": {
+          "command": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "passed",
+              "failed",
+              "not_run"
+            ]
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "handoffQuestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "endpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "method",
+          "path",
+          "auth",
+          "request",
+          "response"
+        ],
+        "properties": {
+          "method": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "auth": {
+            "type": "string"
+          },
+          "request": {
+            "type": "string"
+          },
+          "response": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

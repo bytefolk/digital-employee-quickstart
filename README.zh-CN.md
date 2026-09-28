@@ -83,6 +83,7 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 |----------|------|------|
 | [`oss-maintainer`](showcases/oss-maintainer/) | 1 负责人 + 3 专家岗位 | 开源维护业务：`repo-owner` 总负责，配 `issue-researcher`、`release-engineer`、`community-operator` 三个只读专家岗位 |
 | [`bytefolk`](showcases/bytefolk/) | 1 组织负责人 + 7 项目负责人 + 20 职能岗位 | ByteFolk 真实开源组织的公开化案例，覆盖 7 个项目组与 28 个可离线验证岗位 |
+| [`rd-team`](showcases/rd-team/README.zh-CN.md) | 1 研发负责人 + 6 个职能岗位 | 研发案例库首轮模板：交接契约、只读岗位包、合成教学案例及确定性检索；尚不具备真实代码执行闭环 |
 
 这一类演示数字组织工作区的目标形态：一个目录就是一项业务，一个岗位就是一个可寻址的
 数字员工。本 showcase 现在使用标准的 `workspace.json`、

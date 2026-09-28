@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "rd-workflow.v1alpha1",
+  "description": "Human-run member-list workflow proposal; the current CLI does not execute this configuration",
+  "steps": [
+    {
+      "id": "scope",
+      "role": "tech-lead",
+      "after": [],
+      "output": "task-intake",
+      "approval": "Human confirms requirement scope"
+    },
+    {
+      "id": "requirements",
+      "role": "product-manager",
+      "after": [
+        "scope"
+      ],
+      "output": "requirement-spec.v1",
+      "approval": "Human confirms the PRD"
+    },
+    {
+      "id": "design",
+      "role": "ui-ux-designer",
+      "after": [
+        "requirements"
+      ],
+      "output": "design-spec.v1",
+      "approval": "Human confirms the UI/UX specification"
+    },
+    {
+      "id": "plan",
+      "role": "tech-lead",
+      "after": [
+        "requirements",
+        "design"
+      ],
+      "output": "technical-plan.v1",
+      "approval": "Human confirms architecture or incompatible changes"
+    },
+    {
+      "id": "frontend",
+      "role": "frontend-engineer",
+      "after": [
+        "plan"
+      ],
+      "output": "implementation-result.v1",
+      "approval": "Human reviews the patch before any real repository write"
+    },
+    {
+      "id": "backend",
+      "role": "backend-engineer",
+      "after": [
+        "plan"
+      ],
+      "output": "implementation-result.v1",
+      "optional": true,
+      "approval": "Human reviews the patch before any real repository write"
+    },
+    {
+      "id": "review",
+      "role": "code-reviewer",
+      "after": [
+        "frontend"
+      ],
+      "output": "review-report.v1",
+      "independentTask": true
+    },
+    {
+      "id": "qa",
+      "role": "qa-engineer",
+      "after": [
+        "review"
+      ],
+      "output": "test-report.v1",
+      "independentTask": true
+    },
+    {
+      "id": "accept",
+      "role": "tech-lead",
+      "after": [
+        "qa"
+      ],
+      "output": "approval-record",
+      "approval": "Human approves the final patch; no automatic merge or deployment"
+    }
+  ]
+}
