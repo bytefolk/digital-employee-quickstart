@@ -89,7 +89,7 @@
       "package": {
         "name": "ui-ux-designer",
         "version": "0.1.0",
-        "digest": "sha256:51129e47946f3a04324667fe1d2e3f85a96e2afbaf561cf809e5b5db7bca4356",
+        "digest": "sha256:3888dc51a636fb1acce1c707fede0c49d185305af19239801adc27bc150120fe",
         "localReference": "/workspace/positions/tech-lead/ui-ux-designer"
       },
       "mode": "read_only",

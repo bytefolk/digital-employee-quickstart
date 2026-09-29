@@ -1,5 +1,7 @@
 # UI/UX designer source register
 
-Source: this public pilot showcase, 2026-09-28. Status: teaching demonstration; no real project standard or private material is attached. Maintainer and next review date: to be assigned.
+This package contains reusable review guidance, not a product's visual identity. `design-review-checklist.md` records the UI/UX review steps adapted from the existing RoleWeave UI designer and design-system visual designer packages.
 
-Current project facts must be supplied and verified by a human before a real task. The showcase context contains placeholders, not confirmed API or repository facts.
+For every real task, read the authorized project's current design-system documentation, tokens, components, and relevant screens. Do not embed their values here because they can change. Cite the sources actually inspected in the design result.
+
+The public showcase has no attached real project standard, token set, screenshot baseline, or private design material. Its project context contains placeholders and must be confirmed by a human before use on a real task.
