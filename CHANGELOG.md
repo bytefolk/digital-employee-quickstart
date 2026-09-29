@@ -4,7 +4,8 @@
 
 ### Changed
 
-- Enrich the R&D tech lead, product manager, frontend, backend, code review, and QA role methods with attributed practices from popular upstream agent skills while preserving read-only package boundaries.
+- Enrich the R&D tech lead, product manager, frontend, backend, code review, and QA role methods with attributed practices from popular upstream agent skills.
+- Request approval-gated workspace read/write and host-policy network access for all R&D positions, and expand the organization tool allowlist while documenting Agent Host limits.
 - Expand the R&D UI/UX designer guidance with current-source design-system review, evidence labeling, interaction/accessibility coverage, visual quality criteria, and screenshot-based review boundaries.
 - Add a read-only R&D team showcase with seven offline-verifiable positions, handoff contracts, synthetic teaching cases, and deterministic retrieval (#37).
 - Add a public-safe ByteFolk organization showcase with 28 positions, offline fixtures, documentation, and CI coverage.

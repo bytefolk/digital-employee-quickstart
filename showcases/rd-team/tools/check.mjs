@@ -15,9 +15,13 @@ for (const role of org.roles) {
   const prefix = role.id === 'tech-lead' ? 'positions/tech-lead' : `positions/tech-lead/${role.id}`;
   const manifest = json(`${prefix}/employee.json`);
   assert.equal(manifest.name, role.id);
-  assert.equal(manifest.policy.mode, 'read_only');
-  assert.deepEqual(manifest.policy.filesystem.write, []);
-  assert.deepEqual(role.toolAllow, ['Read', 'Grep', 'Glob']);
+  assert.equal(manifest.policy.mode, 'approval_required');
+  assert.deepEqual(manifest.policy.filesystem.read, ['./**']);
+  assert.deepEqual(manifest.policy.filesystem.write, ['./**']);
+  assert.equal(manifest.policy.network, 'host_policy');
+  assert.deepEqual(role.toolAllow, ['Read', 'Grep', 'Glob', 'Write', 'Edit', 'Bash', 'WebSearch', 'WebFetch', 'Browser']);
+  assert.deepEqual(role.toolDeny, []);
+  assert.equal(role.mode, 'approval_required');
   for (const asset of manifest.assets) assert(existsSync(join(root, prefix, asset)));
   const output = json(`${prefix}/schemas/output.schema.json`);
   const fixture = json(`${prefix}/evals/cases.json`).cases[0].expectedOutput;

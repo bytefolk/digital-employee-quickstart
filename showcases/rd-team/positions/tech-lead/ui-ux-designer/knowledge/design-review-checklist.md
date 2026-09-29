@@ -26,4 +26,4 @@ Use this checklist as a method, not as a built-in visual style. Current product 
 - Record the reference, target, viewport, UI state, and concrete differences in hierarchy, typography, spacing, color, component treatment, clipping, and responsive behavior. Otherwise mark visual comparison `not_run`.
 - Review interaction behavior separately from visual fidelity; a screenshot alone does not prove that controls work.
 - Return a `design-spec.v1` with source references, case references, assumptions, risks, checks, open questions, and covered states.
-- Keep this role read-only. Hand implementation suggestions to the frontend engineer and unresolved product or design-system decisions to the product manager or tech lead.
+- Keep design responsibility clear even when broader tools are available. Hand implementation suggestions to the frontend engineer and unresolved product or design-system decisions to the product manager or tech lead. Use write or external tools only when the task and host explicitly authorize them.
