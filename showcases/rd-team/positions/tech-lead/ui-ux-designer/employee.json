@@ -32,6 +32,7 @@
   },
   "assets": [
     "./knowledge/README.md",
+    "./knowledge/design-review-checklist.md",
     "./playbooks/task.md",
     "./evals/cases.json"
   ]
