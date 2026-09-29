@@ -8,7 +8,11 @@
       "category": "internal-knowledge",
       "audience": "team members",
       "outcome": "Answer questions from the team handbook, on-call rules, and permission documentation.",
-      "boundaries": ["read-only", "must refuse unsupported facts", "must cite source documents"],
+      "boundaries": [
+        "read-only",
+        "must refuse unsupported facts",
+        "must cite source documents"
+      ],
       "supportsDesktopWorkspace": false
     },
     {
@@ -17,7 +21,11 @@
       "category": "employee-support",
       "audience": "new hires",
       "outcome": "Guide a new hire through first-day tasks, benefits, and office logistics.",
-      "boundaries": ["read-only", "must distinguish policy from personal advice", "must cite source documents"],
+      "boundaries": [
+        "read-only",
+        "must distinguish policy from personal advice",
+        "must cite source documents"
+      ],
       "supportsDesktopWorkspace": false
     },
     {
@@ -26,7 +34,11 @@
       "category": "structured-proposal",
       "audience": "operations teams",
       "outcome": "Turn an operational request into a structured proposal without executing it.",
-      "boundaries": ["never executes actions", "requires approval for consequential work", "must preserve the requested target"],
+      "boundaries": [
+        "never executes actions",
+        "requires approval for consequential work",
+        "must preserve the requested target"
+      ],
       "supportsDesktopWorkspace": false
     },
     {
@@ -35,7 +47,11 @@
       "category": "customer-support",
       "audience": "customers and support agents",
       "outcome": "Answer product and pricing questions from public product documentation.",
-      "boundaries": ["read-only", "must not invent unavailable product details", "must cite source documents"],
+      "boundaries": [
+        "read-only",
+        "must not invent unavailable product details",
+        "must cite source documents"
+      ],
       "supportsDesktopWorkspace": false
     },
     {
@@ -44,7 +60,44 @@
       "category": "structured-proposal",
       "audience": "revenue teams",
       "outcome": "Turn a raw sales inquiry, plus optional caller-supplied enterprise context, into a structured qualification proposal with a next best action for human review.",
-      "boundaries": ["read-only", "never sends messages", "never quotes prices or commits delivery dates", "requires human approval", "degrades conservatively when enterprise data is missing or stale"],
+      "boundaries": [
+        "read-only",
+        "never sends messages",
+        "never quotes prices or commits delivery dates",
+        "requires human approval",
+        "degrades conservatively when enterprise data is missing or stale"
+      ],
+      "supportsDesktopWorkspace": false
+    },
+    {
+      "id": "sales-employee",
+      "path": "cases/sales-employee",
+      "category": "revenue-operations",
+      "audience": "revenue teams",
+      "outcome": "Qualify a target account, draft first-touch outreach calibrated to the qualification, extract commitments and objections from a meeting transcript, and write the result back through a declared crm connector.",
+      "boundaries": [
+        "declared MCP tools only: crm.account.read, crm.account.upsert, web.search",
+        "never fabricates CRM records or record ids",
+        "degrades explicitly when a connector is absent",
+        "never quotes prices or commits dates",
+        "requires human approval"
+      ],
+      "supportsDesktopWorkspace": false
+    },
+    {
+      "id": "support-employee",
+      "path": "cases/support-employee",
+      "category": "customer-support",
+      "audience": "support teams and customers",
+      "outcome": "Classify an inbound customer message, answer only from cited knowledge-base entries, and escalate with a structured hand-off when confidence is below threshold or the knowledge base is absent.",
+      "boundaries": [
+        "declared MCP tools only: kb.entry.search, ticket.handoff.create",
+        "answers only with cited knowledge-base entries",
+        "no knowledge base means every request escalates",
+        "never answers from model priors",
+        "never computes billing amounts",
+        "requires human approval"
+      ],
       "supportsDesktopWorkspace": false
     }
   ]

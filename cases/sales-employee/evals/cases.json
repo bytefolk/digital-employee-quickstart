@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
+    {
+      "id": "full-cycle-crm-absent",
+      "input": {
+        "account": {
+          "company": "Northwind Logistics",
+          "domain": "northwind-logistics.example",
+          "suppliedContext": "Mid-market logistics operator, 4 depots. Referred by an existing customer. Ops director asked about route planning automation in a first call.",
+          "language": "en"
+        },
+        "inquiry": {
+          "rawMessage": "We are a 200-person logistics firm evaluating task-automation software for our ops team. I am the VP of Operations and the budget owner. We need to cut manual dispatch paperwork by next quarter. Can someone walk us through the platform?",
+          "channel": "web_form",
+          "receivedAt": "2026-09-01T09:00:00Z"
+        },
+        "transcript": {
+          "source": "dingtalk_minutes",
+          "occurredAt": "2026-09-05T08:00:00Z",
+          "text": "VP of Operations: The dispatch paperwork takes our planners about two hours a day per depot. If we automate the handover sheets, that is the win we want. Sales: Our automation tier covers document routing and handover generation. VP of Operations: Good. I can get procurement to look at a proposal next month. I will send you our depot count breakdown by Friday. Sales: We will prepare a two-week pilot outline for the ops team. VP of Operations: The pricing will be the hard part - our budget cycle closes at the end of the quarter, so anything beyond that is a problem."
+        },
+        "crmTarget": {
+          "recordType": "opportunity",
+          "operation": "create"
+        }
+      },
+      "expectedOutput": {
+        "qualification": {
+          "band": "medium",
+          "score": 68,
+          "signals": {
+            "budget": "known",
+            "authority": "confirmed",
+            "need": "explicit",
+            "timeline": "quarter"
+          },
+          "reasoning": [
+            "Budget: the VP is the budget owner and procurement is engaged; the transcript adds a budget-cycle constraint at quarter end.",
+            "Authority: the speaker is the VP of Operations and self-identifies as the budget owner.",
+            "Need: cutting manual dispatch paperwork is stated as the explicit goal with volume context.",
+            "Timeline: next quarter is stated; the web-search connector is absent, so the band stays at the medium ceiling."
+          ]
+        },
+        "outreachDraft": {
+          "channel": "email",
+          "subject": "Dispatch paperwork automation - pilot outline for Northwind",
+          "body": "Hello, thank you for the walkthrough conversation. You mentioned planners spend about two hours a day per depot on handover sheets, and that a two-week pilot outline for the ops team would be the natural next step. Attached is that outline with the document-routing and handover-generation scope we discussed. You offered to send the depot count breakdown by Friday; when it arrives we can align the pilot scope to it and route the proposal to procurement within your budget cycle."
+        },
+        "meetingExtraction": {
+          "commitments": [
+            {
+              "statement": "VP of Operations will send the depot count breakdown by Friday.",
+              "excerpt": "I will send you our depot count breakdown by Friday."
+            },
+            {
+              "statement": "Sales will prepare a two-week pilot outline for the ops team.",
+              "excerpt": "We will prepare a two-week pilot outline for the ops team."
+            }
+          ],
+          "objections": [
+            {
+              "statement": "Pricing is expected to be the hard part; the budget cycle closes at the end of the quarter.",
+              "kind": "price",
+              "excerpt": "The pricing will be the hard part - our budget cycle closes at the end of the quarter, so anything beyond that is a problem."
+            }
+          ],
+          "nextActions": [
+            {
+              "statement": "Route the proposal to procurement next month.",
+              "owner": "VP of Operations"
+            },
+            {
+              "statement": "Align the pilot outline to the depot count breakdown once received."
+            }
+          ]
+        },
+        "crmSync": {
+          "status": "degraded",
+          "reason": "crm_connector_absent",
+          "recordRef": null
+        },
+        "requiresApproval": true,
+        "degraded": [
+          {
+            "capability": "crm_write",
+            "reason": "crm_connector_absent",
+            "note": "No crm connector is available in this run; the opportunity write-back is skipped and no record is fabricated."
+          },
+          {
+            "capability": "enrichment",
+            "reason": "web_search_connector_absent",
+            "note": "No web-search connector; qualification runs on supplied text only."
+          }
+        ],
+        "evidence": [
+          {
+            "source": "input",
+            "excerpt": "I am the VP of Operations and the budget owner."
+          },
+          {
+            "source": "input",
+            "excerpt": "We need to cut manual dispatch paperwork by next quarter."
+          },
+          {
+            "source": "input",
+            "excerpt": "The dispatch paperwork takes our planners about two hours a day per depot."
+          },
+          {
+            "source": "knowledge",
+            "excerpt": "With the web-search connector absent, the band ceiling is medium."
+          }
+        ]
+      }
+    },
+    {
+      "id": "qualification-only-no-enrichment",
+      "input": {
+        "account": {
+          "company": "Harbor Analytics",
+          "domain": "harbor-analytics.example",
+          "suppliedContext": "Their Head of Data replied to our webinar follow-up: they have an approved budget line for a reporting tool this half-year, she is the decision maker, and their current pipeline breaks every month-end close. She asked for an intro call.",
+          "language": "en"
+        }
+      },
+      "expectedOutput": {
+        "qualification": {
+          "band": "medium",
+          "score": 72,
+          "signals": {
+            "budget": "known",
+            "authority": "confirmed",
+            "need": "implicit",
+            "timeline": "half_year"
+          },
+          "reasoning": [
+            "Budget: an approved budget line for this half-year is stated in the supplied context.",
+            "Authority: the Head of Data identifies herself as the decision maker.",
+            "Need: the monthly-close pipeline breakage is an implied need for a reporting tool, not an explicit statement of purchase intent.",
+            "Timeline: this half-year; band stays at the medium ceiling because the web-search connector is absent."
+          ]
+        },
+        "outreachDraft": {
+          "channel": "email",
+          "subject": "Intro call on month-end close reliability",
+          "body": "Hello, thank you for replying to our webinar follow-up. You mentioned your pipeline breaks every month-end close and that there is an approved budget line for a reporting tool this half-year. Would a 30-minute call to map where the close process breaks be a useful first step? One question before we speak: which step of the close currently needs the most manual attention?"
+        },
+        "meetingExtraction": null,
+        "crmSync": {
+          "status": "not_requested",
+          "recordRef": null
+        },
+        "requiresApproval": true,
+        "degraded": [
+          {
+            "capability": "enrichment",
+            "reason": "web_search_connector_absent",
+            "note": "No web-search connector; qualification runs on supplied text only."
+          }
+        ],
+        "evidence": [
+          {
+            "source": "input",
+            "excerpt": "they have an approved budget line for a reporting tool this half-year"
+          },
+          {
+            "source": "input",
+            "excerpt": "she is the decision maker"
+          },
+          {
+            "source": "input",
+            "excerpt": "their current pipeline breaks every month-end close"
+          }
+        ]
+      }
+    },
+    {
+      "id": "insufficient-input-no-invention",
+      "input": {
+        "account": {
+          "company": "Bluepeak Retail",
+          "language": "en"
+        }
+      },
+      "expectedOutput": {
+        "qualification": {
+          "band": "insufficient_input",
+          "signals": {
+            "budget": "unknown",
+            "authority": "unknown",
+            "need": "unclear",
+            "timeline": "unknown"
+          },
+          "reasoning": [
+            "No supplied context, no inquiry, and no transcript; the web-search connector is absent, so there is no signal source at all.",
+            "Resolving this needs at least one of: supplied context, an inquiry, a transcript, or web-search enrichment."
+          ]
+        },
+        "outreachDraft": null,
+        "meetingExtraction": null,
+        "crmSync": {
+          "status": "not_requested",
+          "recordRef": null
+        },
+        "requiresApproval": true,
+        "degraded": [
+          {
+            "capability": "enrichment",
+            "reason": "web_search_connector_absent",
+            "note": "No web-search connector and no supplied context; nothing is invented."
+          }
+        ],
+        "evidence": [
+          {
+            "source": "knowledge",
+            "excerpt": "No basis at all: no supplied context, no inquiry, no transcript, no enrichment - band insufficient_input."
+          }
+        ]
+      }
+    }
+  ]
+}

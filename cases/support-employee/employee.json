@@ -1,0 +1,49 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "support-employee",
+  "version": "1.0.0",
+  "description": "Customer-service employee: classifies an inbound message, answers only from knowledge-base entries it can cite, and escalates when confidence is below the declared threshold. The knowledge base is only ever requested, never assumed: with no knowledge base bound, every request escalates and no answer is produced from model priors.",
+  "license": "Apache-2.0",
+  "authors": [
+    "ByteFolk"
+  ],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": [
+      "structured_output",
+      "mcp"
+    ]
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json",
+    "mcp": "./mcp.json"
+  },
+  "policy": {
+    "mode": "approval_required",
+    "network": "host_policy",
+    "filesystem": {
+      "read": [
+        "./knowledge/**"
+      ],
+      "write": []
+    },
+    "mcpTools": [
+      {
+        "name": "kb.entry.search",
+        "requestedMode": "read"
+      },
+      {
+        "name": "ticket.handoff.create",
+        "requestedMode": "write"
+      }
+    ]
+  },
+  "assets": [
+    "./knowledge/intent-taxonomy.md",
+    "./knowledge/confidence-and-escalation.md",
+    "./evals/cases.json"
+  ]
+}

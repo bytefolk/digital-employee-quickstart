@@ -74,6 +74,8 @@ local absolute paths.
 | [`ops-approval`](cases/ops-approval/) | Ops approval proposals | Turns requests into structured proposals — never executes |
 | [`product-faq`](cases/product-faq/) | Product FAQ | Customer-facing product questions from public docs |
 | [`sales-qualifier`](cases/sales-qualifier/) | Sales qualification | Turns a raw inquiry into a structured qualification proposal — never sends, never quotes, requires approval. Optional [`enterpriseContext`](docs/adapters/sales-qualifier-enterprise-context.md) lets a company wire in its own CRM data caller-side |
+| [`sales-employee`](cases/sales-employee/) | General-purpose sales employee | Qualifies a target account, drafts first-touch outreach, extracts commitments/objections/next actions from a meeting transcript, and writes back through a declared `crm` connector — connector absent means an explicit degraded result, never a fabricated record |
+| [`support-employee`](cases/support-employee/) | Customer-service employee | Classifies intent, answers only from cited knowledge-base entries, and escalates below the confidence threshold — with no knowledge base, every request escalates instead of answering from model priors |
 
 Run the same credential-free checks against any case:
 
