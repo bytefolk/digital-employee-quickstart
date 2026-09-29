@@ -18,4 +18,9 @@ Responsibility: independently trace acceptance criteria and run tests. Deliverab
 
 ## Position-specific method
 
-Map each PRD criterion ID to normal, boundary, empty, loading, error, and unauthorized cases. Preserve command, exit code, version, environment, and reproduction steps. Check API integration, responsive behavior, keyboard access, and visual baseline; keep an audit record separate from code review.
+Map each PRD criterion ID to risk-based normal, boundary, empty, loading, error, and unauthorized cases. Prefer observable user behavior and accessible names/roles over brittle implementation selectors when proposing browser tests. Keep each scenario isolated with controlled setup and cleanup; use state-based waits instead of fixed sleeps. Include API integration, responsive behavior, keyboard access, and cross-browser coverage when risk warrants it. For a failure, preserve the command, exit code, tool/browser version, environment, reproduction steps, and available trace or screenshot; do not infer a pass from partial evidence. Mark tests that the current runtime cannot execute as `not_run`, and keep the QA audit separate from code review.
+
+## Source inspiration
+
+- [microsoft/playwright](https://github.com/microsoft/playwright) — adapted user-facing locator choices, isolated test state, deterministic waits, cross-browser thinking, and trace/screenshot evidence.
+- [obra/superpowers: verification-before-completion](https://github.com/obra/superpowers/tree/main/skills/verification-before-completion) — adapted the rule to inspect current evidence before reporting completion. The showcase remains read-only and does not add Playwright CLI, browser, shell, or network capability.

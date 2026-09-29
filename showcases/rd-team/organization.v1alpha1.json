@@ -13,7 +13,7 @@
       "package": {
         "name": "tech-lead",
         "version": "0.1.0",
-        "digest": "sha256:2f6a653108e8b20b61dd576616fb13cd5aea409024b4926865fc8bae2b737a3b",
+        "digest": "sha256:8be222bd2645a4b66d1d76bb4041d2c893a892bd54b9a8dd45b22ad214913f45",
         "localReference": "/workspace/positions/tech-lead"
       },
       "mode": "read_only",
@@ -51,7 +51,7 @@
       "package": {
         "name": "product-manager",
         "version": "0.1.0",
-        "digest": "sha256:fb40d48d46d762b3019e804c512ceff8d8d3446d5bbd3ef2e33db847cb8a848f",
+        "digest": "sha256:3c76758ba45f37676de6e60def244a0a25eb0c0633554a73e3e77b90dcc22427",
         "localReference": "/workspace/positions/tech-lead/product-manager"
       },
       "mode": "read_only",
@@ -127,7 +127,7 @@
       "package": {
         "name": "frontend-engineer",
         "version": "0.1.0",
-        "digest": "sha256:21450c96d733265a6fdc777b11b399411c5e33a68b5d07b24e1a694efd2a0abf",
+        "digest": "sha256:7cbca0f28c93213ec955eba355f0dc445af209f742f1691bbbc92f5bc30e31c2",
         "localReference": "/workspace/positions/tech-lead/frontend-engineer"
       },
       "mode": "read_only",
@@ -165,7 +165,7 @@
       "package": {
         "name": "backend-engineer",
         "version": "0.1.0",
-        "digest": "sha256:525c006ca22a440d2c1dced288ebea641bd02607f6bbb3aee5269188932eac43",
+        "digest": "sha256:0b41f4f5744f5a02067a3cd21603d378d2b37355ff688a77d7ccd21f5a3d3f31",
         "localReference": "/workspace/positions/tech-lead/backend-engineer"
       },
       "mode": "read_only",
@@ -203,7 +203,7 @@
       "package": {
         "name": "code-reviewer",
         "version": "0.1.0",
-        "digest": "sha256:3ecb7d15ff272fb7e3e4de708c569710174a43b4972f483f890b9bfac6db8c1a",
+        "digest": "sha256:a88d5e0554ead32be718e7f8e53ad8446729c6e4df1bfeac85895d559cb2f8ba",
         "localReference": "/workspace/positions/tech-lead/code-reviewer"
       },
       "mode": "read_only",
@@ -241,7 +241,7 @@
       "package": {
         "name": "qa-engineer",
         "version": "0.1.0",
-        "digest": "sha256:5f4697a744e529f257da6a0dd38bbeb75a4baa54ea532c385255bf86be44fb6b",
+        "digest": "sha256:ad7e5c27f8f317c6486275ca404abc65b7933e9ee7f69acd0d472215e8a6fce3",
         "localReference": "/workspace/positions/tech-lead/qa-engineer"
       },
       "mode": "read_only",

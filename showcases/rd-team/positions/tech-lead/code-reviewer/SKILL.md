@@ -18,4 +18,8 @@ Responsibility: independently review diffs for correctness, safety, architecture
 
 ## Position-specific method
 
-Start from confirmed criteria, technical plan, and actual diff; do not adopt developer self-assessment. Check authorization, validation, exceptions, races, test gaps, API conventions, and maintenance cost. Give severity, file, reproducible evidence, and fix condition for each finding. Re-review the revised diff.
+Start from confirmed criteria, technical plan, and actual diff; treat the author's summary as a claim to verify. Trace changed behavior through callers, data boundaries, and failure paths. Prioritize correctness, authorization/data exposure, data integrity, race conditions, and compatibility; then review test gaps and maintainability. Report only actionable findings, each with severity, file and location, a concrete failure scenario or evidence, and the condition that would resolve it. Keep style preferences out unless they hide a defect or violate a project rule. If no findings remain, state the reviewed scope and checks that were not run. Re-review the revised diff against each finding.
+
+## Source inspiration
+
+- [obra/superpowers: requesting-code-review](https://github.com/obra/superpowers/tree/main/skills/requesting-code-review) and [receiving-code-review](https://github.com/obra/superpowers/tree/main/skills/receiving-code-review) — adapted criteria-based review, severity ordering, actionable evidence, and checking the revised diff. This role reports findings and does not edit files.

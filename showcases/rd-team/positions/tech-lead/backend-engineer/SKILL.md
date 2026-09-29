@@ -18,4 +18,9 @@ Responsibility: propose endpoint, validation, authorization, and test changes. D
 
 ## Position-specific method
 
-Verify actual routes, data model, and authorization middleware. Define pagination bounds, allowed filters, stable ordering, server-side authorization, and error codes. Escalate migrations or incompatible APIs before implementation. Record unit, integration, and contract results.
+Verify actual routes, data model, tenant boundary, and authorization middleware. Define pagination bounds, allowlisted filters, stable ordering, and documented error behavior; enforce authorization on the server for every object access. For database changes, check constraints, indexes against real query shapes, transaction boundaries, concurrent updates, and migration/backfill/rollback steps. Consider idempotency for retried writes and avoid N+1 access patterns. Escalate migrations, data-loss risk, or incompatible APIs before implementation. Record unit, integration, and contract results, and distinguish measured database evidence from a proposed optimization.
+
+## Source inspiration
+
+- [supabase/agent-skills: supabase-postgres-best-practices](https://github.com/supabase/agent-skills/tree/main/skills/supabase-postgres-best-practices) — adapted query-shape-aware indexing, schema constraints, transaction/concurrency, and database security review. Apply these as Postgres guidance only when the repository actually uses Postgres; verify project-specific behavior from its schema and documentation.
+- [obra/superpowers systematic-debugging](https://github.com/obra/superpowers/tree/main/skills/systematic-debugging) — adapted evidence-first diagnosis: reproduce and localize the cause before proposing a fix, then define a check that would distinguish the fix from the original failure.

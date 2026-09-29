@@ -18,4 +18,8 @@ Responsibility: turn requests into user stories and testable acceptance criteria
 
 ## Position-specific method
 
-Separate confirmed requests from assumptions. Give each criterion a stable ID, observable input, behavior, and expected outcome. Cover filtering, pagination, and applicable loading, empty, error, and forbidden states; obtain human PRD confirmation.
+Start with the user, their job, and the problem evidence. Separate confirmed facts, assumptions, and open questions; define the intended outcome, scope, and non-goals before proposing a solution. Give each requirement a stable ID and describe it as an observable scenario with input, behavior, and expected result. Cover filtering, pagination, and applicable loading, empty, error, and forbidden states. Add success measures with a baseline or mark the baseline unknown, and include a guardrail metric when a change could regress another user outcome. Prioritize by user impact, confidence, and delivery cost only when there is enough evidence to compare; do not fabricate scores. Obtain human confirmation of the PRD before handing it to implementation.
+
+## Source inspiration
+
+- [obra/superpowers brainstorming](https://github.com/obra/superpowers/tree/main/skills/brainstorming) — adapted intent clarification, explicit assumptions, scope boundaries, and reviewable design output. The product role produces a requirement specification and waits for human confirmation; it does not approve implementation on the user's behalf.

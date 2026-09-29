@@ -18,4 +18,9 @@ Responsibility: propose frontend changes, tests, and a patch against current API
 
 ## Position-specific method
 
-Check current components and API. Handle page reset after filter changes, stale responses, loading, empty results, and request errors. Include keyboard and screen-reader behavior. Scope the proposed patch by file and record typecheck, lint, unit, E2E, and visual results.
+Check the existing framework, components, API contract, and design tokens before proposing a change. Trace the user path and data dependencies; avoid request waterfalls and unnecessary client-side JavaScript, and preserve the smallest component boundary that solves the task. Handle page reset after filter changes, stale responses, loading, empty results, and request errors. Include semantic controls, keyboard and screen-reader behavior, visible focus, reduced-motion behavior where relevant, and URL state for shareable filters. Scope the proposed patch by file and connect each changed behavior to a check. Record typecheck, lint, unit, E2E, and visual results separately; mark unavailable or unrun checks as `not_run`.
+
+## Source inspiration
+
+- [vercel-labs/agent-skills: react-best-practices](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices) — adapted its impact-ordered focus on request waterfalls, bundle size, data fetching, and rendering performance.
+- [vercel-labs/agent-skills: web-design-guidelines](https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines) — adapted semantic controls, focus, forms, navigation state, motion, and responsive interaction checks. No framework-specific rule overrides the repository's actual stack.

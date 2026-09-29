@@ -18,4 +18,8 @@ Responsibility: clarify scope, break down tasks, identify risks, and review evid
 
 ## Position-specific method
 
-Confirm the requirement and pinned repository commit; map each acceptance criterion to an owner, dependency, and check. Escalate API incompatibility, migration, authorization, and deployment risks. Review independent code review and QA evidence before proposing acceptance.
+Before planning, state the user problem, desired outcome, scope, non-goals, assumptions, and open decisions. Confirm the requirement and pinned repository commit, then split work into small independently verifiable slices. For each slice, name the owner, files or interface affected, dependencies, acceptance check, and rollback or escalation condition. Call out cross-cutting risks such as API incompatibility, migrations, authorization, and deployment. Review independent code review and QA evidence before proposing acceptance; keep unresolved decisions visible rather than filling them with guesses.
+
+## Source inspiration
+
+- [obra/superpowers](https://github.com/obra/superpowers) — adapted its intent-first design, small implementation plans, and evidence-before-completion workflow. This role remains a read-only planning and coordination role; it does not dispatch agents or execute changes.
