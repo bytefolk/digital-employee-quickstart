@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-mcp.schema.json",
+  "schemaVersion": "employee-mcp.v1alpha1",
+  "servers": [
+    {
+      "name": "crm",
+      "transport": {
+        "type": "stdio",
+        "command": "digital-employee-connector-crm",
+        "args": [],
+        "environment": ["CRM_CONNECTOR_ENDPOINT", "CRM_CONNECTOR_TOKEN"]
+      }
+    },
+    {
+      "name": "web-search",
+      "transport": {
+        "type": "stdio",
+        "command": "digital-employee-connector-web-search",
+        "args": [],
+        "environment": ["WEB_SEARCH_CONNECTOR_ENDPOINT", "WEB_SEARCH_CONNECTOR_TOKEN"]
+      }
+    }
+  ]
+}

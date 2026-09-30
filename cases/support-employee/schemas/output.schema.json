@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["intent", "decision", "confidence", "answer", "escalation", "requiresApproval", "evidence"],
+  "properties": {
+    "intent": { "enum": ["bug", "how_to", "billing", "feature_request", "out_of_scope"] },
+    "decision": { "enum": ["answer", "escalate"] },
+    "confidence": { "enum": ["high", "medium", "low"] },
+    "answer": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["text", "citations"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1, "maxLength": 10000 },
+        "citations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source", "entry"],
+            "properties": {
+              "source": { "const": "knowledge-base" },
+              "entry": { "type": "string", "minLength": 1, "maxLength": 200 },
+              "excerpt": { "type": "string", "maxLength": 500 }
+            }
+          }
+        }
+      }
+    },
+    "escalation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["reason", "handoff"],
+      "properties": {
+        "reason": { "enum": ["no_kb", "low_confidence", "out_of_scope", "other"] },
+        "retrievalAttempt": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "queries": {
+              "type": "array",
+              "maxItems": 20,
+              "items": { "type": "string", "minLength": 1, "maxLength": 300 }
+            },
+            "entriesConsidered": {
+              "type": "array",
+              "maxItems": 50,
+              "items": { "type": "string", "minLength": 1, "maxLength": 200 }
+            },
+            "note": { "type": "string", "maxLength": 500 }
+          }
+        },
+        "handoff": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["note", "urgency", "ticket"],
+          "properties": {
+            "note": { "type": "string", "minLength": 1, "maxLength": 2000 },
+            "urgency": { "enum": ["low", "medium", "high"] },
+            "ticket": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["filed", "ticketRef"],
+              "properties": {
+                "filed": { "type": "boolean" },
+                "ticketRef": { "type": ["string", "null"], "maxLength": 128 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requiresApproval": { "const": true },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source"],
+        "properties": {
+          "source": { "enum": ["customerMessage", "knowledge-base", "conversationHistory", "policy"] },
+          "entry": { "type": "string", "maxLength": 200 },
+          "excerpt": { "type": "string", "maxLength": 500 }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "decision": { "const": "answer" } },
+        "required": ["decision"]
+      },
+      "then": {
+        "properties": {
+          "answer": { "type": "object" },
+          "escalation": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "decision": { "const": "escalate" } },
+        "required": ["decision"]
+      },
+      "then": {
+        "properties": {
+          "answer": { "type": "null" },
+          "escalation": { "type": "object" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "escalation": {
+            "properties": { "reason": { "const": "no_kb" } },
+            "required": ["reason"]
+          }
+        },
+        "required": ["escalation"]
+      },
+      "then": {
+        "properties": {
+          "escalation": {
+            "properties": {
+              "handoff": {
+                "properties": {
+                  "ticket": {
+                    "properties": { "filed": { "const": false }, "ticketRef": { "type": "null" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "escalation": {
+            "properties": {
+              "handoff": {
+                "properties": { "ticket": { "properties": { "filed": { "const": false } } } }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "escalation": {
+            "properties": {
+              "handoff": {
+                "properties": { "ticket": { "properties": { "ticketRef": { "type": "null" } } } }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "escalation": {
+            "properties": {
+              "handoff": {
+                "properties": { "ticket": { "properties": { "filed": { "const": true } } } }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "escalation": {
+            "properties": {
+              "handoff": {
+                "properties": {
+                  "ticket": { "properties": { "ticketRef": { "type": "string", "minLength": 1 } } }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
