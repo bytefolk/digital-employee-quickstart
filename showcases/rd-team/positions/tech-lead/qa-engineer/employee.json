@@ -18,15 +18,15 @@
     "outputSchema": "./schemas/output.schema.json"
   },
   "policy": {
-    "mode": "read_only",
-    "network": "deny",
+    "mode": "approval_required",
+    "network": "host_policy",
     "filesystem": {
       "read": [
-        "./knowledge/**",
-        "./playbooks/**",
-        "./evals/**"
+        "./**"
       ],
-      "write": []
+      "write": [
+        "./**"
+      ]
     },
     "mcpTools": []
   },
