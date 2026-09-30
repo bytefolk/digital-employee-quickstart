@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "qualification",
+    "outreachDraft",
+    "meetingExtraction",
+    "crmSync",
+    "requiresApproval",
+    "degraded",
+    "evidence"
+  ],
+  "properties": {
+    "qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["band", "signals", "reasoning"],
+      "properties": {
+        "band": {
+          "enum": ["high", "medium", "low", "not_qualified", "insufficient_input"]
+        },
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "signals": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["budget", "authority", "need", "timeline"],
+          "properties": {
+            "budget": { "enum": ["known", "unknown", "insufficient", "not_applicable"] },
+            "authority": { "enum": ["confirmed", "likely", "unknown", "none"] },
+            "need": { "enum": ["explicit", "implicit", "unclear", "none"] },
+            "timeline": { "enum": ["immediate", "quarter", "half_year", "unknown", "none"] }
+          }
+        },
+        "reasoning": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+        }
+      }
+    },
+    "outreachDraft": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["channel", "body"],
+      "properties": {
+        "channel": { "enum": ["email", "chat"] },
+        "subject": { "type": "string", "maxLength": 200 },
+        "body": { "type": "string", "minLength": 1, "maxLength": 5000 }
+      }
+    },
+    "meetingExtraction": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["commitments", "objections", "nextActions"],
+      "properties": {
+        "commitments": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["statement"],
+            "properties": {
+              "statement": { "type": "string", "minLength": 1, "maxLength": 500 },
+              "owner": { "type": "string", "maxLength": 120 },
+              "dueBy": { "type": "string", "format": "date-time" },
+              "excerpt": { "type": "string", "maxLength": 500 }
+            }
+          }
+        },
+        "objections": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["statement"],
+            "properties": {
+              "statement": { "type": "string", "minLength": 1, "maxLength": 500 },
+              "kind": {
+                "enum": ["price", "timing", "capability", "authority", "competitor", "other"]
+              },
+              "excerpt": { "type": "string", "maxLength": 500 }
+            }
+          }
+        },
+        "nextActions": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["statement"],
+            "properties": {
+              "statement": { "type": "string", "minLength": 1, "maxLength": 500 },
+              "owner": { "type": "string", "maxLength": 120 },
+              "dueBy": { "type": "string", "format": "date-time" }
+            }
+          }
+        }
+      }
+    },
+    "crmSync": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "recordRef"],
+      "properties": {
+        "status": { "enum": ["synced", "degraded", "not_requested"] },
+        "reason": {
+          "enum": ["crm_connector_absent", "crm_write_rejected", "crm_write_pending_approval"]
+        },
+        "recordRef": { "type": ["string", "null"], "maxLength": 128 }
+      }
+    },
+    "requiresApproval": { "const": true },
+    "degraded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["capability", "reason"],
+        "properties": {
+          "capability": { "enum": ["crm_write", "enrichment"] },
+          "reason": {
+            "enum": ["crm_connector_absent", "crm_write_rejected", "web_search_connector_absent"]
+          },
+          "note": { "type": "string", "maxLength": 500 }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source"],
+        "properties": {
+          "source": { "enum": ["input", "knowledge", "connector"] },
+          "excerpt": { "type": "string", "maxLength": 500 }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "crmSync": { "properties": { "status": { "const": "degraded" } } } }
+      },
+      "then": {
+        "properties": {
+          "crmSync": {
+            "required": ["reason"],
+            "properties": { "recordRef": { "type": "null" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "crmSync": { "properties": { "status": { "const": "synced" } } } }
+      },
+      "then": {
+        "properties": {
+          "crmSync": {
+            "properties": { "recordRef": { "type": "string", "minLength": 1 } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "crmSync": { "properties": { "status": { "const": "not_requested" } } } }
+      },
+      "then": {
+        "properties": {
+          "crmSync": { "properties": { "recordRef": { "type": "null" } } }
+        }
+      }
+    }
+  ]
+}

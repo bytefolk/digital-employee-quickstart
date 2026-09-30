@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["account"],
+  "properties": {
+    "account": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["company"],
+      "properties": {
+        "company": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "domain": { "type": "string", "maxLength": 253 },
+        "suppliedContext": {
+          "type": "string",
+          "maxLength": 20000,
+          "description": "Caller-supplied text about the account (notes, CRM export, referral context). The package stays offline; enrichment beyond this text happens only through the web-search connector."
+        },
+        "language": { "type": "string", "minLength": 2, "maxLength": 8 }
+      }
+    },
+    "inquiry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rawMessage"],
+      "properties": {
+        "rawMessage": { "type": "string", "minLength": 1, "maxLength": 20000 },
+        "channel": {
+          "enum": ["email", "phone", "chat", "web_form", "event", "referral", "other"]
+        },
+        "receivedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "transcript": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1, "maxLength": 50000 },
+        "source": { "enum": ["dingtalk_minutes", "zoom", "teams", "phone", "other"] },
+        "occurredAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "crmTarget": {
+      "description": "Which CRM object this run should write back to. The write itself goes only through the crm connector; this field never carries record content.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "recordType": { "enum": ["lead", "contact", "opportunity", "activity"] },
+        "operation": { "enum": ["create", "update"] },
+        "externalId": { "type": "string", "maxLength": 128 }
+      }
+    }
+  }
+}

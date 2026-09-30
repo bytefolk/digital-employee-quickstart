@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
+    {
+      "id": "answered-with-citations",
+      "input": {
+        "customerMessage": {
+          "text": "How do I export my workspace data as a CSV?",
+          "channel": "chat",
+          "language": "en",
+          "receivedAt": "2026-09-20T02:00:00Z"
+        },
+        "productContext": "Team plan",
+        "kbSnapshot": [
+          {
+            "entry": "kb/export-data",
+            "text": "Workspace data can be exported from Settings > Data > Export. Choose CSV or JSON, then confirm. Exports are emailed as a download link within a few minutes. On the Team plan, exports include all workspace tables; scheduled exports are available on Enterprise only.",
+            "score": 0.93
+          },
+          {
+            "entry": "kb/scheduled-exports",
+            "text": "Scheduled exports are an Enterprise-only feature. Team-plan workspaces export on demand only.",
+            "score": 0.41
+          }
+        ]
+      },
+      "expectedOutput": {
+        "intent": "how_to",
+        "decision": "answer",
+        "confidence": "high",
+        "answer": {
+          "text": "Open Settings > Data > Export, choose CSV (or JSON), and confirm. The workspace data is emailed to you as a download link within a few minutes. On the Team plan exports include all workspace tables; scheduled exports are Enterprise-only, so on your plan you export on demand.",
+          "citations": [
+            {
+              "source": "knowledge-base",
+              "entry": "kb/export-data",
+              "excerpt": "Workspace data can be exported from Settings > Data > Export. Choose CSV or JSON, then confirm."
+            },
+            {
+              "source": "knowledge-base",
+              "entry": "kb/scheduled-exports",
+              "excerpt": "Scheduled exports are an Enterprise-only feature. Team-plan workspaces export on demand only."
+            }
+          ]
+        },
+        "escalation": null,
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "How do I export my workspace data as a CSV?"
+          },
+          {
+            "source": "knowledge-base",
+            "entry": "kb/export-data",
+            "excerpt": "Choose CSV or JSON, then confirm."
+          }
+        ]
+      }
+    },
+    {
+      "id": "low-confidence-escalate-partial-coverage",
+      "input": {
+        "customerMessage": {
+          "text": "We were charged twice for August and we are on a custom annual contract with a mid-year seat change. Can you tell me exactly how much we should be refunded, and refund it today?",
+          "channel": "email",
+          "language": "en",
+          "receivedAt": "2026-09-21T06:30:00Z"
+        },
+        "productContext": "Custom annual contract",
+        "kbSnapshot": [
+          {
+            "entry": "kb/billing-cycle",
+            "text": "Standard plans are billed monthly in advance. Mid-cycle seat changes are prorated on the next invoice.",
+            "score": 0.58
+          }
+        ]
+      },
+      "expectedOutput": {
+        "intent": "billing",
+        "decision": "escalate",
+        "confidence": "low",
+        "answer": null,
+        "escalation": {
+          "reason": "low_confidence",
+          "retrievalAttempt": {
+            "queries": [
+              "duplicate charge refund policy",
+              "custom annual contract seat change billing",
+              "refund request process"
+            ],
+            "entriesConsidered": ["kb/billing-cycle"],
+            "note": "One entry addresses standard-plan billing only; it says nothing about duplicate charges on custom annual contracts, and no entry supports computing a refund amount."
+          },
+          "handoff": {
+            "note": "Customer reports a duplicate August charge on a custom annual contract with a mid-year seat change and asks for an exact refund amount plus an immediate refund. Retrieval returned only kb/billing-cycle, which covers standard monthly plans and prorating - it does not cover duplicate-charge correction or custom-contract reconciliation. A human with contract access must confirm the charge and own any refund; the employee must not compute amounts.",
+            "urgency": "medium",
+            "ticket": {
+              "filed": false,
+              "ticketRef": null
+            }
+          }
+        },
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "We were charged twice for August"
+          },
+          {
+            "source": "knowledge-base",
+            "entry": "kb/billing-cycle",
+            "excerpt": "Standard plans are billed monthly in advance. Mid-cycle seat changes are prorated on the next invoice."
+          }
+        ]
+      }
+    },
+    {
+      "id": "no-kb-escalates-everything",
+      "input": {
+        "customerMessage": {
+          "text": "Where is the setting to turn on weekly email digests?",
+          "channel": "chat",
+          "language": "en",
+          "receivedAt": "2026-09-22T03:15:00Z"
+        }
+      },
+      "expectedOutput": {
+        "intent": "how_to",
+        "decision": "escalate",
+        "confidence": "low",
+        "answer": null,
+        "escalation": {
+          "reason": "no_kb",
+          "retrievalAttempt": {
+            "queries": [],
+            "entriesConsidered": [],
+            "note": "No knowledge-base connector and no supplied entries; nothing could be retrieved for a question that would otherwise be routine."
+          },
+          "handoff": {
+            "note": "Customer asks where to enable weekly email digests. No knowledge base is available in this run, so no answer may be drafted - answering from model priors is prohibited by policy. A human must answer or supply the knowledge base.",
+            "urgency": "low",
+            "ticket": {
+              "filed": false,
+              "ticketRef": null
+            }
+          }
+        },
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "Where is the setting to turn on weekly email digests?"
+          },
+          {
+            "source": "policy",
+            "excerpt": "No knowledge base available: every request escalates with reason no_kb, never answered from model priors."
+          }
+        ]
+      }
+    },
+    {
+      "id": "out-of-scope-escalates-despite-kb",
+      "input": {
+        "customerMessage": {
+          "text": "A competitor published a comparison claiming your product stores data offshore. Advise me whether we can sue them for defamation, and also confirm whether it is true.",
+          "channel": "email",
+          "language": "en",
+          "receivedAt": "2026-09-23T09:45:00Z"
+        },
+        "kbSnapshot": [
+          {
+            "entry": "kb/data-residency",
+            "text": "Workspace data is stored in the region selected at workspace creation; Enterprise workspaces can pin a region.",
+            "score": 0.62
+          }
+        ]
+      },
+      "expectedOutput": {
+        "intent": "out_of_scope",
+        "decision": "escalate",
+        "confidence": "low",
+        "answer": null,
+        "escalation": {
+          "reason": "out_of_scope",
+          "retrievalAttempt": {
+            "queries": ["legal advice defamation claim", "data residency claim by competitor"],
+            "entriesConsidered": ["kb/data-residency"],
+            "note": "The message asks for legal advice and for commentary on a competitor's claim. Legal advice is outside the documented surface; kb/data-residency describes storage regions but does not address the competitor's statement."
+          },
+          "handoff": {
+            "note": "Customer asks (a) whether they can sue a competitor for defamation and (b) whether the competitor's offshore-storage claim is true. Legal advice is out of scope. The factual part belongs to legal/comms, who must own the public position; kb/data-residency may be relevant background but must not be used by this employee to respond to a third party's claim.",
+            "urgency": "medium",
+            "ticket": {
+              "filed": false,
+              "ticketRef": null
+            }
+          }
+        },
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "Advise me whether we can sue them for defamation"
+          },
+          {
+            "source": "knowledge-base",
+            "entry": "kb/data-residency",
+            "excerpt": "Workspace data is stored in the region selected at workspace creation."
+          },
+          {
+            "source": "policy",
+            "excerpt": "The intent is out_of_scope: escalate with reason out_of_scope regardless of what the knowledge base contains."
+          }
+        ]
+      }
+    }
+  ]
+}

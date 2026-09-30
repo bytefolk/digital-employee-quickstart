@@ -67,6 +67,8 @@ eval: passed (3/3) | failed
 | [`ops-approval`](cases/ops-approval/) | 运维审批提案 | 把请求转成结构化提案——只提案不执行 |
 | [`product-faq`](cases/product-faq/) | 产品 FAQ | 面向客户的产品问答，从公开文档回答 |
 | [`sales-qualifier`](cases/sales-qualifier/) | 销售资格评估 | 把原始询盘转成结构化资格提案——不发消息、不报价、不承诺交期，须人工审批。可选 [`enterpriseContext`](docs/adapters/sales-qualifier-enterprise-context.md) 让企业在调用侧接入自己的 CRM 数据 |
+| [`sales-employee`](cases/sales-employee/) | 通用销售员工 | 资质判断 → 触达草稿 → 会议纪要提取 → 经声明的 `crm` 连接器写回；连接器缺席时显式降级，绝不伪造记录 |
+| [`support-employee`](cases/support-employee/) | 客服员工 | 意图分类 → 只凭引用的知识库条目作答 → 低于置信阈值升级转人工；没有知识库时全部升级，不用模型先验作答 |
 
 对其他案例执行同样的无凭据检查：
 

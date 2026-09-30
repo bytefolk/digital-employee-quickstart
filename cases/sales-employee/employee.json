@@ -1,0 +1,54 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "sales-employee",
+  "version": "1.0.0",
+  "description": "General-purpose sales employee: qualifies a target account with cited reasoning, drafts first-touch outreach calibrated to the qualification, and extracts commitments, objections and next actions from a meeting transcript. The crm connector is only ever requested, never assumed: when it is absent the run degrades explicitly and no record or record id is produced.",
+  "license": "Apache-2.0",
+  "authors": [
+    "ByteFolk"
+  ],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": [
+      "structured_output",
+      "mcp"
+    ]
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json",
+    "mcp": "./mcp.json"
+  },
+  "policy": {
+    "mode": "approval_required",
+    "network": "host_policy",
+    "filesystem": {
+      "read": [
+        "./knowledge/**"
+      ],
+      "write": []
+    },
+    "mcpTools": [
+      {
+        "name": "crm.account.read",
+        "requestedMode": "read"
+      },
+      {
+        "name": "crm.account.upsert",
+        "requestedMode": "write"
+      },
+      {
+        "name": "web.search",
+        "requestedMode": "read"
+      }
+    ]
+  },
+  "assets": [
+    "./knowledge/qualification-scoring.md",
+    "./knowledge/outreach-playbook.md",
+    "./knowledge/meeting-note-extraction.md",
+    "./evals/cases.json"
+  ]
+}

@@ -32,6 +32,8 @@ deploy 指引。完成或失败后，只在
 | `ops-approval/` | 运维审批提案（结构化输出） | 是 |
 | `product-faq/` | 产品 FAQ（对外客服场景） | 是 |
 | `sales-qualifier/` | 销售资格评估（结构化提案，企业数据走调用侧 `enterpriseContext`） | 是 |
+| `sales-employee/` | 通用销售员工（资质判断 → 触达草稿 → 会议纪要提取 → CRM 写回，连接器声明式接入） | 是 |
+| `support-employee/` | 客服员工（意图分类 → 引用知识库作答 → 低于阈值升级转人工） | 是 |
 
 ## 案例规范
 
@@ -48,6 +50,18 @@ deploy 指引。完成或失败后，只在
 └── evals/
     └── cases.json         # employee-evals.v1alpha1 离线样例
 ```
+
+声明了 `policy.mcpTools` 的案例还必须提供 `mcp.json` 并在 `entrypoints.mcp` 中引用它。
+连接器声明以框架仓库 [`bytefolk/digital-employee`](https://github.com/bytefolk/digital-employee)
+的契约为准：`employee-mcp.v1alpha1`（每个 server 必须带 `transport`；`policy.mcpTools`
+声明到**工具**一级的 `requestedMode`；凭据只能写环境变量名，不能写明文）。
+工作区 showcase 使用的 `workbench-mcp.v1` 不是包契约，在公开 CLI `0.6.0` 下会以
+`unsupported_employee_mcp_schema` 直接失败。
+
+`sales-employee/` 与 `support-employee/` 即为此类案例：外部数据只能通过声明的连接器
+进入，连接器缺席时必须在输出中显式降级，不得伪造记录或用模型先验作答。每个案例的
+连接器契约（服务器要暴露什么工具、跨界发送什么数据、保留策略、时间/体积上限、
+拒绝输入用例）记录在 [`docs/adapters/`](../docs/adapters/)。
 
 ## 创建你自己的案例
 
@@ -74,4 +88,3 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
    npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
      digital-employee org apply <工作区路径> --json
    ```
-
