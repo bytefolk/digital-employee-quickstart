@@ -5,10 +5,18 @@ This directory implements the first offline slice of the R&D digital employee pr
 ## Capability boundary
 
 - Public compatibility baseline: `@fullstack-ai-infra/digital-employee@0.6.0`. `validate` checks package structure; `eval` checks public fixture contracts. Neither calls a model.
-- All seven positions request workspace-wide read/write scope, host-policy network access, and approval before actions. The organization allowlist includes read, write, shell, and common browser/search tool names. These are permission requests: effective tools and network access still depend on the configured Agent Host, and the published v0.6 adapters do not provide the isolated code-writing, test execution, and post-approval patch application needed for an R&D delivery loop.
+- All seven positions request package reads and writes only to their own `./work/**`, with approval before actions. Employee manifests, skills, schemas, eval fixtures, knowledge, and playbooks remain read-only. The organization allowlist includes read, write, and common browser/search tool names; `Bash` is explicitly denied. These are permission requests: effective tools and network access still depend on the configured Agent Host, and the published v0.6 adapters do not provide the isolated code-writing, test execution, and post-approval patch application needed for an R&D delivery loop.
 - The organization file describes reporting lines. `workflow.json` describes a proposed sequence and human gates; the current CLI does not execute it.
 - `cases/` contains only public synthetic teaching material. Real cases require authorization, anonymization, a pinned baseline, and human review. Held-out tasks and hidden tests belong in a separate evaluation environment.
 - Runtime output, credentials, Agent Host bindings, and repository copies are not part of this template.
+
+## Permission enforcement and independent review
+
+Tool/MCP data-plane network access defaults to `deny`. The fallback for any future `host_policy` request is **fail-closed**: unsupported, unknown, or unenforced host policy means deny. Enabling it requires a separate reviewed change with evidence that the selected host enforces network boundaries and explicit task authorization. Exposing browser/search tools is not a network grant; host authentication/model control-plane traffic is outside this policy.
+
+Tool-name organization rules cannot constrain Bash subcommands, so the shell stays denied until a separately reviewed scoped execution path exists. Every role's SKILL and playbook prohibit deleting files (`rm`), resetting history, pushing or merging (`git push`), deploying, installing packages, downloading/executing scripts (`curl`/`wget` pipelines), bypassing denied tools, and changing its own acceptance baseline or policy. Propose those actions for separate human execution and review. A host must enforce filesystem scope, tool grants, network restrictions, and approval; otherwise do not run these packages. Text instructions and offline checks alone are not a sandbox.
+
+`.github/CODEOWNERS` assigns the R&D showcase, its CI workflow, and CODEOWNERS itself to the independent reviewer `@PeterGuy326`. Repository administrators must enable required code-owner reviews on `main`; this file alone does not enforce a gate. Permission changes (including check-script changes) need an approving non-author reviewer to verify the policy diff, the package digests, and host enforcement evidence. Digests refreshed by the change author remain integrity checks, not independent approval.
 
 ## Credential-free verification
 

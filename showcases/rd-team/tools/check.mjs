@@ -8,6 +8,16 @@ import { search } from './search.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const json = (path) => JSON.parse(readFileSync(join(root, path), 'utf8'));
 const org = json('organization.v1alpha1.json');
+// Pin a conservative default rather than accepting every declaration from the
+// organization being checked. Changes here also require independent ownership.
+const owners = readFileSync(join(root, '../../.github/CODEOWNERS'), 'utf8');
+for (const path of ['/showcases/rd-team/', '/.github/workflows/showcases-rd-team-v0.6.yml', '/.github/CODEOWNERS']) {
+  assert(owners.split('\n').includes(`${path} @PeterGuy326`), `Missing independent owner for ${path}`);
+}
+for (const readme of ['README.md', 'README.zh-CN.md']) {
+  const content = readFileSync(join(root, readme), 'utf8');
+  assert(content.includes('fail-closed') && content.includes('host_policy') && content.includes('deny'), `${readme}: missing network fallback boundary`);
+}
 const roles = org.roles.map((role) => role.id);
 assert.equal(roles.length, 7);
 assert.equal(new Set(roles).size, 7);
@@ -17,10 +27,19 @@ for (const role of org.roles) {
   assert.equal(manifest.name, role.id);
   assert.equal(manifest.policy.mode, 'approval_required');
   assert.deepEqual(manifest.policy.filesystem.read, ['./**']);
-  assert.deepEqual(manifest.policy.filesystem.write, ['./**']);
-  assert.equal(manifest.policy.network, 'host_policy');
-  assert.deepEqual(role.toolAllow, ['Read', 'Grep', 'Glob', 'Write', 'Edit', 'Bash', 'WebSearch', 'WebFetch', 'Browser']);
-  assert.deepEqual(role.toolDeny, []);
+  assert.deepEqual(manifest.policy.filesystem.write, ['./work/**']);
+  // Deny by default: an unsupported host_policy must never imply allow.
+  // A future opt-in needs independently reviewed host enforcement evidence.
+  assert.equal(manifest.policy.network, 'deny');
+  assert.deepEqual(role.toolAllow, ['Read', 'Grep', 'Glob', 'Write', 'Edit', 'WebSearch', 'WebFetch', 'Browser']);
+  assert.deepEqual(role.toolDeny, ['Bash']);
+  assert(role.toolDeny.every(tool => !role.toolAllow.includes(tool)));
+  for (const instructions of ['SKILL.md', 'playbooks/task.md']) {
+    const content = readFileSync(join(root, prefix, instructions), 'utf8');
+    for (const boundary of ['work/', 'employee.json', 'evals', 'schemas', 'Bash', 'rm', 'git push', 'curl', 'host_policy', 'fail-closed']) {
+      assert(content.includes(boundary), `${role.id}/${instructions}: missing ${boundary} boundary`);
+    }
+  }
   assert.equal(role.mode, 'approval_required');
   for (const asset of manifest.assets) assert(existsSync(join(root, prefix, asset)));
   const output = json(`${prefix}/schemas/output.schema.json`);
@@ -52,4 +71,4 @@ const wrongStack = search({role: 'frontend-engineer', 'task-type': 'frontend-fea
 assert.equal(wrongStack.count, 0);
 const noHit = search({role: 'frontend-engineer', 'task-type': 'frontend-feature', query: 'unrelated astronomy observatory', limit: 5});
 assert.equal(noHit.count, 0);
-console.log(JSON.stringify({status: 'passed', roles: roles.length, cases: json('cases/catalog.json').cases.length, checks: ['assets','fixtures','workflow','case-provenance','search','baseline-conflict']}));
+console.log(JSON.stringify({status: 'passed', roles: roles.length, cases: json('cases/catalog.json').cases.length, checks: ['assets','fixtures','workflow','case-provenance','search','baseline-conflict','output-only-writes','shell-deny','network-fail-closed','independent-ownership']}));

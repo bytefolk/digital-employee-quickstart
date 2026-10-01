@@ -1,0 +1,6 @@
+# Independent review of R&D permissions, validation, fixtures, and this ownership file.
+# Enable required code-owner reviews in the main branch rules; this file alone
+# cannot enforce approval. The PR author cannot satisfy independent approval.
+/showcases/rd-team/ @PeterGuy326
+/.github/workflows/showcases-rd-team-v0.6.yml @PeterGuy326
+/.github/CODEOWNERS @PeterGuy326

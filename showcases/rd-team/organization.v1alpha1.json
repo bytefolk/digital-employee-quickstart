@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/workspace-org.schema.json",
   "schemaVersion": "workspace-org.v1",
   "business": "rd-team",
-  "description": "Seven approval-gated research and development roles with workspace read/write, host-policy network requests, independent review, and QA responsibilities.",
+  "description": "Seven approval-gated research and development roles with package reads, isolated work output, default-denied shell/network access, independent review, and QA responsibilities.",
   "owner": "tech-lead",
   "roles": [
     {
@@ -13,7 +13,7 @@
       "package": {
         "name": "tech-lead",
         "version": "0.1.0",
-        "digest": "sha256:e8b520d2089466a9d3ab7106a97ae91b173701a62c6d110597c8f93070991a4f",
+        "digest": "sha256:3c454052f4b204ea7b2d0e70841944244cf1b6cdb822ddb9aa4f65c15cf92e08",
         "localReference": "/workspace/positions/tech-lead"
       },
       "mode": "approval_required",
@@ -24,12 +24,13 @@
         "Glob",
         "Write",
         "Edit",
-        "Bash",
         "WebSearch",
         "WebFetch",
         "Browser"
       ],
-      "toolDeny": [],
+      "toolDeny": [
+        "Bash"
+      ],
       "metadata": {
         "roleweave.i18n.zh-CN.name": "研发负责人",
         "roleweave.i18n.zh-CN.description": "澄清范围、分解任务、识别风险并复核证据"
@@ -53,7 +54,7 @@
       "package": {
         "name": "product-manager",
         "version": "0.1.0",
-        "digest": "sha256:16718b83f3ba81c0e5bb5b10a44f87b7a10479ab5ec28f1b2688359f1dcec062",
+        "digest": "sha256:af3f9aa7aee1c5a1afab21e4531f43e19257d0461865924141faeb49b0c7a035",
         "localReference": "/workspace/positions/tech-lead/product-manager"
       },
       "mode": "approval_required",
@@ -64,12 +65,13 @@
         "Glob",
         "Write",
         "Edit",
-        "Bash",
         "WebSearch",
         "WebFetch",
         "Browser"
       ],
-      "toolDeny": [],
+      "toolDeny": [
+        "Bash"
+      ],
       "metadata": {
         "roleweave.i18n.zh-CN.name": "产品经理",
         "roleweave.i18n.zh-CN.description": "整理需求、用户故事和可验证的验收标准"
@@ -93,7 +95,7 @@
       "package": {
         "name": "ui-ux-designer",
         "version": "0.1.0",
-        "digest": "sha256:892653b490515de965d95bedc992267b6b5aceed2ba0724a6e425a47b7572ca8",
+        "digest": "sha256:8030bb65d882c52de521a9a4e94f11d50c0c4ded24b9c1a42d8761f33d19d7ca",
         "localReference": "/workspace/positions/tech-lead/ui-ux-designer"
       },
       "mode": "approval_required",
@@ -104,12 +106,13 @@
         "Glob",
         "Write",
         "Edit",
-        "Bash",
         "WebSearch",
         "WebFetch",
         "Browser"
       ],
-      "toolDeny": [],
+      "toolDeny": [
+        "Bash"
+      ],
       "metadata": {
         "roleweave.i18n.zh-CN.name": "UI/UX 设计师",
         "roleweave.i18n.zh-CN.description": "基于已批准设计规范描述页面、交互和全部状态"
@@ -133,7 +136,7 @@
       "package": {
         "name": "frontend-engineer",
         "version": "0.1.0",
-        "digest": "sha256:feaa447adbc1027732090414cc5dff4385c63424dbf57032f2cfc092222fbcde",
+        "digest": "sha256:c2cd5bce42131b70cd91e9fc33555e9dc82ca3582d8ebcc267383650d69bcc84",
         "localReference": "/workspace/positions/tech-lead/frontend-engineer"
       },
       "mode": "approval_required",
@@ -144,12 +147,13 @@
         "Glob",
         "Write",
         "Edit",
-        "Bash",
         "WebSearch",
         "WebFetch",
         "Browser"
       ],
-      "toolDeny": [],
+      "toolDeny": [
+        "Bash"
+      ],
       "metadata": {
         "roleweave.i18n.zh-CN.name": "前端工程师",
         "roleweave.i18n.zh-CN.description": "根据设计和 API 提出前端实现、测试与 Patch"
@@ -173,7 +177,7 @@
       "package": {
         "name": "backend-engineer",
         "version": "0.1.0",
-        "digest": "sha256:cb7124ea3e3be73c3ad98aa3b479100fb77fc0a64dfd0951dd2b1553c63a908c",
+        "digest": "sha256:05e6d1f5336797f40ac0bbee611ceb7a806a1fb9770b9d21f527a9dd59dcee7d",
         "localReference": "/workspace/positions/tech-lead/backend-engineer"
       },
       "mode": "approval_required",
@@ -184,12 +188,13 @@
         "Glob",
         "Write",
         "Edit",
-        "Bash",
         "WebSearch",
         "WebFetch",
         "Browser"
       ],
-      "toolDeny": [],
+      "toolDeny": [
+        "Bash"
+      ],
       "metadata": {
         "roleweave.i18n.zh-CN.name": "后端工程师",
         "roleweave.i18n.zh-CN.description": "根据需求提出接口、验证、权限及测试实现"
@@ -213,7 +218,7 @@
       "package": {
         "name": "code-reviewer",
         "version": "0.1.0",
-        "digest": "sha256:07e7230743d2e04ef85275849a2c6678eccbc8d2f30444732ad87f0cefe6f07c",
+        "digest": "sha256:a915c8fb198e529becbfbb54904ac829b30c0bf101922ab735a0a7de46b0d5b1",
         "localReference": "/workspace/positions/tech-lead/code-reviewer"
       },
       "mode": "approval_required",
@@ -224,12 +229,13 @@
         "Glob",
         "Write",
         "Edit",
-        "Bash",
         "WebSearch",
         "WebFetch",
         "Browser"
       ],
-      "toolDeny": [],
+      "toolDeny": [
+        "Bash"
+      ],
       "metadata": {
         "roleweave.i18n.zh-CN.name": "代码评审员",
         "roleweave.i18n.zh-CN.description": "独立审查 Diff、架构、安全和可维护性"
@@ -253,7 +259,7 @@
       "package": {
         "name": "qa-engineer",
         "version": "0.1.0",
-        "digest": "sha256:7ef2caef67f7ff5eb3cb06707728d434c1caab0a1fe4b14b210520d1866a3a7a",
+        "digest": "sha256:92f77ef076a246e72eb3de6165e5fd54e64ea0aa3051571d380705879f033a1e",
         "localReference": "/workspace/positions/tech-lead/qa-engineer"
       },
       "mode": "approval_required",
@@ -264,12 +270,13 @@
         "Glob",
         "Write",
         "Edit",
-        "Bash",
         "WebSearch",
         "WebFetch",
         "Browser"
       ],
-      "toolDeny": [],
+      "toolDeny": [
+        "Bash"
+      ],
       "metadata": {
         "roleweave.i18n.zh-CN.name": "QA 测试工程师",
         "roleweave.i18n.zh-CN.description": "独立追踪验收条件，执行测试并报告缺陷"

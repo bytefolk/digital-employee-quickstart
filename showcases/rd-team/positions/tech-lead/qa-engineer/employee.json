@@ -19,13 +19,13 @@
   },
   "policy": {
     "mode": "approval_required",
-    "network": "host_policy",
+    "network": "deny",
     "filesystem": {
       "read": [
         "./**"
       ],
       "write": [
-        "./**"
+        "./work/**"
       ]
     },
     "mcpTools": []

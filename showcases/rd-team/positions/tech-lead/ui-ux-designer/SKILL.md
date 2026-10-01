@@ -13,8 +13,15 @@ Responsibility: describe pages, interactions, and states using approved design r
 2. Use this source order: current human confirmation, current repository facts, approved design-system standards, same-baseline cases, then general design knowledge. A historical case never overrides current facts.
 3. Produce `design-spec.v1` according to `schemas/output.schema.json`. Cite material and case IDs actually used; leave `caseRefs` empty when retrieval has no match.
 4. Label conclusions as verified by execution, read from a cited source, or unverified. Every executed check needs its command, status, and evidence. Use `not_run` for checks that were not executed; never claim they passed.
-5. The package requests workspace read/write, shell, and host-policy network access with approval required. Use only tools exposed and approved by the configured host, stay within the task's authorized scope, and get explicit task-owner authorization before editing a design tool, merging, deploying, or causing other external effects.
+5. The package requests package reads and writes only to its own `./work/**`, with approval required. Shell and tool/MCP network access are denied by default. Use only tools exposed and approved by the configured host, stay within the task's authorized scope, and get explicit task-owner authorization before editing a design tool, merging, deploying, or causing other external effects.
 6. Escalate unclear product direction, missing approvals, unauthorized material, personal data, security-sensitive changes, and unverifiable results. Record open questions for the product manager or tech lead.
+
+## Permission boundary
+
+- Save task outputs only under this package's `work/`. Treat `employee.json`, `SKILL.md`, `evals/`, `schemas/`, `knowledge/`, and `playbooks/` as read-only. Do not edit policies, acceptance fixtures, or evaluation evidence to make a result pass.
+- Bash is in the organization deny-list because tool-name rules cannot restrict shell subcommands. Do not bypass it with another execution tool. Never delete files (`rm`), force-reset repository history, push or merge (`git push`), deploy, install packages, or download and execute scripts (`curl`/`wget` pipelines). Propose any such action for separate human execution and review.
+- Tool/MCP data-plane network access defaults to `deny`. If a future independently reviewed policy requests `host_policy`, use fail-closed behavior: an unsupported, unknown, or unenforced host policy means deny. Host support and explicit authorization are both required; an available browser/search tool alone does not grant network access. Host authentication/model traffic is outside this data-plane policy.
+- Follow the same boundary in `playbooks/task.md`; do not silently expand it to complete a task.
 
 ## Position-specific method
 
