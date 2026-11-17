@@ -32,6 +32,18 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 | CLI version pin | — | `@fullstack-ai-infra/digital-employee@0.6.0` |
 | What it does not prove | — | No live knowledge-base connector call. No live ticketing system call. No model invocation. The eval proves the **intent classification contract**, the **citation contract**, and the **escalation contract** (including the no-KB path), not that a live run would retrieve the same entries or produce the same copy. |
 
+## ecommerce-support
+
+| Evidence | Eval case | Key observation |
+|---|---|---|
+| Order-status answer with citations | `order-status-answered-with-citations` | `intent=order_status`, `decision=answer`, `confidence=high`. Pre-sale shipping question answered from two cited entries (`kb/presale-shipping`, `kb/shipping-hours`); no delivery date is committed beyond what the policy states. |
+| Product question answer with citations | `product-question-answered-with-citations` | `intent=product_qa`, `decision=answer`, `confidence=high`. Usage and warranty answered from `kb/thermos-usage` and `kb/warranty` with excerpts; `requiresApproval=true` on every run. |
+| Refund-amount escalation (no manual computation) | `refund-amount-low-confidence-escalate` | `intent=return_refund`, `decision=escalate`, `confidence=low`. Shopper demands a self-computed 268 CNY merged refund; `kb/price-protection` states amounts are system-assessed and staff never compute them. Escalation reason: `low_confidence`; no amount is confirmed, no refund is performed. |
+| Authenticity/compensation out-of-scope escalation | `authenticity-compensation-out-of-scope-escalate` | `intent=out_of_scope`, `decision=escalate`, `confidence=low`, `urgency=high`. Counterfeit claim with a 12315 complaint and a "假一赔三" demand; `kb/authenticity` is a shop statement, not a licence to adjudicate authenticity or promise compensation. Escalation reason: `out_of_scope`. |
+| No-KB run: 100% escalation | `no-kb-escalates-everything` | `intent=order_status`, `decision=escalate`, `confidence=low`. No knowledge-base connector and no supplied entries; even a routine shipping question escalates with reason `no_kb`. No answer is produced from model priors. |
+| CLI version pin | — | `@fullstack-ai-infra/digital-employee@0.6.0` |
+| What it does not prove | — | No live knowledge-base connector call. No live ticketing system call. No refund, order write, or model invocation. The eval proves the **intent classification contract**, the **citation contract**, and the **escalation contract** (refund-amount, authenticity/liability, and no-KB paths), not that a live run would retrieve the same entries or produce the same copy. |
+
 ## sales-qualifier
 
 | Evidence | Eval case | Key observation |

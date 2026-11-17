@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
+    {
+      "id": "order-status-answered-with-citations",
+      "input": {
+        "customerMessage": {
+          "text": "我下的是预售款，今天刚付的钱，大概什么时候能发货？",
+          "channel": "chat",
+          "language": "zh",
+          "receivedAt": "2026-11-18T02:00:00Z"
+        },
+        "productContext": "预售商品订单",
+        "kbSnapshot": [
+          {
+            "entry": "kb/presale-shipping",
+            "text": "预售商品以商品详情页标注的预计发货时间为准，通常在该时间后的 48 小时内发出，发出后可在订单详情查看物流；预售期遇法定节假日顺延。",
+            "score": 0.9
+          },
+          {
+            "entry": "kb/shipping-hours",
+            "text": "仓库工作日 9:00-18:00 打包发货，周末与法定节假日不发货。",
+            "score": 0.5
+          }
+        ]
+      },
+      "expectedOutput": {
+        "intent": "order_status",
+        "decision": "answer",
+        "confidence": "high",
+        "answer": {
+          "text": "您这单是预售款，发货时间以商品详情页标注的“预计发货时间”为准，通常在该时间后的 48 小时内发出；仓库在工作日 9:00-18:00 打包，周末和法定节假日不发货、预售期遇节假日顺延。发出后您可在订单详情查看物流。",
+          "citations": [
+            {
+              "source": "knowledge-base",
+              "entry": "kb/presale-shipping",
+              "excerpt": "预售商品以商品详情页标注的预计发货时间为准，通常在该时间后的 48 小时内发出。"
+            },
+            {
+              "source": "knowledge-base",
+              "entry": "kb/shipping-hours",
+              "excerpt": "仓库工作日 9:00-18:00 打包发货，周末与法定节假日不发货。"
+            }
+          ]
+        },
+        "escalation": null,
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "我下的是预售款，今天刚付的钱，大概什么时候能发货？"
+          },
+          {
+            "source": "knowledge-base",
+            "entry": "kb/presale-shipping",
+            "excerpt": "以商品详情页标注的预计发货时间为准"
+          }
+        ]
+      }
+    },
+    {
+      "id": "product-question-answered-with-citations",
+      "input": {
+        "customerMessage": {
+          "text": "这款保温杯能直接装刚烧开的沸水吗？保修多久？",
+          "channel": "chat",
+          "language": "zh",
+          "receivedAt": "2026-11-18T02:30:00Z"
+        },
+        "kbSnapshot": [
+          {
+            "entry": "kb/thermos-usage",
+            "text": "本品内胆为 316 不锈钢，可盛装沸水；请勿在装入刚烧开的沸水后立即密封摇晃，以免烫伤。",
+            "score": 0.88
+          },
+          {
+            "entry": "kb/warranty",
+            "text": "保温杯提供自签收之日起 12 个月质保，非人为造成的保温失效或漏水可申请换新。",
+            "score": 0.61
+          }
+        ]
+      },
+      "expectedOutput": {
+        "intent": "product_qa",
+        "decision": "answer",
+        "confidence": "high",
+        "answer": {
+          "text": "可以，这款内胆是 316 不锈钢，能装刚烧开的沸水；只是别装完沸水就立刻密封摇晃，防止烫伤。质保方面，自签收之日起 12 个月内，非人为的保温失效或漏水可申请换新。",
+          "citations": [
+            {
+              "source": "knowledge-base",
+              "entry": "kb/thermos-usage",
+              "excerpt": "本品内胆为 316 不锈钢，可盛装沸水。"
+            },
+            {
+              "source": "knowledge-base",
+              "entry": "kb/warranty",
+              "excerpt": "保温杯提供自签收之日起 12 个月质保。"
+            }
+          ]
+        },
+        "escalation": null,
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "这款保温杯能直接装刚烧开的沸水吗？保修多久？"
+          },
+          {
+            "source": "knowledge-base",
+            "entry": "kb/warranty",
+            "excerpt": "非人为造成的保温失效或漏水可申请换新"
+          }
+        ]
+      }
+    },
+    {
+      "id": "refund-amount-low-confidence-escalate",
+      "input": {
+        "customerMessage": {
+          "text": "双十一买的，现在降价了我要价保退差价。另外这两单帮我一起退款，我算过了应该退我 268 元，你今天直接原路退给我就行。",
+          "channel": "chat",
+          "language": "zh",
+          "receivedAt": "2026-11-18T03:10:00Z"
+        },
+        "productContext": "两笔历史订单",
+        "kbSnapshot": [
+          {
+            "entry": "kb/price-protection",
+            "text": "支持签收后 7 天内价保，需同一商品同一规格且仍在价保期内；差价按系统核定的实付差额退还，客服不手工计算金额。",
+            "score": 0.6
+          }
+        ]
+      },
+      "expectedOutput": {
+        "intent": "return_refund",
+        "decision": "escalate",
+        "confidence": "low",
+        "answer": null,
+        "escalation": {
+          "reason": "low_confidence",
+          "retrievalAttempt": {
+            "queries": [
+              "价保退差价 规则",
+              "两单合并退款 金额核定",
+              "退款 268 元 计算"
+            ],
+            "entriesConsidered": ["kb/price-protection"],
+            "note": "唯一命中的价保条目明确“按系统核定的实付差额退还、客服不手工计算”，且没有任何条目授权合并两单退款或确认 268 元这一金额。买家要求据其自算金额直接退款，属于必须有人工以订单与支付权限核定的操作。"
+          },
+          "handoff": {
+            "note": "买家申请价保退差价并要求按其计算的 268 元合并两单原路退款。知识库仅覆盖价保规则且规定金额由系统核定、客服不得手工计算。员工不得计算或承诺退款金额，更不能执行退款；需由具备订单与支付权限的人工核定价保资格与实付差额。",
+            "urgency": "medium",
+            "ticket": {
+              "filed": false,
+              "ticketRef": null
+            }
+          }
+        },
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "我算过了应该退我 268 元，你今天直接原路退给我就行"
+          },
+          {
+            "source": "knowledge-base",
+            "entry": "kb/price-protection",
+            "excerpt": "差价按系统核定的实付差额退还，客服不手工计算金额。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "authenticity-compensation-out-of-scope-escalate",
+      "input": {
+        "customerMessage": {
+          "text": "你们卖的就是假货，我已经在 12315 投诉了。我现在要求假一赔三并保留起诉权利，你作为客服现在就给我确认是不是假货、赔不赔。",
+          "channel": "email",
+          "language": "zh",
+          "receivedAt": "2026-11-18T04:00:00Z"
+        },
+        "kbSnapshot": [
+          {
+            "entry": "kb/authenticity",
+            "text": "本店所售均为品牌授权正品，支持专柜验货与官方防伪码验证。",
+            "score": 0.62
+          }
+        ]
+      },
+      "expectedOutput": {
+        "intent": "out_of_scope",
+        "decision": "escalate",
+        "confidence": "low",
+        "answer": null,
+        "escalation": {
+          "reason": "out_of_scope",
+          "retrievalAttempt": {
+            "queries": [
+              "是否正品 鉴定 结论",
+              "假一赔三 赔付",
+              "12315 投诉 处理"
+            ],
+            "entriesConsidered": ["kb/authenticity"],
+            "note": "买家要求对真伪作结论、判定并执行“假一赔三”赔付，且已进入监管投诉并提及诉讼。真伪鉴定结论、赔偿判定与法律/监管争议超出员工范围；kb/authenticity 仅是店铺正品声明，不能据此对第三方指控作鉴定或承诺赔付。"
+          },
+          "handoff": {
+            "note": "买家主张售假，已在 12315 投诉并要求假一赔三、保留起诉权利，要求客服当场确认是否假货及是否赔付。真伪鉴定、赔偿判定与法律/监管争议属 out_of_scope，须转交具备鉴定资质与授权的人工或法务处理；员工不得复述正品声明来否认指控或承诺任何赔付。",
+            "urgency": "high",
+            "ticket": {
+              "filed": false,
+              "ticketRef": null
+            }
+          }
+        },
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "要求假一赔三并保留起诉权利……现在就给我确认是不是假货、赔不赔"
+          },
+          {
+            "source": "knowledge-base",
+            "entry": "kb/authenticity",
+            "excerpt": "本店所售均为品牌授权正品，支持专柜验货与官方防伪码验证。"
+          },
+          {
+            "source": "policy",
+            "excerpt": "意图为 out_of_scope：无论知识库内容如何，一律以 reason out_of_scope 升级。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "no-kb-escalates-everything",
+      "input": {
+        "customerMessage": {
+          "text": "我三天前下的订单到现在还没发货，你们是不是把我的收货地址搞错了？",
+          "channel": "chat",
+          "language": "zh",
+          "receivedAt": "2026-11-18T05:00:00Z"
+        }
+      },
+      "expectedOutput": {
+        "intent": "order_status",
+        "decision": "escalate",
+        "confidence": "low",
+        "answer": null,
+        "escalation": {
+          "reason": "no_kb",
+          "retrievalAttempt": {
+            "queries": [],
+            "entriesConsidered": [],
+            "note": "无 knowledge-base 连接器且调用方未提供任何条目，无法检索；该问题虽属常规售后，也不得凭模型先验起草答复。"
+          },
+          "handoff": {
+            "note": "买家称订单三天未发货并怀疑收货地址有误。本次运行无可用知识库，按策略不得凭先验作答；需由人工核对该订单的发货状态与收货地址，或先接入店铺售后知识库。",
+            "urgency": "medium",
+            "ticket": {
+              "filed": false,
+              "ticketRef": null
+            }
+          }
+        },
+        "requiresApproval": true,
+        "evidence": [
+          {
+            "source": "customerMessage",
+            "excerpt": "我三天前下的订单到现在还没发货，你们是不是把我的收货地址搞错了？"
+          },
+          {
+            "source": "policy",
+            "excerpt": "无知识库可用：每个请求都以 reason no_kb 升级，绝不凭模型先验作答。"
+          }
+        ]
+      }
+    }
+  ]
+}

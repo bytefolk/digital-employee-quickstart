@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-mcp.schema.json",
+  "schemaVersion": "employee-mcp.v1alpha1",
+  "servers": [
+    {
+      "name": "knowledge-base",
+      "transport": {
+        "type": "stdio",
+        "command": "digital-employee-connector-knowledge-base",
+        "args": [],
+        "environment": ["KB_CONNECTOR_ENDPOINT", "KB_CONNECTOR_TOKEN"]
+      }
+    },
+    {
+      "name": "ticketing",
+      "transport": {
+        "type": "stdio",
+        "command": "digital-employee-connector-ticketing",
+        "args": [],
+        "environment": ["TICKETING_CONNECTOR_ENDPOINT", "TICKETING_CONNECTOR_TOKEN"]
+      }
+    }
+  ]
+}

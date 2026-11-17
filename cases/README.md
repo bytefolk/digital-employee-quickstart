@@ -34,6 +34,7 @@ deploy 指引。完成或失败后，只在
 | `sales-qualifier/` | 销售资格评估（结构化提案，企业数据走调用侧 `enterpriseContext`） | 是 |
 | `sales-employee/` | 通用销售员工（资质判断 → 触达草稿 → 会议纪要提取 → CRM 写回，连接器声明式接入） | 是 |
 | `support-employee/` | 客服员工（意图分类 → 引用知识库作答 → 低于阈值升级转人工） | 是 |
+| `ecommerce-support/` | 电商售后客服（订单/物流/退换/商品意图分类 → 引用售后知识库作答 → 退款金额、真伪赔付、无知识库一律升级转人工；不退款、不改订单） | 是 |
 
 ## 案例规范
 
@@ -58,7 +59,7 @@ deploy 指引。完成或失败后，只在
 工作区 showcase 使用的 `workbench-mcp.v1` 不是包契约，在公开 CLI `0.6.0` 下会以
 `unsupported_employee_mcp_schema` 直接失败。
 
-`sales-employee/` 与 `support-employee/` 即为此类案例：外部数据只能通过声明的连接器
+`sales-employee/`、`support-employee/` 与 `ecommerce-support/` 即为此类案例：外部数据只能通过声明的连接器
 进入，连接器缺席时必须在输出中显式降级，不得伪造记录或用模型先验作答。每个案例的
 连接器契约（服务器要暴露什么工具、跨界发送什么数据、保留策略、时间/体积上限、
 拒绝输入用例）记录在 [`docs/adapters/`](../docs/adapters/)。

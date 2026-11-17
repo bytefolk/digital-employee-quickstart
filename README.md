@@ -76,6 +76,7 @@ local absolute paths.
 | [`sales-qualifier`](cases/sales-qualifier/) | Sales qualification | Turns a raw inquiry into a structured qualification proposal — never sends, never quotes, requires approval. Optional [`enterpriseContext`](docs/adapters/sales-qualifier-enterprise-context.md) lets a company wire in its own CRM data caller-side |
 | [`sales-employee`](cases/sales-employee/) | General-purpose sales employee | Qualifies a target account, drafts first-touch outreach, extracts commitments/objections/next actions from a meeting transcript, and writes back through a declared `crm` connector — connector absent means an explicit degraded result, never a fabricated record |
 | [`support-employee`](cases/support-employee/) | Customer-service employee | Classifies intent, answers only from cited knowledge-base entries, and escalates below the confidence threshold — with no knowledge base, every request escalates instead of answering from model priors |
+| [`ecommerce-support`](cases/ecommerce-support/) | E-commerce after-sales employee | Classifies shopper messages (order status, logistics, return/refund, product question), answers only from cited after-sales knowledge-base entries, and escalates refund-amount demands, authenticity/liability disputes, and every request when no knowledge base is bound — never refunds, cancels, computes amounts, or writes to an order. Connector contract: [`ecommerce-support-connectors`](docs/adapters/ecommerce-support-connectors.md) |
 
 Run the same credential-free checks against any case:
 
