@@ -69,6 +69,7 @@ eval: passed (3/3) | failed
 | [`sales-qualifier`](cases/sales-qualifier/) | 销售资格评估 | 把原始询盘转成结构化资格提案——不发消息、不报价、不承诺交期，须人工审批。可选 [`enterpriseContext`](docs/adapters/sales-qualifier-enterprise-context.md) 让企业在调用侧接入自己的 CRM 数据 |
 | [`sales-employee`](cases/sales-employee/) | 通用销售员工 | 资质判断 → 触达草稿 → 会议纪要提取 → 经声明的 `crm` 连接器写回；连接器缺席时显式降级，绝不伪造记录 |
 | [`support-employee`](cases/support-employee/) | 客服员工 | 意图分类 → 只凭引用的知识库条目作答 → 低于置信阈值升级转人工；没有知识库时全部升级，不用模型先验作答 |
+| [`ecommerce-support`](cases/ecommerce-support/) | 电商售后客服 | 买家消息意图分类（订单/物流/退换货/商品咨询）→ 只凭引用的售后知识库条目作答 → 退款金额诉求、真伪/赔付争议、无知识库时一律升级转人工；不退款、不改订单、不算金额。连接器契约见 [`ecommerce-support-connectors`](docs/adapters/ecommerce-support-connectors.md) |
 
 对其他案例执行同样的无凭据检查：
 

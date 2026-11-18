@@ -99,6 +99,24 @@
         "requires human approval"
       ],
       "supportsDesktopWorkspace": false
+    },
+    {
+      "id": "ecommerce-support",
+      "path": "cases/ecommerce-support",
+      "category": "customer-support",
+      "audience": "e-commerce shoppers and after-sales teams",
+      "outcome": "Classify an inbound shopper message (order status, logistics, return/refund, product question, out-of-scope), answer only from cited after-sales knowledge-base entries, and escalate with a structured hand-off when confidence is below threshold or the knowledge base is absent.",
+      "boundaries": [
+        "declared MCP tools only: kb.entry.search, ticket.handoff.create",
+        "answers only with cited knowledge-base entries",
+        "no knowledge base means every request escalates",
+        "never answers from model priors",
+        "never refunds, cancels, or writes to an order",
+        "never computes refund or compensation amounts",
+        "never adjudicates authenticity or liability claims",
+        "requires human approval"
+      ],
+      "supportsDesktopWorkspace": false
     }
   ]
 }
