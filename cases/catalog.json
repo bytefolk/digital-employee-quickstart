@@ -117,6 +117,22 @@
         "requires human approval"
       ],
       "supportsDesktopWorkspace": false
+    },
+    {
+      "id": "intake-qualifier",
+      "path": "cases/intake-qualifier",
+      "category": "revenue-operations",
+      "audience": "small delivery teams and intake admins",
+      "outcome": "Assess an inbound service request, draft a scope-only acceptance proposal (no price, no delivery commitment, no dispatch), extract commitments and objections from communication, and write an internal proposal back through a declared intake connector.",
+      "boundaries": [
+        "declared MCP tools only: intake.request.read, intake.proposal.create, web.search",
+        "never fabricates intake records or record ids",
+        "degrades explicitly when a connector is absent",
+        "proposal schema has no price, amount or delivery-date field",
+        "never accepts, dispatches, confirms or pays",
+        "requires human approval"
+      ],
+      "supportsDesktopWorkspace": false
     }
   ]
 }

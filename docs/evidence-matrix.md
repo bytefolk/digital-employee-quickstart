@@ -51,3 +51,19 @@ npx --yes --package @fullstack-ai-infra/digital-employee@0.6.0 -- \
 | Full-context qualification | `qualified-full-context` | Qualification produces a structured proposal with cited reasoning and a next best action. Enterprise context is consumed via the caller-supplied `enterpriseContext` field, not via a connector. |
 | CLI version pin | — | `@fullstack-ai-infra/digital-employee@0.6.0` |
 | What it does not prove | — | No live enterprise-data connector call. No model invocation. The eval proves the **contract shape** and the **degradation contract** when enterprise data is missing or stale. |
+
+
+## intake-qualifier
+
+| Evidence | Eval case | Key observation |
+|---|---|---|
+| Scope-only acceptance proposal | `clear-request-accept` | `band=accept` with cited B/A/N/T reasoning; `proposalDraft` carries `scope`/`deliverables`/`criteria` and empty `clarifyingQuestions`. The output schema has **no price, amount or delivery-date field** (`additionalProperties: false`), so a price cannot be carried even by accident. |
+| Clarify when scope is unclear | `needs-info-clarify` | `band=clarify`; `proposalDraft` leads with `clarifyingQuestions`; no full scope is fabricated to look complete. |
+| Budget-mismatch decline | `budget-mismatch-decline` | `band=decline`; cites the requester's own budget hint as `insufficient`; `proposalDraft=null`; no price is invented. |
+| Out-of-scope escalation | `out-of-scope-escalate` | `band=out_of_scope`; competitor fishing for internal cost/margin disclosure is routed to a human; `proposalDraft=null`. |
+| Connector-degraded run (intake absent) | `clear-request-accept`, `full-cycle-with-transcript` | `proposalSync.status=degraded`, `reason=intake_connector_absent`, `recordRef=null`. No intake record or record id is fabricated. |
+| Web-search absent degradation | all cases | `degraded[]` entries with `capability=enrichment`, `reason=web_search_connector_absent`; assessment runs on supplied text only. |
+| Insufficient input, no invention | `insufficient-input-no-invention` | `band=insufficient_input`; `proposalDraft=null`, `meetingExtraction=null`, `proposalSync=not_requested`. |
+| Communication-note extraction | `full-cycle-with-transcript` | 2 commitments, 1 price objection, 1 next action; "by Friday" without a calendar anchor keeps `dueBy` omitted. |
+| CLI version pin | — | `@fullstack-ai-infra/digital-employee@0.6.0` |
+| What it does not prove | — | No live intake write, no live web-search enrichment, no model invocation. The eval proves the **contract shape**, the **scope-only proposal boundary**, and the **degradation contract**, not that a live run would produce the same band or copy. |

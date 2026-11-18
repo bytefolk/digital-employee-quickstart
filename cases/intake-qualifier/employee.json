@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/bytefolk/digital-employee/main/configs/employee-package.schema.json",
+  "schemaVersion": "employee-package.v1alpha1",
+  "name": "intake-qualifier",
+  "version": "1.0.0",
+  "description": "Service-intake qualifier for a small delivery team: assesses an inbound request with cited reasoning, drafts a scope-only acceptance proposal that carries no price, no delivery-date commitment and no dispatch, extracts commitments/objections/next actions from communication, and writes back an internal proposal only through the declared intake connector. When the connector is absent the run degrades explicitly and never fabricates a record. Pricing, dispatch, client confirmation and payment remain human decisions.",
+  "license": "Apache-2.0",
+  "authors": ["ByteFolk"],
+  "host": {
+    "protocol": "agent-host.v1",
+    "requiredCapabilities": ["structured_output", "mcp"]
+  },
+  "entrypoints": {
+    "skill": "./SKILL.md",
+    "inputSchema": "./schemas/input.schema.json",
+    "outputSchema": "./schemas/output.schema.json",
+    "mcp": "./mcp.json"
+  },
+  "policy": {
+    "mode": "approval_required",
+    "network": "host_policy",
+    "filesystem": { "read": ["./knowledge/**"], "write": [] },
+    "mcpTools": [
+      { "name": "intake.request.read", "requestedMode": "read" },
+      { "name": "intake.proposal.create", "requestedMode": "write" },
+      { "name": "web.search", "requestedMode": "read" }
+    ]
+  },
+  "assets": [
+    "./knowledge/qualification-scoring.md",
+    "./knowledge/proposal-playbook.md",
+    "./knowledge/meeting-note-extraction.md",
+    "./evals/cases.json"
+  ]
+}

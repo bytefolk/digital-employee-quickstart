@@ -56,7 +56,8 @@ jobs:
             cases/sales-qualifier \
             cases/sales-employee \
             cases/support-employee \
-            cases/ecommerce-support
+            cases/ecommerce-support \
+            cases/intake-qualifier
           do
             validate_json="$(npx --yes --package "$DIGITAL_EMPLOYEE_PACKAGE" -- \
               digital-employee validate "$case_dir" --json)"
@@ -77,8 +78,8 @@ jobs:
               "$case_dir" "$passed" "$passed"
           done
 
-          test "$total" -eq 41
-          printf 'Public v0.6.0 matrix: validate=8/8, eval=%s/41\n' "$total"
+          test "$total" -eq 47
+          printf 'Public v0.6.0 matrix: validate=9/9, eval=%s/47\n' "$total"
 
       - name: Smoke-test public init path
         env:
