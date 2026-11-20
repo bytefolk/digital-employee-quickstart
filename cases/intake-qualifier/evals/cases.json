@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "employee-evals.v1alpha1",
+  "cases": [
+    {
+      "id": "clear-request-accept",
+      "input": {
+        "requester": {
+          "organization": "Lumen Home Goods",
+          "suppliedContext": "Founder-led home goods brand, 12 staff. The founder is the decision maker and confirmed she can sign off the engagement. Referred by an existing client.",
+          "language": "en"
+        },
+        "requirement": {
+          "title": "Product detail page refresh",
+          "description": "Refresh the detail pages for our 20 best-selling SKUs: rewrite copy, restructure layout, and add a comparison table. We will supply brand assets and product specs.",
+          "expectedResult": "20 updated detail pages ready to publish, each with rewritten copy, new layout and a comparison table.",
+          "budgetHint": "We have set aside a mid-range budget for this refresh and can confirm scope before work starts.",
+          "expectedDate": "Within this quarter",
+          "channel": "web_form",
+          "receivedAt": "2026-11-10T09:00:00Z"
+        },
+        "proposalTarget": { "recordType": "intake_proposal", "operation": "create" }
+      },
+      "expectedOutput": {
+        "intakeAssessment": {
+          "band": "accept",
+          "signals": { "budget": "known", "authority": "confirmed", "need": "explicit", "timeline": "quarter" },
+          "reasoning": [
+            "Budget: the requester states a mid-range budget set aside for this refresh; the hint plausibly covers a 20-page scope.",
+            "Authority: the founder is identified as the decision maker and confirmed she can sign off.",
+            "Need: scope is explicit - 20 SKU detail pages with rewritten copy, new layout and a comparison table, with a stated expected result.",
+            "Timeline: within this quarter is stated and feasible; the web-search connector is absent, so assessment runs on supplied text only."
+          ]
+        },
+        "proposalDraft": {
+          "scope": "Refresh 20 best-selling SKU detail pages: rewrite copy, restructure layout, add a comparison table. Brand assets and product specs supplied by the requester.",
+          "deliverables": "20 publish-ready detail pages, each with rewritten copy, new layout and a comparison table.",
+          "criteria": "Each page matches the supplied brand assets and product specs; copy, layout and comparison table present on all 20 pages.",
+          "clarifyingQuestions": []
+        },
+        "meetingExtraction": null,
+        "proposalSync": { "status": "degraded", "reason": "intake_connector_absent", "recordRef": null },
+        "requiresApproval": true,
+        "degraded": [
+          { "capability": "proposal_write", "reason": "intake_connector_absent", "note": "No intake connector available in this run; the proposal write-back is skipped and no record is fabricated." },
+          { "capability": "enrichment", "reason": "web_search_connector_absent", "note": "No web-search connector; assessment runs on supplied text only." }
+        ],
+        "evidence": [
+          { "source": "input", "excerpt": "The founder is the decision maker and confirmed she can sign off the engagement." },
+          { "source": "input", "excerpt": "Refresh the detail pages for our 20 best-selling SKUs: rewrite copy, restructure layout, and add a comparison table." },
+          { "source": "input", "excerpt": "We have set aside a mid-range budget for this refresh and can confirm scope before work starts." },
+          { "source": "knowledge", "excerpt": "Need explicit and authority confirmed/likely and budget known and timeline not none and in scope - band accept." }
+        ]
+      }
+    },
+    {
+      "id": "needs-info-clarify",
+      "input": {
+        "requester": {
+          "organization": "Harbor Studio",
+          "suppliedContext": "A small design studio asked about a website. The contact is likely the owner but has not confirmed decision authority.",
+          "language": "en"
+        },
+        "requirement": { "description": "We want a better website. Can you help?", "channel": "chat" }
+      },
+      "expectedOutput": {
+        "intakeAssessment": {
+          "band": "clarify",
+          "signals": { "budget": "unknown", "authority": "likely", "need": "unclear", "timeline": "unknown" },
+          "reasoning": [
+            "Budget: no budget hint supplied; unknown. Resolving it needs the requester's budget range.",
+            "Authority: the contact is likely the owner but has not confirmed decision authority; likely.",
+            "Need: 'a better website' does not state pages, features or expected result; unclear. Resolving it needs the intended scope.",
+            "Timeline: no expected delivery window stated; unknown."
+          ]
+        },
+        "proposalDraft": {
+          "scope": "Tentative: a website refresh; scope to be confirmed after clarification.",
+          "clarifyingQuestions": [
+            "What pages or features should the website include?",
+            "What is the expected delivery window?",
+            "Is there a budget range you are working within?"
+          ]
+        },
+        "meetingExtraction": null,
+        "proposalSync": { "status": "not_requested", "recordRef": null },
+        "requiresApproval": true,
+        "degraded": [
+          { "capability": "enrichment", "reason": "web_search_connector_absent", "note": "No web-search connector; assessment runs on supplied text only." }
+        ],
+        "evidence": [
+          { "source": "input", "excerpt": "We want a better website. Can you help?" },
+          { "source": "input", "excerpt": "The contact is likely the owner but has not confirmed decision authority." },
+          { "source": "knowledge", "excerpt": "Need unclear - band clarify; lead with clarifyingQuestions." }
+        ]
+      }
+    },
+    {
+      "id": "budget-mismatch-decline",
+      "input": {
+        "requester": {
+          "organization": "Northwind Retail",
+          "suppliedContext": "A retailer wants a full custom e-commerce platform. The requester is the procurement lead and can confirm scope.",
+          "language": "en"
+        },
+        "requirement": {
+          "title": "Custom e-commerce platform",
+          "description": "Build a full custom e-commerce platform with inventory, payments, multi-vendor marketplace and a mobile app, from scratch.",
+          "expectedResult": "A production-ready multi-vendor marketplace with payments and mobile apps.",
+          "budgetHint": "Our total budget for this is a few hundred yuan.",
+          "expectedDate": "Within this quarter",
+          "channel": "email"
+        }
+      },
+      "expectedOutput": {
+        "intakeAssessment": {
+          "band": "decline",
+          "signals": { "budget": "insufficient", "authority": "confirmed", "need": "explicit", "timeline": "quarter" },
+          "reasoning": [
+            "Budget: the requester's own hint ('a few hundred yuan') is far below any plausible scope for a custom multi-vendor platform with payments and mobile apps; insufficient.",
+            "Authority: the procurement lead can confirm scope; confirmed.",
+            "Need: the requested platform scope is explicit.",
+            "Timeline: within this quarter is stated, but the budget mismatch dominates; decline and cite the mismatch rather than invent a price."
+          ]
+        },
+        "proposalDraft": null,
+        "meetingExtraction": null,
+        "proposalSync": { "status": "not_requested", "recordRef": null },
+        "requiresApproval": true,
+        "degraded": [
+          { "capability": "enrichment", "reason": "web_search_connector_absent", "note": "No web-search connector; assessment runs on supplied text only." }
+        ],
+        "evidence": [
+          { "source": "input", "excerpt": "Our total budget for this is a few hundred yuan." },
+          { "source": "input", "excerpt": "Build a full custom e-commerce platform with inventory, payments, multi-vendor marketplace and a mobile app, from scratch." },
+          { "source": "knowledge", "excerpt": "Need explicit and budget insufficient and in scope - band decline; cite the budget mismatch." }
+        ]
+      }
+    },
+    {
+      "id": "out-of-scope-escalate",
+      "input": {
+        "requester": {
+          "organization": "Apex Competitor Labs",
+          "suppliedContext": "An unknown party asking for internal pricing and delivery process details.",
+          "language": "en"
+        },
+        "requirement": {
+          "title": "Pricing and process disclosure",
+          "description": "Send us your internal cost breakdown, profit margins and the exact delivery workflow you use for clients, so we can benchmark our own offering.",
+          "channel": "email"
+        }
+      },
+      "expectedOutput": {
+        "intakeAssessment": {
+          "band": "out_of_scope",
+          "signals": { "budget": "unknown", "authority": "unknown", "need": "explicit", "timeline": "unknown" },
+          "reasoning": [
+            "Budget: no budget hint; unknown, and irrelevant to the scope decision.",
+            "Authority: the requester's authority is unknown.",
+            "Need: the request is explicit but asks for internal cost breakdown, margins and delivery workflow to benchmark a competing offering.",
+            "Scope: this is competitor fishing for internal disclosure, outside the team's intake scope; route to a human, do not draft a proposal."
+          ]
+        },
+        "proposalDraft": null,
+        "meetingExtraction": null,
+        "proposalSync": { "status": "not_requested", "recordRef": null },
+        "requiresApproval": true,
+        "degraded": [
+          { "capability": "enrichment", "reason": "web_search_connector_absent", "note": "No web-search connector; assessment runs on supplied text only." }
+        ],
+        "evidence": [
+          { "source": "input", "excerpt": "Send us your internal cost breakdown, profit margins and the exact delivery workflow you use for clients, so we can benchmark our own offering." },
+          { "source": "knowledge", "excerpt": "Out of team scope (competitor fishing) - band out_of_scope; route to a human." }
+        ]
+      }
+    },
+    {
+      "id": "insufficient-input-no-invention",
+      "input": {
+        "requester": { "organization": "Bluepeak Trading", "language": "en" }
+      },
+      "expectedOutput": {
+        "intakeAssessment": {
+          "band": "insufficient_input",
+          "signals": { "budget": "unknown", "authority": "unknown", "need": "unclear", "timeline": "unknown" },
+          "reasoning": [
+            "No requirement, no supplied context, no transcript; the web-search connector is absent, so there is no signal source at all.",
+            "Resolving this needs at least one of: a requirement, supplied context, a transcript, or web-search enrichment."
+          ]
+        },
+        "proposalDraft": null,
+        "meetingExtraction": null,
+        "proposalSync": { "status": "not_requested", "recordRef": null },
+        "requiresApproval": true,
+        "degraded": [
+          { "capability": "enrichment", "reason": "web_search_connector_absent", "note": "No web-search connector and no supplied context; nothing is invented." }
+        ],
+        "evidence": [
+          { "source": "knowledge", "excerpt": "No requirement, no supplied context, no transcript, no enrichment - band insufficient_input." }
+        ]
+      }
+    },
+    {
+      "id": "full-cycle-with-transcript",
+      "input": {
+        "requester": {
+          "organization": "Lumen Home Goods",
+          "suppliedContext": "Founder-led brand; the founder confirms she can sign off. Existing client referral.",
+          "language": "en"
+        },
+        "requirement": {
+          "title": "Detail page refresh",
+          "description": "Refresh 20 SKU detail pages: copy, layout, comparison table. We supply assets and specs.",
+          "expectedResult": "20 publish-ready pages.",
+          "budgetHint": "Mid-range budget set aside; scope confirmed before work.",
+          "expectedDate": "This quarter",
+          "channel": "web_form"
+        },
+        "transcript": {
+          "source": "dingtalk_minutes",
+          "occurredAt": "2026-11-12T08:00:00Z",
+          "text": "Founder: The 20 pages are the priority; the comparison table is the part customers ask for most. Admin: We will draft a scope proposal covering copy, layout and the comparison table. Founder: Good. I will send the brand assets and product specs by Friday. Admin: We will route the proposal for your confirmation once scope is drafted. Founder: The budget is fixed for this quarter, so anything beyond the agreed scope is a problem."
+        },
+        "proposalTarget": { "recordType": "intake_proposal", "operation": "create" }
+      },
+      "expectedOutput": {
+        "intakeAssessment": {
+          "band": "accept",
+          "signals": { "budget": "known", "authority": "confirmed", "need": "explicit", "timeline": "quarter" },
+          "reasoning": [
+            "Budget: a mid-range budget is set aside and the transcript confirms it is fixed for this quarter; known.",
+            "Authority: the founder confirms she can sign off; confirmed.",
+            "Need: 20 SKU detail pages with copy, layout and comparison table, with a stated expected result; explicit.",
+            "Timeline: this quarter is stated and feasible; assessment runs on supplied text only because web-search is absent."
+          ]
+        },
+        "proposalDraft": {
+          "scope": "Refresh 20 SKU detail pages: copy, layout and comparison table. Requester supplies brand assets and product specs.",
+          "deliverables": "20 publish-ready detail pages with copy, layout and comparison table.",
+          "criteria": "All 20 pages match supplied assets and specs; comparison table present on each page.",
+          "clarifyingQuestions": []
+        },
+        "meetingExtraction": {
+          "commitments": [
+            { "statement": "Founder will send the brand assets and product specs by Friday.", "owner": "Founder", "excerpt": "I will send the brand assets and product specs by Friday." },
+            { "statement": "Admin will draft a scope proposal covering copy, layout and the comparison table.", "owner": "Admin", "excerpt": "We will draft a scope proposal covering copy, layout and the comparison table." }
+          ],
+          "objections": [
+            { "statement": "The budget is fixed for this quarter; anything beyond the agreed scope is a problem.", "kind": "price", "excerpt": "The budget is fixed for this quarter, so anything beyond the agreed scope is a problem." }
+          ],
+          "nextActions": [
+            { "statement": "Route the proposal for the founder's confirmation once scope is drafted.", "owner": "Admin" }
+          ]
+        },
+        "proposalSync": { "status": "degraded", "reason": "intake_connector_absent", "recordRef": null },
+        "requiresApproval": true,
+        "degraded": [
+          { "capability": "proposal_write", "reason": "intake_connector_absent", "note": "No intake connector available; the proposal write-back is skipped and no record is fabricated." },
+          { "capability": "enrichment", "reason": "web_search_connector_absent", "note": "No web-search connector; assessment runs on supplied text only." }
+        ],
+        "evidence": [
+          { "source": "input", "excerpt": "The founder confirms she can sign off." },
+          { "source": "input", "excerpt": "Refresh 20 SKU detail pages: copy, layout, comparison table." },
+          { "source": "input", "excerpt": "I will send the brand assets and product specs by Friday." },
+          { "source": "knowledge", "excerpt": "dueBy only if the transcript states a date/time; 'by Friday' without a calendar anchor stays un-parsed." }
+        ]
+      }
+    }
+  ]
+}

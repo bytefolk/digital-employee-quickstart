@@ -70,6 +70,7 @@ eval: passed (3/3) | failed
 | [`sales-employee`](cases/sales-employee/) | 通用销售员工 | 资质判断 → 触达草稿 → 会议纪要提取 → 经声明的 `crm` 连接器写回；连接器缺席时显式降级，绝不伪造记录 |
 | [`support-employee`](cases/support-employee/) | 客服员工 | 意图分类 → 只凭引用的知识库条目作答 → 低于置信阈值升级转人工；没有知识库时全部升级，不用模型先验作答 |
 | [`ecommerce-support`](cases/ecommerce-support/) | 电商售后客服 | 买家消息意图分类（订单/物流/退换货/商品咨询）→ 只凭引用的售后知识库条目作答 → 退款金额诉求、真伪/赔付争议、无知识库时一律升级转人工；不退款、不改订单、不算金额。连接器契约见 [`ecommerce-support-connectors`](docs/adapters/ecommerce-support-connectors.md) |
+| [`intake-qualifier`](cases/intake-qualifier/) | 接单评估员 | 需求承接评估 → 仅范围提案（schema 无金额/交期字段）→ 沟通记录提取 → 经声明的 `intake` 连接器写回内部提案；连接器缺席时显式降级，绝不伪造记录；不承接、不派单、不确认、不碰付款。连接器契约见 [`intake-qualifier-connectors`](docs/adapters/intake-qualifier-connectors.md) |
 
 对其他案例执行同样的无凭据检查：
 
